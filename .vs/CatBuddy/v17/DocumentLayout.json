@@ -1,7 +1,32 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\repository\\produtorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\repository\\produtorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\controllers\\produtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\controllers\\produtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\views\\usuario\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\views\\usuario\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\views\\produto\\informacoesproduto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\views\\produto\\informacoesproduto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +34,89 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProdutoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Repository\\ProdutoRepository.cs",
+              "RelativeDocumentMoniker": "CatBuddy\\Repository\\ProdutoRepository.cs",
+              "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Repository\\ProdutoRepository.cs",
+              "RelativeToolTip": "CatBuddy\\Repository\\ProdutoRepository.cs",
+              "ViewState": "AQIAAGsAAAAAAAAAAAAQwHYAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-19T03:22:06.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "InformacoesProduto.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Produto\\InformacoesProduto.cshtml",
+              "RelativeDocumentMoniker": "CatBuddy\\Views\\Produto\\InformacoesProduto.cshtml",
+              "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Produto\\InformacoesProduto.cshtml",
+              "RelativeToolTip": "CatBuddy\\Views\\Produto\\InformacoesProduto.cshtml",
+              "ViewState": "AQIAAFoAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-19T03:20:30.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Usuario\\Index.cshtml",
+              "RelativeDocumentMoniker": "CatBuddy\\Views\\Usuario\\Index.cshtml",
+              "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Usuario\\Index.cshtml",
+              "RelativeToolTip": "CatBuddy\\Views\\Usuario\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-19T03:17:23.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "CatBuddy\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "CatBuddy\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAABIAAAAAAAAAAAAQwBsAAABBAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-19T03:13:38.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProdutoController.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Controllers\\ProdutoController.cs",
+              "RelativeDocumentMoniker": "CatBuddy\\Controllers\\ProdutoController.cs",
+              "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Controllers\\ProdutoController.cs",
+              "RelativeToolTip": "CatBuddy\\Controllers\\ProdutoController.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAABMAAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-19T03:13:30.169Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Program.cs",
+              "RelativeDocumentMoniker": "CatBuddy\\Program.cs",
+              "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Program.cs",
+              "RelativeToolTip": "CatBuddy\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-19T02:46:23.444Z",
+              "EditorCaption": ""
             }
           ]
         }

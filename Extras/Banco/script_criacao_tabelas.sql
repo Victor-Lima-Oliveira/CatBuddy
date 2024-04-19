@@ -49,6 +49,7 @@ CREATE TABLE tbl_produto (
     composição text,
     preco float not null,
     imgPath varchar(200),
+    ds_nome varchar(40),
     foreign key (cod_categoria) references tbl_categoria (cod_id_categoria),
     foreign key (cod_fornecedor) references tbl_fornecedor (cod_id_fornecedor));
 
