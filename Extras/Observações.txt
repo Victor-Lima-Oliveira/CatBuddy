@@ -1,0 +1,29 @@
+INSERT CATEGORIA:
+
+Higiene 
+Alimentação 
+Saúde
+Lazer
+Acessório
+Educação
+
+INSERT LOGRADOURO
+alameda
+avenida
+
+
+
+/--------------------------------------------------------------------------------/
+
+
+ESPECIFICAÇÕES PRODUTO
+
+idade = ex. Adulto, filhote...
+sabor  = Sabor dos alimentos
+informacoesNutricionais = Informações nutricionais dos alimentos
+cor = cor geral do produto
+medidasAproximadas 
+material
+composição = Informações de medicamentos 
+
+
