@@ -17,7 +17,8 @@ namespace CatBuddy.Controllers
         public IActionResult InformacoesProduto(int id)
         {
             id = 1;
-            return View(_produtoRepository.retornaProdutos());
+            var produto = _produtoRepository.retornaProduto(id);
+            return View(produto);
         }
     }
 }

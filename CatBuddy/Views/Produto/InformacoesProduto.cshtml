@@ -1,119 +1,111 @@
-﻿@model IEnumerable<CatBuddy.Models.Produto>
+﻿@model CatBuddy.Models.Produto
 
 @{
     ViewData["Title"] = "InformacoesProduto";
 }
 
-<h1>InformacoesProduto</h1>
+<h1></h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CodIdProduto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CodCategoria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QtdEstoque)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CodFornecedor)
-            </th>
-            <th>
+@*Painel com foto e painel de informações*@
+<div class="container">
+    <div class="row">
+        @*Painel da foto*@
+        <div class="col">
+            <img src="@Model.ImgPath" class="card-img img-thumbnail" />
+        </div>
+
+        @*Painel de informações*@
+        <div class="col">
+            <h4>@Html.DisplayFor(model => model.DsNome)</h4>
+            <a href="#descricaoCompleta">Ver Descrição completa</a>
+            <pre>@Html.DisplayFor(model => model.Descricao)</pre>
+            <b>Preço: </b> Model.Preco
+            <a class="btn btn-info">Adicionar ao carrinho </a>
+        </div>
+    </div>
+</div>
+
+@*Descrição completa*@
+<div class="container" id="descricaoCompleta">
+    <h4>Descrição</h4>
+    <hr />
+    <pre>@Model.Descricao</pre>
+</div>
+
+@*Informações complementares - As informações só serão apresentadas se tiver algo salvo no banco*@
+<div class="container">
+    <dl class="row">
+        @if (String.IsNullOrEmpty(Model.Idade))
+        {
+            <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Idade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sabor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InformacoesNutricionais)
-            </th>
-            <th>
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Idade)
+            </dd>
+        }
+        @if (String.IsNullOrEmpty(Model.Cor))
+        {
+            <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Cor)
-            </th>
-            <th>
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cor)
+            </dd>
+        }
+        @if (String.IsNullOrEmpty(Model.Sabor))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Sabor)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Sabor)
+            </dd>
+        }
+        @if (String.IsNullOrEmpty(Model.InformacoesNutricionais))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InformacoesNutricionais)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.InformacoesNutricionais)
+            </dd>
+        }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CodFornecedor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CodFornecedor)
+        </dd>
+        @if (String.IsNullOrEmpty(Model.MedidasAproximadas))
+        {
+            <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.MedidasAproximadas)
-            </th>
-            <th>
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MedidasAproximadas)
+            </dd>
+        }
+        @if (String.IsNullOrEmpty(Model.Material))
+        {
+            <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Material)
-            </th>
-            <th>
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Material)
+            </dd>
+        }
+        @if (String.IsNullOrEmpty(Model.Composição))
+        {
+            <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Composição)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Preco)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImgPath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DsNome)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodIdProduto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodCategoria)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QtdEstoque)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodFornecedor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Idade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sabor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InformacoesNutricionais)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MedidasAproximadas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Material)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Composição)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Preco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImgPath)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DsNome)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Composição)
+            </dd>
+        }
+    </dl>
+</div>
+
+
+

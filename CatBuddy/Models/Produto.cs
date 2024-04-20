@@ -13,7 +13,10 @@ namespace CatBuddy.Models
         public int CodCategoria { get; set; }
         public string Descricao { get; set; }
         public int QtdEstoque { get; set; }
-        [Required]
+        [
+            Display(Name = "Marca"),
+            Required
+        ]
         public int CodFornecedor { get; set; }
         [MaxLength(13)]
         public string Idade { get; set; }
