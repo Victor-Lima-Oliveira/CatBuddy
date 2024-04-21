@@ -1,7 +1,7 @@
 ﻿@model CatBuddy.Models.Produto
 
 @{
-    ViewData["Title"] = "InformacoesProduto";
+    ViewData["Title"] = Model.DsNome;
 }
 
 <h1></h1>
@@ -19,23 +19,33 @@
             <h4>@Html.DisplayFor(model => model.DsNome)</h4>
             <a href="#descricaoCompleta">Ver Descrição completa</a>
             <pre>@Html.DisplayFor(model => model.Descricao)</pre>
-            <b>Preço: </b> Model.Preco
-            <a class="btn btn-info">Adicionar ao carrinho </a>
+            <div><b>Preço:</b> R$ @Model.Preco</div>
+            <a class="btn btn-yellow">Adicionar ao carrinho </a>
         </div>
     </div>
+</div>
+
+@* Espaçaento*@
+<div class="d-block mt-4 mb-4 ">
+    <hr />
 </div>
 
 @*Descrição completa*@
 <div class="container" id="descricaoCompleta">
     <h4>Descrição</h4>
-    <hr />
     <pre>@Model.Descricao</pre>
+</div>
+
+@* Espaçaento*@
+<div class="d-block mt-4 mb-4 ">
+    <hr />
 </div>
 
 @*Informações complementares - As informações só serão apresentadas se tiver algo salvo no banco*@
 <div class="container">
+    <h4>Informações complementares</h4>
     <dl class="row">
-        @if (String.IsNullOrEmpty(Model.Idade))
+        @if (!String.IsNullOrEmpty(Model.Idade))
         {
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Idade)
@@ -44,7 +54,7 @@
                 @Html.DisplayFor(model => model.Idade)
             </dd>
         }
-        @if (String.IsNullOrEmpty(Model.Cor))
+        @if (!String.IsNullOrEmpty(Model.Cor))
         {
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Cor)
@@ -53,7 +63,7 @@
                 @Html.DisplayFor(model => model.Cor)
             </dd>
         }
-        @if (String.IsNullOrEmpty(Model.Sabor))
+        @if (!String.IsNullOrEmpty(Model.Sabor))
         {
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Sabor)
@@ -62,7 +72,7 @@
                 @Html.DisplayFor(model => model.Sabor)
             </dd>
         }
-        @if (String.IsNullOrEmpty(Model.InformacoesNutricionais))
+        @if (!String.IsNullOrEmpty(Model.InformacoesNutricionais))
         {
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.InformacoesNutricionais)
@@ -77,7 +87,7 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CodFornecedor)
         </dd>
-        @if (String.IsNullOrEmpty(Model.MedidasAproximadas))
+        @if (!String.IsNullOrEmpty(Model.MedidasAproximadas))
         {
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.MedidasAproximadas)
@@ -86,7 +96,7 @@
                 @Html.DisplayFor(model => model.MedidasAproximadas)
             </dd>
         }
-        @if (String.IsNullOrEmpty(Model.Material))
+        @if (!String.IsNullOrEmpty(Model.Material))
         {
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Material)
@@ -95,7 +105,7 @@
                 @Html.DisplayFor(model => model.Material)
             </dd>
         }
-        @if (String.IsNullOrEmpty(Model.Composição))
+        @if (!String.IsNullOrEmpty(Model.Composição))
         {
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Composição)

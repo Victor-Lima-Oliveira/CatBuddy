@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\CatBuddy.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\wwwroot\\css\\BootstrapCatBuddy.css",
+      "PackagePath": "staticwebassets\\css\\BootstrapCatBuddy.css"
+    },
+    {
       "Id": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

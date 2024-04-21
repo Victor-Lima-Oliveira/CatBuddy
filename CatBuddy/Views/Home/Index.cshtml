@@ -2,26 +2,52 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container" >
-    <div id="carouselExample" class="carousel slide" >
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="/img/logo.jpg" class="img-fluid" alt="..." data-bs-interval="10">
+<style>
+    /* Estilo personalizado para o carrossel ocupar toda a largura da tela,
+    Essa tela possui estrutura completamente diferente por isso */
+    
+    .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 100%; /* Todos os conteudos irão ocupar a tela inteira */
+        padding: 0px; /* Retirar o padding da tela inteira*/
+    }
+
+    .carousel-item img {
+        width: 100%; /* Define a largura da imagem do carrossel como 100% da largura do contêiner */
+        height: 60vh; /* Mantém a proporção da imagem */
+    }
+
+    .navbar-expand-xxl, .navbar-expand-xxl, .navbar-expand-lg, .navbar-expand-md, .navbar-expand-sm, .navbar{
+        margin-bottom:0rem !important; /* Retirar a distancia entre navbar e carrossel*/
+    }
+
+    .bi-chevron-right, .bi-chevron-left {
+        font-size: 3em; /* altera o tamanho dos simbolos que mudam o carrossel*/
+    }
+
+</style>
+
+<div class="conteinerCarrossel">
+    <div class="containerfluid">
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner ">
+                <div class="carousel-item active">
+                    <img src="/img/logo.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/1920x600" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/1920x600" class="d-block w-100" alt="...">
+                </div>
             </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <i class="bi bi-chevron-left text-yellow"></i>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <i class="bi bi-chevron-right text-yellow"></i>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
 </div>
+
+

@@ -22,6 +22,9 @@ namespace CatBuddy.Models
         public string Idade { get; set; }
         [MaxLength(45)]
         public string Sabor { get; set; }
+        [
+            Display(Name ="Informções Nutricionais")
+        ]
         public string InformacoesNutricionais { get; set; }
         [MaxLength(45)]
         public string Cor { get; set; }

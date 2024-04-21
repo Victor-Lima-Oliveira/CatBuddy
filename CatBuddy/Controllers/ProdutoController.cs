@@ -7,18 +7,24 @@ namespace CatBuddy.Controllers
     {
         private IProdutoRepository _produtoRepository;
         public ProdutoController(IProdutoRepository produtoRepository)
-        { 
+        {
             _produtoRepository = produtoRepository;
         }
+        // Action para produtos não encontrados
         public IActionResult Index()
         {
             return View();
         }
         public IActionResult InformacoesProduto(int id)
         {
-            id = 1;
-            var produto = _produtoRepository.retornaProduto(id);
-            return View(produto);
+            if (id != 0)
+            {
+                return View(_produtoRepository.retornaProduto(id));
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
     }
 }

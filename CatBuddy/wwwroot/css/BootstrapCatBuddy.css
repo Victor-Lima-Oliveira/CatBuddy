@@ -1,0 +1,19 @@
+﻿/* Página responsável por seguir a sintaxe do bootstrap mas com as especificidades do projeto*/
+
+
+/* Botões */
+.btn-yellow {
+    background-color: var(--yellow);
+    border-color: var(--yellow);
+    color: var(--white);
+}
+
+    .btn-yellow:hover {
+        color: var(--white);
+        background-color: var(--yellow--hover);
+        border-color: var(--yellow--hover);
+    }
+
+.text-yellow {
+    color: rgb(var(--yellow--rgb)) !important;
+}
