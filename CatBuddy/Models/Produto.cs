@@ -39,5 +39,6 @@ namespace CatBuddy.Models
         public string ImgPath { get; set; }
         [MaxLength(40)]
         public string DsNome { get; set; }
+        public int QtdDeProduto { get; set; }
     }
 }

@@ -1,0 +1,116 @@
+﻿using CatBuddy.Models;
+using Newtonsoft.Json;
+
+namespace CatBuddy.httpContext
+{
+    public class CarrinhoDeCompraCookie
+    {
+        private string sKey = "Carrinho.Compra";
+        private Cookie _cookie;
+
+        public CarrinhoDeCompraCookie(Cookie cookie)
+        {
+            _cookie = cookie;
+        }
+
+        /// <summary>
+        /// Persiste os produtos no carrinho
+        /// </summary>
+        private void SalvarProdutoNosCookies(List<Produto> listProdutos)
+        {
+            // Converte a lista de objetos que o usuário selecionou em string
+            string listProdutosString = JsonConvert.SerializeObject(listProdutos);
+
+            // Cadastra esse cookie no navegador do usuário
+            _cookie.Atualizar(sKey, listProdutosString);
+        }
+
+        /// <summary>
+        /// Retorna a lista de produtos no carrinho
+        /// </summary>
+        public List<Produto> ConsultarProdutosNoCarrinho()
+        {
+            if (_cookie.Existe(sKey))
+            {
+                // Recupera os produtos cadastrados no cookie (que estão em string)
+                string sProdutosAdicionados = _cookie.Consultar(sKey);
+
+                // converte os mesmo para o objeto produto
+                return JsonConvert.DeserializeObject<List<Produto>>(sProdutosAdicionados);
+            }
+            else
+            {
+                // Se não possuir nada cadastrado, retorna uma lista vazia
+                return new List<Produto>();
+            }
+        }
+
+        /// <summary>
+        /// Insere ou atualiza a quantidade de um produto no carrinho
+        /// </summary>
+        public void AdicionarAoCarrinho(Produto produto)
+        {
+            List<Produto> listProduto;
+
+            // Se existe o cookie
+            if (_cookie.Existe(sKey))
+            {
+                // Busca a lista de produtos já cadastrados 
+                listProduto = ConsultarProdutosNoCarrinho();
+
+                // Se o produto já estiver no carrinho, resgata ele dos cookies
+                Produto produtoJaCadastrado = listProduto.SingleOrDefault(a => a.CodIdProduto == produto.CodIdProduto);
+
+                // Se o produto não estiver cadastrado, insere na lista
+                if (produtoJaCadastrado == null)
+                {
+                    listProduto.Add(produto);
+                }
+                // Se o produto ja foi cadastrado, atualiza a quantidade com o novo valor 
+                else
+                {
+                    produtoJaCadastrado.QtdDeProduto = produto.QtdDeProduto;
+                }
+            }
+            else
+            {
+                listProduto = new List<Produto>();
+                listProduto.Add(produto);
+            }
+
+            // Registra os produtos nos cookies
+            SalvarProdutoNosCookies(listProduto);
+        }
+
+        /// <summary>
+        /// Remove um produto do carrinho
+        /// </summary>
+        public void RemoverProduto(Produto produto)
+        {
+            // Retorna a lista com todos os produtos 
+            List<Produto> listProduto = ConsultarProdutosNoCarrinho();
+
+            // Verifica se o produto está nos cookies 
+            Produto produtoJaCadastrado = listProduto.SingleOrDefault(a => a.QtdDeProduto == produto.QtdDeProduto);
+
+            // Se o produto já estiver cadastrados nos cookies
+            if(produtoJaCadastrado != null)
+            {
+                // Remove o produto da lista
+                listProduto.Remove(produtoJaCadastrado);
+
+                // Salva a lista sem ele o produto nos cookies 
+                SalvarProdutoNosCookies(listProduto);
+            }
+        }
+
+        /// <summary>
+        /// Remove todos os produtos e o cookie 
+        /// </summary>
+        public void RemoverTodos()
+        {
+            _cookie.Remover(sKey);
+        }
+
+    }
+}

@@ -20,7 +20,7 @@
             <a href="#descricaoCompleta">Ver Descrição completa</a>
             <pre>@Html.DisplayFor(model => model.Descricao)</pre>
             <div><b>Preço:</b> R$ @Model.Preco</div>
-            <a class="btn btn-yellow">Adicionar ao carrinho </a>
+            <a class="btn btn-yellow" asp-action="AdicionarItemAoCarrinho" asp-route-id="@Model.CodIdProduto">Adicionar ao carrinho </a>
         </div>
     </div>
 </div>
