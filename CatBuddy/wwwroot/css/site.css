@@ -13,6 +13,7 @@ html {
     --yellow: #DAA520;
     /*Cores do projeto em rgb*/
     --yellow--rgb: 218, 165, 32;
+    --purple--rgb: 100,81,166;
     /*Cores do proejto com efeito hover*/
     --yellow--hover: #6D5310;
 }

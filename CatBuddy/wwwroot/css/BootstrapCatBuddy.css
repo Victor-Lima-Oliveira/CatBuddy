@@ -17,3 +17,9 @@
 .text-yellow {
     color: rgb(var(--yellow--rgb)) !important;
 }
+
+.text-purple {
+    color: rgb(var(--purple--rgb)) !important;
+}
+
+
