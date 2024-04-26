@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\controllers\\produtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\controllers\\produtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\views\\produto\\informacoesproduto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\views\\produto\\informacoesproduto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\views\\produto\\carrinho.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\views\\produto\\carrinho.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|c:\\users\\victo\\documentos\\a_programacao\\asp_core\\catbuddy\\catbuddy\\views\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{D0051B2E-CC2D-4A3E-9A0F-830BC6A1B3DC}|CatBuddy\\CatBuddy.csproj|solutionrelative:catbuddy\\views\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,64 +38,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "CatBuddy\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "CatBuddy\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAACoAAAAAAAAAAAAAADgAAACZAAAA",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "CatBuddy\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "CatBuddy\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAABQAAAAAAAAAAAAAADIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-22T02:18:08.179Z",
+              "WhenOpened": "2024-04-26T01:12:09.605Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Program.cs",
-              "RelativeDocumentMoniker": "CatBuddy\\Program.cs",
-              "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Program.cs",
-              "RelativeToolTip": "CatBuddy\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAABEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T02:09:20.846Z"
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "CatBuddy\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "CatBuddy\\wwwroot\\css\\site.css",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-04-26T01:06:30.931Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "InformacoesProduto.cshtml",
               "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Produto\\InformacoesProduto.cshtml",
               "RelativeDocumentMoniker": "CatBuddy\\Views\\Produto\\InformacoesProduto.cshtml",
               "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Produto\\InformacoesProduto.cshtml",
               "RelativeToolTip": "CatBuddy\\Views\\Produto\\InformacoesProduto.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAGAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAcwBYAAABuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-22T02:07:43.914Z"
+              "WhenOpened": "2024-04-26T00:36:55.696Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "_Layout.cshtml.css",
+              "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Shared\\_Layout.cshtml.css",
+              "RelativeDocumentMoniker": "CatBuddy\\Views\\Shared\\_Layout.cshtml.css",
+              "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Shared\\_Layout.cshtml.css",
+              "RelativeToolTip": "CatBuddy\\Views\\Shared\\_Layout.cshtml.css",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-04-26T00:30:41.663Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Carrinho.cshtml",
               "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Produto\\Carrinho.cshtml",
               "RelativeDocumentMoniker": "CatBuddy\\Views\\Produto\\Carrinho.cshtml",
               "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Views\\Produto\\Carrinho.cshtml",
               "RelativeToolTip": "CatBuddy\\Views\\Produto\\Carrinho.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADIAAAAQAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACcAAABgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-22T02:06:10.147Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProdutoController.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Controllers\\ProdutoController.cs",
-              "RelativeDocumentMoniker": "CatBuddy\\Controllers\\ProdutoController.cs",
-              "ToolTip": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\Controllers\\ProdutoController.cs",
-              "RelativeToolTip": "CatBuddy\\Controllers\\ProdutoController.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAgwD0AAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T01:49:16.819Z",
+              "WhenOpened": "2024-04-22T02:06:10.147Z",
               "EditorCaption": ""
             }
           ]

@@ -4,56 +4,43 @@
     ViewData["Title"] = "Carrinho";
 }
 
-<h1>Carrinho</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CodIdProduto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Preco)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImgPath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DsNome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QtdDeProduto)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodIdProduto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Preco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImgPath)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DsNome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QtdDeProduto)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="row">
+        <div class="col-10">
+            <h2 class="paytone-one-regular text-purple">Carrinho</h2>
+        </div>
+        <div class="col-1">
+            <h3 class="paytone-one-regular text-purple">Preço</h3>
+        </div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+
+        <div class="container border-bottom">
+            <div class="row">
+                @*foto*@
+                <div class="col-2 ">
+                    <img src="@item.ImgPath" width="80%" height="80%" />
+                </div>
+                @* Descricao *@
+                <div class="col-8">
+                    <h4 class="paytone-one-regular">@item.DsNome</h4>
+                    <h6>@item.CodFornecedor</h6>
+                </div>
+                @*Preço*@
+                <div class="col-2">
+                    <h6 class="paytone-one-regular"><b>R$: </b>@item.Preco</h6>
+                    <p> </p>
+                    <p>
+                        <a class="btn btn-success btn-md paytone-one-regular" style="width:100%">Adicionar</a>
+                    </p>
+                    <p>
+                        <a class="btn btn-danger btn-md paytone-one-regular" style="width:100%" >Remover</a>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    }

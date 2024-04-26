@@ -17,8 +17,28 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\wwwroot\\img\\Banners\\Inicial.png",
+      "PackagePath": "staticwebassets\\img\\Banners\\Inicial.png"
+    },
+    {
+      "Id": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\wwwroot\\img\\Banners\\petshop.png",
+      "PackagePath": "staticwebassets\\img\\Banners\\petshop.png"
+    },
+    {
+      "Id": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\wwwroot\\img\\Logo.png",
+      "PackagePath": "staticwebassets\\img\\Logo.png"
+    },
+    {
       "Id": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\wwwroot\\img\\logo.jpg",
       "PackagePath": "staticwebassets\\img\\logo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\wwwroot\\img\\logogato.png",
+      "PackagePath": "staticwebassets\\img\\logogato.png"
+    },
+    {
+      "Id": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\wwwroot\\img\\logogato2.png",
+      "PackagePath": "staticwebassets\\img\\logogato2.png"
     },
     {
       "Id": "C:\\Users\\victo\\Documentos\\A_Programacao\\ASP_CORE\\CatBuddy\\CatBuddy\\wwwroot\\js\\site.js",

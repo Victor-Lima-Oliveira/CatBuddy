@@ -12,6 +12,9 @@ a[b-a8qlr2rij3] {
   color: #0077cc;
 }
 
+.tamanho-fonte-nav-bar[b-a8qlr2rij3]{
+    font-size: 1.2rem;
+}
 .btn-primary[b-a8qlr2rij3] {
   color: #fff;
   background-color: #1b6ec2;
@@ -50,5 +53,5 @@ button.accept-policy[b-a8qlr2rij3] {
 }
 
 .fundo-navBar[b-a8qlr2rij3] {
-    background-color: var(--purple);
+    background-color: var(--lightPurple);
 }

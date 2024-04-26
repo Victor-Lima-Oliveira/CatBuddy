@@ -4,10 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CatBuddy</title>
+    <link rel="shortcut icon" href="~/img/logogato2.png">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="~/css/bootstrapcatbuddy.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/CatBuddy.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -24,7 +28,7 @@
                 <ul class="nav navbar-collapse collapse flex-grow-0" aria-expanded="false">
                     <li class="nav-item p-4">
                         <div class="dropdown">
-                            <div class="text-white" type="button" id="dropdownMenuButton" aria-expanded="false">
+                            <div class="text-white paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
                                 Para Gato
                             </div>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -36,7 +40,7 @@
                     </li>
                     <li class="nav-item p-4">
                         <div class="dropdown">
-                            <div class="text-white" type="button" id="dropdownMenuButton" aria-expanded="false">
+                            <div class="text-white paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
                                 Para Humanos
                             </div>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -49,13 +53,13 @@
                 </ul>
 
                 <div class="nav justify-content-center ">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Cat Buddy</a>
+                    <a class="navbar-brand"  asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" style="height:12vh;" /></a>
                 </div>
    
                 <ul class="nav navbar-collapse collapse flex-grow-0 text-decoration-none">
-                    <li class="nav-item"><a class="bi bi-search text-white m-4 d-grid text-decoration-none"></a></li>
-                    <li class="nav-item"><a class="bi bi-basket text-white m-4 d-grid text-decoration-none" asp-action="Carrinho" asp-controller="Produto"></a></li>
-                    <li class="nav-item"><a class="bi bi-person text-white m-4 d-grid text-decoration-none"></a></li>
+                    <li class="nav-item"><a class="bi bi-search text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
+                    <li class="nav-item"><a class="bi bi-basket text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Carrinho" asp-controller="Produto"></a></li>
+                    <li class="nav-item"><a class="bi bi-person text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
                 </ul>
             </div>
         </nav>

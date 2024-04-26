@@ -10,15 +10,15 @@
 <div class="container">
     <div class="row">
         @*Painel da foto*@
-        <div class="col">
+        <div class="col-3">
             <img src="@Model.ImgPath" class="card-img img-thumbnail" />
         </div>
 
         @*Painel de informações*@
         <div class="col">
             <h4>@Html.DisplayFor(model => model.DsNome)</h4>
-            <a href="#descricaoCompleta">Ver Descrição completa</a>
-            <pre>@Html.DisplayFor(model => model.Descricao)</pre>
+            <h5>@Model.CodFornecedor</h5>
+            <h6><a href="#descricaoCompleta">Ver Descrição completa</a></h6>
             <div><b>Preço:</b> R$ @Model.Preco</div>
             <a class="btn btn-yellow" asp-action="AdicionarItemAoCarrinho" asp-route-id="@Model.CodIdProduto">Adicionar ao carrinho </a>
         </div>
