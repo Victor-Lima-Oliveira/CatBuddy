@@ -19,7 +19,7 @@ namespace CatBuddy.Controllers
             _carrinhoDeCompraCookie = carrinhoDeCompraCookie;
             _pedidoRepository = pedidoRepository;
         }
-        public IActionResult ListaItensCarrinho()
+        public IActionResult Carrinho()
         {
             return View(_carrinhoDeCompraCookie.ConsultarProdutosNoCarrinho());
         }
@@ -48,13 +48,13 @@ namespace CatBuddy.Controllers
                 return RedirectToAction(Const.ErroAction, Const.ErroController);
             }
 
-            return RedirectToAction("ListaItensCarrinho");
+            return RedirectToAction("Carrinho");
         }
 
         public IActionResult ExcluirCarrinho()
         {
             _carrinhoDeCompraCookie.RemoverTodos();
-            return RedirectToAction("ListaItensCarrinho");
+            return RedirectToAction("Carrinho");
         }
 
         public IActionResult RemoverProduto(int id)
@@ -71,7 +71,7 @@ namespace CatBuddy.Controllers
                 TempData[Const.ErroTempData] = err.Message;
                 return RedirectToAction(Const.ErroAction, Const.ErroController);
             }
-            return RedirectToAction("ListaItensCarrinho");
+            return RedirectToAction("Carrinho");
         }
 
         public IActionResult Pagamento()

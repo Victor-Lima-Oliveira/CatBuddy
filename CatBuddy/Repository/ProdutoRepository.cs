@@ -70,7 +70,6 @@ namespace CatBuddy.Repository
                     produto.QtdEstoque = (int)mySqlDataReader["qtdEstoque"];
                     produto.Idade = (string)mySqlDataReader["idade"];
                     produto.Sabor = (string)mySqlDataReader["sabor"];
-                    produto.InformacoesNutricionais = (string)mySqlDataReader["informacoesNutricionais"];
                     produto.Cor = (string)mySqlDataReader["cor"];
                     produto.MedidasAproximadas = (string)mySqlDataReader["medidasAproximadas"];
                     produto.Composição = (string)mySqlDataReader["composicao"];
@@ -127,7 +126,6 @@ namespace CatBuddy.Repository
                             QtdEstoque = (int)produtoItem["qtdEstoque"],
                             Idade = (string)produtoItem["idade"],
                             Sabor = (string)produtoItem["sabor"],
-                            InformacoesNutricionais = (string)produtoItem["informacoesNutricionais"],
                             Cor = (string)produtoItem["cor"],
                             MedidasAproximadas = (string)produtoItem["medidasAproximadas"],
                             Composição = (string)produtoItem["composicao"],

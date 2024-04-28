@@ -11,7 +11,6 @@
     }
 }
 
-<h1></h1>
 @if(Model.QtdEstoque == 0)
 {
     <h6 class="alert alert-darkFuchsia"><b>Produto indisponível: </b>Estamos repondo nosso estoque</h6>
@@ -24,6 +23,7 @@ else if (Model.QtdEstoque <= 20)
 {
     <h6 class="alert alert-yellow"><b>Corra:</b> Ultimos produtos em estoque</h6>
 }
+
 @*Painel com foto e painel de informações*@
 <div class="container">
     <div class="row">

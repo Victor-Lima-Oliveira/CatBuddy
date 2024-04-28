@@ -23,18 +23,28 @@ namespace CatBuddy.Controllers
         }
         public IActionResult InformacoesProduto(int id)
         {
+            Produto produtoSelecionado;
             try
             {
                 if (id != 0)
                 {
-                    return View(_produtoRepository.retornaProduto(id));
+                    produtoSelecionado = _produtoRepository.retornaProduto(id);
+
+                    if (produtoSelecionado.CodIdProduto == 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View(produtoSelecionado);
+                    }
                 }
                 else
                 {
                     return RedirectToAction("Index");
                 }
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 TempData[Const.ErroTempData] = err.Message;
                 return RedirectToAction(Const.ErroAction, Const.ErroController);
@@ -73,7 +83,7 @@ namespace CatBuddy.Controllers
                     _carrinhoDeCompraCookie.AdicionarAoCarrinho(produtoNoCarrinho);
 
                     // Depois redireciona para o carrinho 
-                    return RedirectToAction("ListaItensCarrinho", "Carrinho");
+                    return RedirectToAction("Carrinho", "Carrinho");
                 }
             }
             catch (Exception err)
