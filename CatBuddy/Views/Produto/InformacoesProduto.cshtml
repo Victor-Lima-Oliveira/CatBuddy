@@ -1,12 +1,22 @@
 ﻿@model CatBuddy.Models.Produto
 
 @{
-    ViewData["Title"] = Model.NomeProduto;
-
+    @if(Model.QtdEstoque == 0)
+    {
+        ViewData["Title"] = "Produto indisponível";
+    }
+    else
+    {
+        ViewData["Title"] = Model.NomeProduto;
+    }
 }
 
 <h1></h1>
-@if (Model.QtdEstoque <= 10)
+@if(Model.QtdEstoque == 0)
+{
+    <h6 class="alert alert-darkFuchsia"><b>Produto indisponível: </b>Estamos repondo nosso estoque</h6>
+}
+else if (Model.QtdEstoque <= 10)
 {
     <h6 class="alert alert-darkFuchsia"><b>Corra:</b> Ultimos @Model.QtdEstoque produtos em estoque</h6>
 }
