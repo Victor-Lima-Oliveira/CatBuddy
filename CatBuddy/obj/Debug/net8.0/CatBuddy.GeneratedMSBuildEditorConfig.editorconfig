@@ -26,16 +26,28 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\victo\Documentos\A_Programacao\ASP_CORE\CatBuddy\CatBuddy
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/victo/Documentos/A_Programacao/ASP_CORE/CatBuddy/CatBuddy/Views/Carrinho/FinalizarPedido.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FycmluaG9cRmluYWxpemFyUGVkaWRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Documentos/A_Programacao/ASP_CORE/CatBuddy/CatBuddy/Views/Carrinho/ListaItensCarrinho.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FycmluaG9cTGlzdGFJdGVuc0NhcnJpbmhvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Documentos/A_Programacao/ASP_CORE/CatBuddy/CatBuddy/Views/Carrinho/Pagamento.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FycmluaG9cUGFnYW1lbnRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Documentos/A_Programacao/ASP_CORE/CatBuddy/CatBuddy/Views/Erro/MostrarErro.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb1xNb3N0cmFyRXJyby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/victo/Documentos/A_Programacao/ASP_CORE/CatBuddy/CatBuddy/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/victo/Documentos/A_Programacao/ASP_CORE/CatBuddy/CatBuddy/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/victo/Documentos/A_Programacao/ASP_CORE/CatBuddy/CatBuddy/Views/Produto/Carrinho.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b1xDYXJyaW5oby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/victo/Documentos/A_Programacao/ASP_CORE/CatBuddy/CatBuddy/Views/Produto/Index.cshtml]
