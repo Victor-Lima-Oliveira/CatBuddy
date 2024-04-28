@@ -1,1 +1,8 @@
+# Ignorando os arquivos de personalizacao do visualStudio, para cada colaborador ter a liberdade de fazer as modificacoes que desejar
 .vs/
+
+# Ignorando arquivos binarios de compilacao, pois os mesmos sao gerado pelo proprio visualStudio toda hora
+CatBuddy/bin
+
+# Ignorando arquivos intermediarios de complicao, pois os mesmos sao gerados pelo proprio visualStudio toda hora
+CatBuddy/obj
