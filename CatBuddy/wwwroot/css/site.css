@@ -6,19 +6,26 @@ html {
     /*Cores padrão*/
     --white: #fff;
     /*Cores do projeto*/
-    --amareloPastel: #F8F8B4;
+    --amareloPastel: #FDFDE3;
     --purple: #6451A6;
     --lightPurple: #8C7EBF;
     --darkFuchsia: #860F58;
     --yellow: #DAA520;
     /*Cores do projeto em rgb*/
-    --yellow--rgb: 218, 165, 32;
+    --amareloPastel--rgb: 248,248,180;
     --purple--rgb: 100,81,166;
+    --lightPurple--rgb: 140,126,191;
+    --darkFuchsia--rgb: 134, 15, 88;
+    --yellow--rgb: 218,165,32;
     /*Cores do proejto com efeito hover*/
+    --amareloPastel--hover: #D5BD1E;
+    --purple--hover: #322953;
+    --lightPurple--hover: #463F60;
+    --darkFuchsia--hover: #43082C;
     --yellow--hover: #6D5310;
 }
 
-.paytone-one-regular {
+.font-paytone-one-regular {
     font-family: "Paytone One", sans-serif;
     font-weight: 300;
     font-style: normal;

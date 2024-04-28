@@ -1,0 +1,29 @@
+﻿@model IEnumerable<CatBuddy.Models.Produto>
+
+@{
+    ViewData["Title"] = "Pagamento";
+}
+
+<h1>Escolha sua forma de pagamento</h1>
+
+<table class="table d-flex d-flex-inline">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Preco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QtdDeProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeFornecedor)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+ </table>
+
+<a class="btn btn-yellow" asp-action="FinalizarPedido" asp-controller="Carrinho" asp-route-codPagamento="1">Finalizar compra</a>

@@ -1,7 +1,71 @@
 ﻿/* Página responsável por seguir a sintaxe do bootstrap mas com as especificidades do projeto*/
+/*Textos com as cores do projeto*/
+.text-amareloPastel {
+    color: rgb(var(--amareloPastel--rgb)) !important;
+}
 
+.text-purple {
+    color: rgb(var(--purple--rgb)) !important;
+}
 
-/* Botões */
+.text-lightPurple {
+    color: rgb(var(--lightPurple--rgb)) !important;
+}
+
+.text-darkFuchsia {
+    color: rgb(var(--darkFuchsia--rgb)) !important;
+}
+
+.text-yellow {
+    color: rgb(var(--yellow--rgb)) !important;
+}
+
+/*Botoes com as cores do projeto*/
+.btn-amareloPastel {
+    background-color: var(--amareloPastel);
+    border-color: var(--amareloPastel);
+    color: var(--white);
+}
+
+    .btn-amareloPastel:hover {
+        color: var(--white);
+        background-color: var(--amareloPastel--hover);
+        border-color: var(--amareloPastel--hover);
+    }
+
+.btn-purple {
+    background-color: var(--purple);
+    border-color: var(--purple);
+    color: var(--white);
+}
+
+    .btn-purple:hover {
+        color: var(--white);
+        background-color: var(--purple--hover);
+        border-color: var(--purple--hover);
+    }
+.btn-lightPurple {
+    background-color: var(--lightPurple);
+    border-color: var(--lightPurple);
+    color: var(--white);
+}
+
+    .btn-lightPurple:hover {
+        color: var(--white);
+        background-color: var(--lightPurple--hover);
+        border-color: var(--lightPurple--hover);
+    }
+.btn-darkFuchsia {
+    background-color: var(--darkFuchsia);
+    border-color: var(--darkFuchsia);
+    color: var(--white);
+}
+
+    .btn-darkFuchsia:hover {
+        color: var(--white);
+        background-color: var(--darkFuchsia--hover);
+        border-color: var(--darkFuchsia--hover);
+    }
 .btn-yellow {
     background-color: var(--yellow);
     border-color: var(--yellow);
@@ -14,12 +78,25 @@
         border-color: var(--yellow--hover);
     }
 
-.text-yellow {
-    color: rgb(var(--yellow--rgb)) !important;
+
+
+
+.alert-yellow {
+    color: var(--white);
+    background-color: var(--yellow);
+    border-color: var(--yellow--hover);
 }
 
-.text-purple {
-    color: rgb(var(--purple--rgb)) !important;
+    .alert-yellow .alert-link {
+        color: #6a1a21;
+    }
+
+.alert-darkFuchsia {
+    color: var(--white);
+    background-color: var(--darkFuchsia);
+    border-color: var(--yellow--hover);
 }
 
-
+.alert-yellow .alert-link {
+    color: #6a1a21;
+}

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<CatBuddy.Models.Produto>
+
+@{
+    ViewData["Title"] = "Carrinho";
+}
+
+@if (Model.Any())
+{
+    <p>
+        <a class="btn btn-danger" asp-action="ExcluirCarrinho" asp-controller="Carrinho">Remover Carrinho</a>
+        <div class="row ">
+            <div class="col-10">
+                <h2 class="font-paytone-one-regular text-">Carrinho</h2>
+            </div>
+        </div>
+    </p>
+
+    @foreach (var item in Model)
+    {
+
+        <div class="container border-bottom">
+            <div class="row">
+                @*foto*@
+                <div class="col-2 ">
+                    <img src="@item.ImgPath" width="80%" height="80%" />
+                </div>
+
+                @* Descricao *@
+                <div class="col-8">
+                    <h4 class="font-paytone-one-regular text-yellow">@item.NomeProduto</h4>
+                    <h6>@item.NomeFornecedor</h6>
+                    <div class="mt-2">
+                        <form asp-action="AlterarQuantidadeNosCookies" asp-controller="Produto">
+                            <b>
+                                Quantidade:
+                            </b>
+                            <div class="btn p-0">
+                                <select asp-for="@item.QtdDeProduto" class="form-select form-select-md quantidade" data-id="@item.CodIdProduto">
+                                    @for (int i = 1; i <= 10; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                            </div>
+                            <a Class="btn btn-danger" asp-action="RemoverProduto" asp-controller="Carrinho" asp-route-id="@item.CodIdProduto">Remover item</a>
+                            <input asp-for="@item.CodIdProduto" Class="visually-hidden" type="number" value="@item.CodIdProduto" />
+                        </form>
+                    </div>
+                </div>
+
+                @*Preço*@
+                <div class="col-2">
+                    <div class="d-flex align-items-end flex-column mb-3">
+                        <div>
+                            <h4 class="font-paytone-one-regular text-yellow"><span class="text-purple">Preço <b>R$:</b></span> @item.Preco</h4>
+                        </div>
+                        <div>
+                            <h6 class="font-paytone-one-regular text-yellow "><span class="text-purple">Subtotal <b>R$: </b></span>@item.Subtotal</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <a class="btn btn-yellow" asp-action="Pagamento" asp-controller="Carrinho">Comprar</a>
+}
+else
+{
+    <h4 class="font-paytone-one-regular text-darkFuchsia">Nenhum produto no carrinho, veja nossas sugestões: </h4>
+
+}
+
+
+
+<script>
+    $(document).ready(function () {
+        $('.quantidade').change(function () {
+            var idProduto = $(this).data('id');
+            var quantidade = $(this).val();
+
+            $.ajax({
+                url: '/Carrinho/AlterarQuantidadeNosCookies',
+                type: 'POST',
+                data: { codIdProduto: idProduto, qtdDeProduto: quantidade },
+                success: function () {
+                    location.reload();
+                },
+                error: function () {
+                    alert('Erro ao atualizar a página, tente novamente mais tarde');
+                }
+            });
+        });
+    });
+</script>

@@ -41,12 +41,8 @@ namespace CatBuddy.Repository
             MySqlDataAdapter mySqlDataAdapter;
             MySqlDataReader mySqlDataReader;
 
-            sbAux.Append(" SELECT * FROM tbl_produto ");
-            sbAux.Append(" WHERE cod_id_produto = @CodIdProduto ");
-
-
             // Montando a sintaxe do SQL
-            _SintaxeSQl = sbAux.ToString();
+            _SintaxeSQl = "SELECT * FROM vwProduto WHERE cod_id_produto = @CodIdProduto";
 
             using (var conexao = new MySqlConnection(_conexao))
             {
@@ -69,11 +65,9 @@ namespace CatBuddy.Repository
                 // Gravar os dados na model
                 while (mySqlDataReader.Read())
                 {
-                    produto.CodIdProduto = (int) mySqlDataReader["cod_id_produto"];
-                    produto.CodCategoria = (int)mySqlDataReader["cod_categoria"];
+                    produto.CodIdProduto = (int)mySqlDataReader["cod_id_produto"];
                     produto.Descricao = (string)mySqlDataReader["descricao"];
                     produto.QtdEstoque = (int)mySqlDataReader["qtdEstoque"];
-                    produto.CodFornecedor = (int)mySqlDataReader["cod_fornecedor"];
                     produto.Idade = (string)mySqlDataReader["idade"];
                     produto.Sabor = (string)mySqlDataReader["sabor"];
                     produto.InformacoesNutricionais = (string)mySqlDataReader["informacoesNutricionais"];
@@ -82,7 +76,11 @@ namespace CatBuddy.Repository
                     produto.Composição = (string)mySqlDataReader["composicao"];
                     produto.Preco = (float)mySqlDataReader["preco"];
                     produto.ImgPath = (string)mySqlDataReader["imgPath"];
-                    produto.DsNome = (string)mySqlDataReader["ds_nome"];
+                    produto.NomeProduto = (string)mySqlDataReader["ds_nome"];
+                    produto.CodCategoria = (int)mySqlDataReader["codFornecedor"];
+                    produto.NomeCategoria = (string)mySqlDataReader["Categoria"];
+                    produto.CodFornecedor = (int)mySqlDataReader["codFornecedor"];
+                    produto.NomeFornecedor = (string)mySqlDataReader["fornecedor"];
                 }
             }
             return produto;
@@ -125,10 +123,8 @@ namespace CatBuddy.Repository
                         new Produto
                         {
                             CodIdProduto = (int)produtoItem["cod_id_produto"],
-                            CodCategoria = (int)produtoItem["cod_categoria"],
                             Descricao = (string)produtoItem["descricao"],
                             QtdEstoque = (int)produtoItem["qtdEstoque"],
-                            CodFornecedor = (int)produtoItem["cod_fornecedor"],
                             Idade = (string)produtoItem["idade"],
                             Sabor = (string)produtoItem["sabor"],
                             InformacoesNutricionais = (string)produtoItem["informacoesNutricionais"],
@@ -137,7 +133,11 @@ namespace CatBuddy.Repository
                             Composição = (string)produtoItem["composicao"],
                             Preco = (float)produtoItem["preco"],
                             ImgPath = (string)produtoItem["imgPath"],
-                            DsNome = (string)produtoItem["ds_nome"]
+                            NomeProduto = (string)produtoItem["ds_nome"],
+                            CodCategoria = (int)produtoItem["codFornecedor"],
+                            NomeCategoria = (string)produtoItem["Categoria"],
+                            CodFornecedor = (int)produtoItem["codFornecedor"],
+                            NomeFornecedor = (string)produtoItem["fornecedor"]
                         });
                 }
 
@@ -145,6 +145,35 @@ namespace CatBuddy.Repository
             }
 
             return listProduto;
+        }
+        public void VendeProduto(int codProduto, int qtdEstoque)
+        {
+            StringBuilder sbAux = new StringBuilder();
+
+            // Sintaxe SQL
+            sbAux.Append(" UPDATE tbl_produto SET qtdEstoque = @qtdEstoque ");
+            sbAux.Append(" WHERE cod_id_produto = @codIdProduto ");
+
+            // Monta o comando
+            _SintaxeSQl = sbAux.ToString();
+
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                // Comando MySQL
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                // Passagem de parametros
+                cmd.Parameters.Add("@codIdProduto", MySqlDbType.Int32).Value = codProduto;
+                cmd.Parameters.Add("@qtdEstoque", MySqlDbType.Int32).Value = qtdEstoque;
+
+                // Abre a conexao
+                conexao.Open();
+
+                // Insere o pedido e retorna o numero do pedido
+                cmd.ExecuteNonQuery();
+
+                conexao.Close();
+            }
         }
     }
 }

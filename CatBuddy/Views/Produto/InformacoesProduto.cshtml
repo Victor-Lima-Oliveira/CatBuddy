@@ -1,11 +1,19 @@
 ﻿@model CatBuddy.Models.Produto
 
 @{
-    ViewData["Title"] = Model.DsNome;
+    ViewData["Title"] = Model.NomeProduto;
+
 }
 
 <h1></h1>
-
+@if (Model.QtdEstoque <= 10)
+{
+    <h6 class="alert alert-darkFuchsia"><b>Corra:</b> Ultimos @Model.QtdEstoque produtos em estoque</h6>
+}
+else if (Model.QtdEstoque <= 20)
+{
+    <h6 class="alert alert-yellow"><b>Corra:</b> Ultimos produtos em estoque</h6>
+}
 @*Painel com foto e painel de informações*@
 <div class="container">
     <div class="row">
@@ -16,11 +24,36 @@
 
         @*Painel de informações*@
         <div class="col">
-            <h4>@Html.DisplayFor(model => model.DsNome)</h4>
-            <h5>@Model.CodFornecedor</h5>
+            <h4 class="font-paytone-one-regular text-yellow">@Html.DisplayFor(model => model.NomeProduto)</h4>
+            <h5>@Model.NomeFornecedor</h5>
             <h6><a href="#descricaoCompleta">Ver Descrição completa</a></h6>
             <div><b>Preço:</b> R$ @Model.Preco</div>
-            <a class="btn btn-yellow" asp-action="AdicionarItemAoCarrinho" asp-route-id="@Model.CodIdProduto">Adicionar ao carrinho </a>
+            <div class="mt-2">
+                <form asp-action="AdicionarItemAoCarrinho" asp-controller="Produto">
+                    <div class="btn p-0">
+                        <select asp-for="QtdDeProduto" class="form-select form-select-md ">
+                            @for (int i = 1; i <= 10; i++)
+                            {
+                                @if (Model.QtdEstoque == i)
+                                {
+                                    <option value="@i">@i</option>
+                                    break;
+                                }
+                                @if (i == 1)
+                                {
+                                    <option selected value="@i">@i</option>
+                                    continue;
+                                }
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+                    @Html.HiddenFor(model => model.CodIdProduto)
+                    <input asp-for="CodIdProduto" Class="visually-hidden" type="number" value="@Model.CodIdProduto" />
+
+                    <input class="btn btn-yellow" type="submit" value="Adicionar ao carrinho" @(Model.QtdEstoque == 0 ? "disabled" : "") />
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -32,7 +65,7 @@
 
 @*Descrição completa*@
 <div class="container" id="descricaoCompleta">
-    <h4>Descrição</h4>
+    <h4 class="font-paytone-one-regular text-yellow" >Descrição</h4>
     <pre>@Model.Descricao</pre>
 </div>
 
@@ -43,7 +76,7 @@
 
 @*Informações complementares - As informações só serão apresentadas se tiver algo salvo no banco*@
 <div class="container">
-    <h4>Informações complementares</h4>
+    <h4 class="font-paytone-one-regular text-yellow">Informações complementares</h4>
     <dl class="row">
         @if (!String.IsNullOrEmpty(Model.Idade))
         {

@@ -13,6 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/CatBuddy.styles.css" asp-append-version="true" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
     <header>
@@ -28,7 +30,7 @@
                 <ul class="nav navbar-collapse collapse flex-grow-0" aria-expanded="false">
                     <li class="nav-item p-4">
                         <div class="dropdown">
-                            <div class="text-white paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
+                            <div class="text-white font-paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
                                 Para Gato
                             </div>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -40,7 +42,7 @@
                     </li>
                     <li class="nav-item p-4">
                         <div class="dropdown">
-                            <div class="text-white paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
+                            <div class="text-white font-paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
                                 Para Humanos
                             </div>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -58,8 +60,8 @@
    
                 <ul class="nav navbar-collapse collapse flex-grow-0 text-decoration-none">
                     <li class="nav-item"><a class="bi bi-search text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
-                    <li class="nav-item"><a class="bi bi-basket text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Carrinho" asp-controller="Produto"></a></li>
-                    <li class="nav-item"><a class="bi bi-person text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
+                    <li class="nav-item"><a class="bi bi-basket text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="ListaItensCarrinho" asp-controller="Carrinho"></a></li>
+                    <li class="nav-item"><a class="bi bi-person text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Index" asp-controller="Usuario"></a></li>
                 </ul>
             </div>
         </nav>

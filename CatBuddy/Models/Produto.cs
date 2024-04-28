@@ -9,21 +9,16 @@ namespace CatBuddy.Models
     {
         [Required]
         public int CodIdProduto { get; set; }
-        [Required]
-        public int CodCategoria { get; set; }
+
         public string Descricao { get; set; }
         public int QtdEstoque { get; set; }
-        [
-            Display(Name = "Marca"),
-            Required
-        ]
-        public int CodFornecedor { get; set; }
+
         [MaxLength(13)]
         public string Idade { get; set; }
         [MaxLength(45)]
         public string Sabor { get; set; }
         [
-            Display(Name ="Informções Nutricionais")
+            Display(Name = "Informções Nutricionais")
         ]
         public string InformacoesNutricionais { get; set; }
         [MaxLength(45)]
@@ -38,7 +33,19 @@ namespace CatBuddy.Models
         [MaxLength(200)]
         public string ImgPath { get; set; }
         [MaxLength(40)]
-        public string DsNome { get; set; }
+        public string NomeProduto { get; set; }
         public int QtdDeProduto { get; set; }
+        public float Subtotal { get; set; }
+        [
+         Required
+        ]
+        public int CodFornecedor { get; set; }
+        [
+         Display(Name = "Marca"),
+        ]
+        public string NomeFornecedor { get; set; }
+        [Required]
+        public int CodCategoria { get; set; }
+        public string NomeCategoria { get; set; }
     }
 }

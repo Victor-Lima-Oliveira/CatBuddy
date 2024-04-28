@@ -9,5 +9,6 @@ namespace CatBuddy.Repository.Contract
         void atualizaProduto(Produto produto);
         Produto retornaProduto(int id);
         IEnumerable<Produto> retornaProdutos();
+        void VendeProduto(int codProduto, int qtdEstoque);
     }
 }

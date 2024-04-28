@@ -48,7 +48,7 @@ namespace CatBuddy.httpContext
         /// <summary>
         /// Insere ou atualiza a quantidade de um produto no carrinho
         /// </summary>
-        public void AdicionarAoCarrinho(Produto produto)
+        public void AdicionarAoCarrinho(Produto produtoQueSeraPersistido)
         {
             List<Produto> listProduto;
 
@@ -59,23 +59,42 @@ namespace CatBuddy.httpContext
                 listProduto = ConsultarProdutosNoCarrinho();
 
                 // Se o produto já estiver no carrinho, resgata ele dos cookies
-                Produto produtoJaCadastrado = listProduto.SingleOrDefault(a => a.CodIdProduto == produto.CodIdProduto);
+                Produto produtoJaCadastrado = listProduto.SingleOrDefault(a => a.CodIdProduto == produtoQueSeraPersistido.CodIdProduto);
 
                 // Se o produto não estiver cadastrado, insere na lista
                 if (produtoJaCadastrado == null)
                 {
-                    listProduto.Add(produto);
+                    listProduto.Add(produtoQueSeraPersistido);
                 }
                 // Se o produto ja foi cadastrado, atualiza a quantidade com o novo valor 
                 else
                 {
-                    produtoJaCadastrado.QtdDeProduto = produto.QtdDeProduto;
+                    // Remove o produto antigo do cookies
+                    RemoverProduto(produtoJaCadastrado);
+
+                    // Remove o produto antigo da lista
+                    listProduto.Remove(produtoJaCadastrado);
+
+                    // Adiciona o produto com um novo subtotal e quantidade
+                    Produto produtoAtualizado = new Produto()
+                    {
+                        CodIdProduto = produtoJaCadastrado.CodIdProduto,
+                        ImgPath = produtoJaCadastrado.ImgPath,
+                        QtdDeProduto = produtoQueSeraPersistido.QtdDeProduto,
+                        NomeProduto = produtoJaCadastrado.NomeProduto,
+                        Preco = produtoJaCadastrado.Preco,
+                        Subtotal = produtoQueSeraPersistido.Subtotal,
+                        NomeFornecedor = produtoJaCadastrado.NomeFornecedor 
+                    };
+
+                    // Adiciona o novo produto na lista 
+                    listProduto.Add(produtoAtualizado);
                 }
             }
             else
             {
                 listProduto = new List<Produto>();
-                listProduto.Add(produto);
+                listProduto.Add(produtoQueSeraPersistido);
             }
 
             // Registra os produtos nos cookies
@@ -91,7 +110,7 @@ namespace CatBuddy.httpContext
             List<Produto> listProduto = ConsultarProdutosNoCarrinho();
 
             // Verifica se o produto está nos cookies 
-            Produto produtoJaCadastrado = listProduto.SingleOrDefault(a => a.QtdDeProduto == produto.QtdDeProduto);
+            Produto produtoJaCadastrado = listProduto.SingleOrDefault(a => a.CodIdProduto == produto.CodIdProduto);
 
             // Se o produto já estiver cadastrados nos cookies
             if(produtoJaCadastrado != null)
