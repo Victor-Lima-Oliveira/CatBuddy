@@ -13,9 +13,8 @@ CREATE TABLE tbl_categoria (
 CREATE TABLE tbl_fornecedor (
     cod_id_fornecedor int PRIMARY KEY auto_increment,
     cnpj varchar(14) UNIQUE,
-    razaoSocial varchar(80),
     nomeFantasia varchar(35));
-    
+        
 CREATE TABLE tbl_contatoFornecedor (
 	cod_id_contato int PRIMARY KEY auto_increment,
 	numero varchar(11),
@@ -59,16 +58,6 @@ CREATE TABLE tbl_Usuario (
     nomeUsuario varchar(50),
     CPF varchar(11));
     
- 
- -- TODO: criar tabela pagamento
-CREATE TABLE tbl_pedido (
-    cod_id_pedido int PRIMARY KEY auto_increment,
-    cod_usuario int,
-    cod_pagamento int,
-    valorTotal int,
-    dataPedido datetime,
-    foreign key (cod_usuario) references tbl_usuario (cod_id_usuario) );
-    
 -- TODO: Criar a tabela vacina 
 CREATE TABLE tbl_carteiraVacina (
     cod_id_carteirinha int PRIMARY KEY auto_increment,
@@ -91,14 +80,24 @@ CREATE TABLE tbl_enderecoUsuario (
     foreign key (cod_logradouro) references tbl_logradouro (cod_id_logradouro),
     foreign key (cod_usuario) references tbl_usuario (cod_id_usuario));
 
-CREATE TABLE tbl_itemPedido (
-    cod_id_item int PRIMARY KEY auto_increment,
-    cod_prod int,
+create table tbl_tiposDePagamento(
+cod_id_pagamento int primary key auto_increment,
+nomePagamento varchar(30));
+
+CREATE TABLE tbl_pedido (
+    cod_id_pedido int PRIMARY KEY auto_increment,
     cod_usuario int,
-    quantidadeProduto int,
-    somatorioItem int,
-    cod_pedido int,
-    foreign key (cod_prod) references tbl_produto (cod_id_produto),
+    cod_pagamento int,
+    valorTotal float,
+    dataPedido datetime,
     foreign key (cod_usuario) references tbl_usuario (cod_id_usuario),
-    foreign key (cod_pedido) references tbl_pedido (cod_id_pedido));
+    foreign key (cod_pagamento) references tbl_tiposDePagamento (cod_id_pagamento));
+    
+    create table tbl_itemPedido(
+cod_produto int not null,
+cod_pedido int not null,
+qtd int not null,
+subtotal float not null,
+foreign key (cod_produto) references tbl_produto (cod_id_produto),
+foreign key (cod_pedido) references tbl_pedido (cod_id_pedido));
  
