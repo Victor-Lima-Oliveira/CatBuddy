@@ -6,3 +6,6 @@ CatBuddy/bin
 
 # Ignorando arquivos intermediarios de complicao, pois os mesmos sao gerados pelo proprio visualStudio toda hora
 CatBuddy/obj
+
+#ignorando as configuracoes de conexao do banco
+CatBuddy/appsettings.json

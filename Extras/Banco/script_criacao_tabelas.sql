@@ -24,17 +24,37 @@ CREATE TABLE tbl_contatoFornecedor (
 
 CREATE TABLE tbl_enderecoFornecedor (
     cod_id_endereco int PRIMARY KEY auto_increment,
-    endereco varchar(35),
+    endereco varchar(100),
     bairro varchar(35),
     cep varchar(8),
     cod_logradouro int,
     nomeEndereco varchar(35),
     cod_fornecedor int,
+    municipio varchar (30),
    foreign key (cod_fornecedor) references tbl_fornecedor (cod_id_fornecedor),
    foreign key (cod_logradouro) references tbl_logradouro (cod_id_logradouro));
-   
-   create table tbl_informacoesNutricionais (
+      
+CREATE TABLE tbl_produto (
+    cod_id_produto int PRIMARY KEY auto_increment,
+    cod_categoria int not null,
+    descricao text not null,
+    qtdEstoque int,
+    cod_fornecedor int not null,
+    idade varchar(30),
+    sabor varchar(45),
+    cor varchar(45),
+    medidasAproximadas varchar(45),
+    material varchar(45),
+    composicao text,
+    preco float not null,
+    imgPath varchar(200),
+    ds_nome varchar(100),
+    foreign key (cod_categoria) references tbl_categoria (cod_id_categoria),
+    foreign key (cod_fornecedor) references tbl_fornecedor (cod_id_fornecedor));
+    
+    create table tbl_infonutricionais (
 cod_produto int, 
+cod_id_produto int not null, 
 TamanhoOuPorcao varchar(10),
 caloriaPorPorcao varchar(10),
 proteinas varchar(10),
@@ -43,26 +63,9 @@ vitaminas varchar(10),
 mineirais varchar(10),
 fibraDiétrica varchar(10),
 Colesterol varchar(10),
-Sodio varchar(10));
+Sodio varchar(10),
+foreign key (cod_id_produto) references tbl_produto (cod_id_produto));
 
-CREATE TABLE tbl_produto (
-    cod_id_produto int PRIMARY KEY auto_increment,
-    cod_categoria int not null,
-    descricao text not null,
-    qtdEstoque int,
-    cod_fornecedor int not null,
-    idade varchar(13),
-    sabor varchar(45),
-    cor varchar(45),
-    medidasAproximadas varchar(45),
-    material varchar(45),
-    composicao text,
-    preco float not null,
-    imgPath varchar(200),
-    ds_nome varchar(40),
-    foreign key (cod_categoria) references tbl_categoria (cod_id_categoria),
-    foreign key (cod_fornecedor) references tbl_fornecedor (cod_id_fornecedor));
-    
 CREATE TABLE tbl_Usuario (
     cod_id_usuario int PRIMARY KEY auto_increment,
     NivelAcesso int,
