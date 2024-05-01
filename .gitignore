@@ -9,3 +9,4 @@ CatBuddy/obj
 
 #ignorando as configuracoes de conexao do banco
 CatBuddy/appsettings.json
+/CatBuddy/appsettings.json
