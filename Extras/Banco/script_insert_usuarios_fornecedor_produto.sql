@@ -157,4 +157,10 @@ insert into tbl_produto values -- Whiskas
 '59', '3', 'Filhote', 'Carne e Leite', '', '', '', 'Farinha de Visceras e Ossos de Aves, Glúten de Milho, Milho Integral, Farelo de Soja, Farinha de Carne e Ossos de Bovinos, Quirera de Arroz, Gordura de Aves, Leite em Pó, Óleo de Peixe, Cenoura, Espinafre, Hidrolisado de Fígado de Aves, Mananoligossacarídeo - mín 0.05%, Taurina, Metionina, Vitaminas (Vitamina A (Retinol), B1 (Tiamina), B2 (Riboflavina), B6 (Piridoxina), B12 (Cianocobalamina), D3 (Colecalciferol), E (Acetato DL Alfa Tocoferol), Ácido Fólico, Niacina, Cloreto de Colina, Ácido Pantotênico), Minerais (Cloreto de Potássio , Cloreto de Sódio (sal comum), Iodato de Cálcio, Óxido de Zinco, Selenito de Sódio, Sulfato de Cobre, Sulfato de Manganês), B.H.T. (Hidróxido de Tolueno Butilado).Eventuais Substitutivos: Sorgo Integral, Cevada em grão, Trigo Integral, Farinha de Peixe, Proteína Concentrada de Soja, Biomassa de microalga, Farinha de Carne e Ossos de Suíno Espécies doadoras de gene: Agrobacterium tumefaciens, Bacillus thuringiensis, Streptomyces viridochromogenes, Zea mays, Sphingobium herbicidorovans, Dicossoma sp, Diabrotica firgifera, Thermoccocales spp, Bacillus subtilis.Espécies doadoras do gene: Agrobacterium tumefaciens, Bacillus thuringiensis, Streptomyces viridochromogenes, Arabidopsis thaliana, Delftia acidovorans, Pseudomonas fluorescens, Zea mays, Stenotrophomonas maltophilia, B.T. var Azawai e Kurstaqui, Agrobacterium sp',
 '49.90', 'Catbuddy\whiskasadultofrangoespecial.png', 'Whiskas Gatos Filhotes Carne e Leite');
 
+-- Remove o prefixo "Catbuddy" de todos os produtos 
+update tbl_produto set imgpath = REPLACE (imgpath, "Catbuddy", "") where imgpath like "Catbuddy%";
+
+-- Coloca o prefixo do projeto
+update tbl_produto set imgpath = CONCAT("img/produtos/", imgpath);
+
 insert into tbl_usuario value(null, 1, "ROBESVALDO", "57812365478");
