@@ -8,3 +8,4 @@ CatBuddy/bin
 CatBuddy/obj
 
 #ignorando as configuracoes de conexao do banco
+CatBuddy/appsettings.json
