@@ -27,7 +27,7 @@ namespace CatBuddy.Models
         public string MedidasAproximadas { get; set; }
         [MaxLength(45)]
         public string Material { get; set; }
-        public string Composição { get; set; }
+        public string Composicao { get; set; }
         [Required]
         public float Preco { get; set; }
         [MaxLength(200)]
