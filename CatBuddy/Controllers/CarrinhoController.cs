@@ -78,6 +78,7 @@ namespace CatBuddy.Controllers
         {
             return View();
         }
+
         public IActionResult FinalizarPedido(int codPagamento)
         {
             // TODO: Criar uma transaction para adicionar produto e itens do produto 

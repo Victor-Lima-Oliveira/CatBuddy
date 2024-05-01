@@ -1,4 +1,5 @@
 /* Modelo Físico: */
+drop database db_catbuddy;
 create database db_catBuddy;
 use db_catBuddy;
 
@@ -51,10 +52,10 @@ CREATE TABLE tbl_produto (
     ds_nome varchar(100),
     foreign key (cod_categoria) references tbl_categoria (cod_id_categoria),
     foreign key (cod_fornecedor) references tbl_fornecedor (cod_id_fornecedor));
-    
-    create table tbl_infonutricionais (
-cod_produto int, 
-cod_id_produto int not null, 
+
+create table tbl_infonutricionais (
+cod_id_infonutricionais int primary key auto_increment,
+cod_produto int unique, 
 TamanhoOuPorcao varchar(10),
 caloriaPorPorcao varchar(10),
 proteinas varchar(10),
@@ -63,8 +64,7 @@ vitaminas varchar(10),
 mineirais varchar(10),
 fibraDiétrica varchar(10),
 Colesterol varchar(10),
-Sodio varchar(10),
-foreign key (cod_id_produto) references tbl_produto (cod_id_produto));
+Sodio varchar(10));
 
 CREATE TABLE tbl_Usuario (
     cod_id_usuario int PRIMARY KEY auto_increment,

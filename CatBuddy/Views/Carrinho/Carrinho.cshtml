@@ -18,11 +18,11 @@
     @foreach (var item in Model)
     {
 
-        <div class="container border-bottom">
+        <div class="container border-bottom mt-3">
             <div class="row">
                 @*foto*@
                 <div class="col-2 ">
-                    <img src="@item.ImgPath" width="80%" height="80%" />
+                    <img src="~/@item.ImgPath" width="80%" height="80%" />
                 </div>
 
                 @* Descricao *@

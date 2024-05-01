@@ -27,9 +27,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <ul class="nav navbar-collapse collapse flex-grow-0" aria-expanded="false">
-                    <li class="nav-item p-4">
-                        <div class="dropdown">
+                <ul class="nav navbar-collapse collapse justify-content-around" aria-expanded="false">
+                    <li class="d-flex ">
+                        <div class="dropdown me-5">
                             <div class="text-white font-paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
                                 Para Gato
                             </div>
@@ -39,9 +39,7 @@
                                 <li><div class="dropdown-item">Comedouro</div></li>
                             </ul>
                         </div>
-                    </li>
-                    <li class="nav-item p-4">
-                        <div class="dropdown">
+                        <div class="dropdown ms-5">
                             <div class="text-white font-paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
                                 Para Humanos
                             </div>
@@ -52,16 +50,18 @@
                             </ul>
                         </div>
                     </li>
-                </ul>
-
-                <div class="nav justify-content-center ">
-                    <a class="navbar-brand"  asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" style="height:12vh;" /></a>
-                </div>
-   
-                <ul class="nav navbar-collapse collapse flex-grow-0 text-decoration-none">
-                    <li class="nav-item"><a class="bi bi-search text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
-                    <li class="nav-item"><a class="bi bi-basket text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Carrinho" asp-controller="Carrinho"></a></li>
-                    <li class="nav-item"><a class="bi bi-person text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Index" asp-controller="Usuario"></a></li>
+                    <li>
+                        <div class="nav justify-content-center ">
+                            <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" style="height:12vh;" /></a>
+                        </div>
+                    </li>
+                    <li>
+                        <ul class="nav navbar-collapse collapse flex-grow-0 text-decoration-none">
+                            <li class="nav-item"><a class="bi bi-search text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
+                            <li class="nav-item"><a class="bi bi-basket text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Carrinho" asp-controller="Carrinho"></a></li>
+                            <li class="nav-item"><a class="bi bi-person text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Index" asp-controller="Usuario"></a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -75,7 +75,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container text-white">
-            &copy; @DateTime.Now.Year - CatBuddy
+            &copy; @DateTime.Now.Year - CatBuddy         <a asp-controller="Colaborador" asp-action="Index">Colaboradores</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -4,11 +4,13 @@ namespace CatBuddy.Repository.Contract
 {
     public interface IProdutoRepository
     {
-        void insereProduto(Produto produto);
-        void deletaProduto(int id);
-        void atualizaProduto(Produto produto);
-        Produto retornaProduto(int id);
-        IEnumerable<Produto> retornaProdutos();
-        void VendeProduto(int codProduto, int qtdEstoque);
+        public void insereProduto(Produto produto);
+        public void deletaProduto(int id);
+        public void atualizaProduto(Produto produto);
+        public Produto retornaProduto(int id);
+        public IEnumerable<Produto> retornaProdutos();
+        public void VendeProduto(int codProduto, int qtdEstoque);
+        public InfoNutricionais RetornaInformacacoesNutricionais(int codProduto);
+
     }
 }

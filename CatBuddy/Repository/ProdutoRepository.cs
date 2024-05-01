@@ -37,7 +37,6 @@ namespace CatBuddy.Repository
         public Produto retornaProduto(int idProduto)
         {
             Produto produto;
-            StringBuilder sbAux = new StringBuilder();
             MySqlDataAdapter mySqlDataAdapter;
             MySqlDataReader mySqlDataReader;
 
@@ -76,13 +75,58 @@ namespace CatBuddy.Repository
                     produto.Preco = (float)mySqlDataReader["preco"];
                     produto.ImgPath = (string)mySqlDataReader["imgPath"];
                     produto.NomeProduto = (string)mySqlDataReader["ds_nome"];
-                    produto.CodCategoria = (int)mySqlDataReader["codFornecedor"];
+                    produto.CodCategoria = (int)mySqlDataReader["codCategoria"];
                     produto.NomeCategoria = (string)mySqlDataReader["Categoria"];
                     produto.CodFornecedor = (int)mySqlDataReader["codFornecedor"];
                     produto.NomeFornecedor = (string)mySqlDataReader["fornecedor"];
                 }
             }
             return produto;
+        }
+
+        public InfoNutricionais RetornaInformacacoesNutricionais(int codProduto)
+        {
+            InfoNutricionais informacoesNutricionais;
+            MySqlDataAdapter mySqlDataAdapter;
+            MySqlDataReader mySqlDataReader;
+
+            _SintaxeSQl = "SELECT * FROM tbl_infonutricionais WHERE cod_produto = @CodIdProduto";
+
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                conexao.Open();
+
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                //Adicionar parametros
+                cmd.Parameters.Add("@CodIdProduto", MySqlDbType.Int32).Value = codProduto;
+
+                // Adapter para o comando
+                mySqlDataAdapter = new MySqlDataAdapter(cmd);
+
+                // Instancia do produto
+                informacoesNutricionais = new InfoNutricionais();
+
+                // leitor dos dados do livro
+                mySqlDataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                // Gravar os dados na model
+                while (mySqlDataReader.Read())
+                {
+                    informacoesNutricionais.cod_id_info = (int)mySqlDataReader["cod_id_infonutricionais"];
+                    informacoesNutricionais.cod_produto = (int)mySqlDataReader["cod_produto"];
+                    informacoesNutricionais.TamanhoOuPorcao = mySqlDataReader["TamanhoOuPorcao"].ToString();
+                    informacoesNutricionais.caloriaPorPorcao = mySqlDataReader["caloriaPorPorcao"].ToString();
+                    informacoesNutricionais.proteinas = mySqlDataReader["proteinas"].ToString();
+                    informacoesNutricionais.carboidratos = mySqlDataReader["carboidratos"].ToString();
+                    informacoesNutricionais.vitaminas = mySqlDataReader["vitaminas"].ToString();
+                    informacoesNutricionais.mineirais = mySqlDataReader["mineirais"].ToString();
+                    informacoesNutricionais.fibraDietrica = mySqlDataReader["fibraDiétrica"].ToString();
+                    informacoesNutricionais.Colesterol = mySqlDataReader["Colesterol"].ToString();
+                    informacoesNutricionais.Sodio = mySqlDataReader["Sodio"].ToString();
+                }
+            }
+            return informacoesNutricionais;
         }
 
         public IEnumerable<Produto> retornaProdutos()

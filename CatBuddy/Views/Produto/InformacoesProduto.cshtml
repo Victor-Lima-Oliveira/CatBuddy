@@ -1,25 +1,25 @@
-﻿@model CatBuddy.Models.Produto
+﻿@model CatBuddy.Models.ViewProdutoeInformacoesNutricionais
 
 @{
-    @if(Model.QtdEstoque == 0)
+    @if (Model.produto.QtdEstoque == 0)
     {
         ViewData["Title"] = "Produto indisponível";
     }
     else
     {
-        ViewData["Title"] = Model.NomeProduto;
+        ViewData["Title"] = Model.produto.NomeProduto;
     }
 }
 
-@if(Model.QtdEstoque == 0)
+@if (Model.produto.QtdEstoque == 0)
 {
     <h6 class="alert alert-darkFuchsia"><b>Produto indisponível: </b>Estamos repondo nosso estoque</h6>
 }
-else if (Model.QtdEstoque <= 10)
+else if (Model.produto.QtdEstoque <= 10)
 {
-    <h6 class="alert alert-darkFuchsia"><b>Corra:</b> Ultimos @Model.QtdEstoque produtos em estoque</h6>
+    <h6 class="alert alert-darkFuchsia"><b>Corra:</b> Ultimos @Model.produto.QtdEstoque produtos em estoque</h6>
 }
-else if (Model.QtdEstoque <= 20)
+else if (Model.produto.QtdEstoque <= 20)
 {
     <h6 class="alert alert-yellow"><b>Corra:</b> Ultimos produtos em estoque</h6>
 }
@@ -29,22 +29,22 @@ else if (Model.QtdEstoque <= 20)
     <div class="row">
         @*Painel da foto*@
         <div class="col-3">
-            <img src="~/@Model.ImgPath" class="card-img img-thumbnail" />
+            <img src="~/@Model.produto.ImgPath" class="card-img img-thumbnail" />
         </div>
 
         @*Painel de informações*@
         <div class="col">
-            <h4 class="font-paytone-one-regular text-yellow">@Html.DisplayFor(model => model.NomeProduto)</h4>
-            <h5>@Model.NomeFornecedor</h5>
+            <h4 class="font-paytone-one-regular text-yellow">@Html.DisplayFor(model => model.produto.NomeProduto)</h4>
+            <h5>@Model.produto.NomeFornecedor</h5>
             <h6><a href="#descricaoCompleta">Ver Descrição completa</a></h6>
-            <div><b>Preço:</b> R$ @Model.Preco</div>
+            <div><b>Preço:</b> R$ @Model.produto.Preco</div>
             <div class="mt-2">
                 <form asp-action="AdicionarItemAoCarrinho" asp-controller="Produto">
                     <div class="btn p-0">
-                        <select asp-for="QtdDeProduto" class="form-select form-select-md ">
+                        <select asp-for="produto.QtdDeProduto" class="form-select form-select-md ">
                             @for (int i = 1; i <= 10; i++)
                             {
-                                @if (Model.QtdEstoque == i)
+                                @if (Model.produto.QtdEstoque == i)
                                 {
                                     <option value="@i">@i</option>
                                     break;
@@ -58,10 +58,10 @@ else if (Model.QtdEstoque <= 20)
                             }
                         </select>
                     </div>
-                    @Html.HiddenFor(model => model.CodIdProduto)
-                    <input asp-for="CodIdProduto" Class="visually-hidden" type="number" value="@Model.CodIdProduto" />
+                    @Html.HiddenFor(model => model.produto.CodIdProduto)
+                    <input asp-for="produto.CodIdProduto" Class="visually-hidden" type="number" value="@Model.produto.CodIdProduto" />
 
-                    <input class="btn btn-yellow" type="submit" value="Adicionar ao carrinho" @(Model.QtdEstoque == 0 ? "disabled" : "") />
+                    <input class="btn btn-yellow" type="submit" value="Adicionar ao carrinho" @(Model.produto.QtdEstoque == 0 ? "disabled" : "") />
                 </form>
             </div>
         </div>
@@ -75,8 +75,8 @@ else if (Model.QtdEstoque <= 20)
 
 @*Descrição completa*@
 <div class="container" id="descricaoCompleta">
-    <h4 class="font-paytone-one-regular text-yellow" >Descrição</h4>
-    <pre>@Model.Descricao</pre>
+    <h4 class="font-paytone-one-regular text-yellow">Descrição</h4>
+    <p class="text-justify">@Model.produto.Descricao</p>
 </div>
 
 @* Espaçaento*@
@@ -88,76 +88,152 @@ else if (Model.QtdEstoque <= 20)
 <div class="container">
     <h4 class="font-paytone-one-regular text-yellow">Informações complementares</h4>
     <dl class="row">
-        @if (!String.IsNullOrEmpty(Model.Idade))
+        @if (!String.IsNullOrEmpty(Model.produto.Idade))
         {
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Idade)
+                @Html.DisplayNameFor(model => model.produto.Idade)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Idade)
+                @Html.DisplayFor(model => model.produto.Idade)
             </dd>
         }
-        @if (!String.IsNullOrEmpty(Model.Cor))
+        @if (!String.IsNullOrEmpty(Model.produto.Cor))
         {
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Cor)
+                @Html.DisplayNameFor(model => model.produto.Cor)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Cor)
+                @Html.DisplayFor(model => model.produto.Cor)
             </dd>
         }
-        @if (!String.IsNullOrEmpty(Model.Sabor))
+        @if (!String.IsNullOrEmpty(Model.produto.Sabor))
         {
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Sabor)
+                @Html.DisplayNameFor(model => model.produto.Sabor)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Sabor)
+                @Html.DisplayFor(model => model.produto.Sabor)
             </dd>
         }
-        @if (!String.IsNullOrEmpty(Model.InformacoesNutricionais))
+        @if (!String.IsNullOrEmpty(Model.produto.InformacoesNutricionais))
         {
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.InformacoesNutricionais)
+                @Html.DisplayNameFor(model => model.produto.InformacoesNutricionais)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.InformacoesNutricionais)
+                @Html.DisplayFor(model => model.produto.InformacoesNutricionais)
             </dd>
         }
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CodFornecedor)
+            @Html.DisplayNameFor(model => model.produto.CodFornecedor)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CodFornecedor)
+            @Html.DisplayFor(model => model.produto.CodFornecedor)
         </dd>
-        @if (!String.IsNullOrEmpty(Model.MedidasAproximadas))
+        @if (!String.IsNullOrEmpty(Model.produto.MedidasAproximadas))
         {
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.MedidasAproximadas)
+                @Html.DisplayNameFor(model => model.produto.MedidasAproximadas)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.MedidasAproximadas)
+                @Html.DisplayFor(model => model.produto.MedidasAproximadas)
             </dd>
         }
-        @if (!String.IsNullOrEmpty(Model.Material))
+        @if (!String.IsNullOrEmpty(Model.produto.Material))
         {
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Material)
+                @Html.DisplayNameFor(model => model.produto.Material)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Material)
+                @Html.DisplayFor(model => model.produto.Material)
             </dd>
         }
-        @if (!String.IsNullOrEmpty(Model.Composição))
+        @if (!String.IsNullOrEmpty(Model.produto.Composição))
         {
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Composição)
+                @Html.DisplayNameFor(model => model.produto.Composição)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Composição)
+                @Html.DisplayFor(model => model.produto.Composição)
             </dd>
         }
     </dl>
 </div>
+
+@* Informações nutricionais *@
+@if (Model.PossuiInformacoesNutricionais)
+{
+    <div class="container">
+        <h4 class="font-paytone-one-regular text-yellow">Informações Nutricionais </h4>
+        <table class="table table-striped">
+            <tbody class="" >
+                @if (!String.IsNullOrEmpty(Model.infoNutricionais.TamanhoOuPorcao))
+                {
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.infoNutricionais.TamanhoOuPorcao)</td>
+                        <td>@Model.infoNutricionais.TamanhoOuPorcao</td>
+                    </tr>
+                }
+                @if (!String.IsNullOrEmpty(Model.infoNutricionais.caloriaPorPorcao))
+                {
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.infoNutricionais.caloriaPorPorcao)</td>
+                        <td>@Model.infoNutricionais.caloriaPorPorcao</td>
+                    </tr>
+                }
+                @if (!String.IsNullOrEmpty(Model.infoNutricionais.proteinas))
+                {
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.infoNutricionais.proteinas)</td>
+                        <td>@Model.infoNutricionais.proteinas</td>
+                    </tr>
+                }
+                @if (!String.IsNullOrEmpty(Model.infoNutricionais.carboidratos))
+                {
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.infoNutricionais.carboidratos)</td>
+                        <td>@Model.infoNutricionais.carboidratos</td>
+                    </tr>
+                }
+                @if (!String.IsNullOrEmpty(Model.infoNutricionais.vitaminas))
+                {
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.infoNutricionais.vitaminas)</td>
+                        <td>@Model.infoNutricionais.vitaminas</td>
+                    </tr>
+                }
+                @if (!String.IsNullOrEmpty(Model.infoNutricionais.mineirais))
+                {
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.infoNutricionais.mineirais)</td>
+                        <td>@Model.infoNutricionais.mineirais</td>
+                    </tr>
+                }
+                @if (!String.IsNullOrEmpty(Model.infoNutricionais.fibraDietrica))
+                {
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.infoNutricionais.fibraDietrica)</td>
+                        <td>@Model.infoNutricionais.fibraDietrica</td>
+                    </tr>
+                }
+                @if (!String.IsNullOrEmpty(Model.infoNutricionais.Colesterol))
+                {
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.infoNutricionais.Colesterol)</td>
+                        <td>@Model.infoNutricionais.Colesterol</td>
+                    </tr>
+                }
+                @if (!String.IsNullOrEmpty(Model.infoNutricionais.Sodio))
+                {
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.infoNutricionais.Sodio)</td>
+                        <td>@Model.infoNutricionais.Sodio</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
 
 

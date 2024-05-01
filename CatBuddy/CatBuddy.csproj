@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\TratamentoDeErro\" />
     <Folder Include="wwwroot\img\Produtos\" />
   </ItemGroup>
 
