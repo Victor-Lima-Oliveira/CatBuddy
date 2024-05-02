@@ -115,15 +115,6 @@ else if (Model.produto.QtdEstoque <= 20)
                 @Html.DisplayFor(model => model.produto.Sabor)
             </dd>
         }
-        @if (!String.IsNullOrEmpty(Model.produto.InformacoesNutricionais))
-        {
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.produto.InformacoesNutricionais)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.produto.InformacoesNutricionais)
-            </dd>
-        }
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.produto.CodFornecedor)
         </dt>
@@ -148,13 +139,13 @@ else if (Model.produto.QtdEstoque <= 20)
                 @Html.DisplayFor(model => model.produto.Material)
             </dd>
         }
-        @if (!String.IsNullOrEmpty(Model.produto.Composição))
+        @if (!String.IsNullOrEmpty(Model.produto.Composicao))
         {
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.produto.Composição)
+                @Html.DisplayNameFor(model => model.produto.Composicao)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.produto.Composição)
+                @Html.DisplayFor(model => model.produto.Composicao)
             </dd>
         }
     </dl>

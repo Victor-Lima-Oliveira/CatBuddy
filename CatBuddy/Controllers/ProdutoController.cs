@@ -131,5 +131,68 @@ namespace CatBuddy.Controllers
             }
         }
 
+        public IActionResult CadastrarProduto()
+        {
+            List<Categoria> listCategoria = new List<Categoria>();
+            List<Fornecedor> listFornecedor = new List<Fornecedor>();
+            List<Categoria> listCategoriaAux = new List<Categoria>();
+            List<Fornecedor> listFornecedorAux = new List<Fornecedor>();
+            ViewModelCadastrarProduto view;
+            Fornecedor fornecedor;
+            Categoria categoria;
+
+            // Retorna as listas de categoria e fornecedor
+            listFornecedorAux = _produtoRepository.RetornaFornecedores();
+            listCategoriaAux = _produtoRepository.RetornaCategorias();
+
+            // Declara o primeiro valor como selecione
+            fornecedor = new Fornecedor
+            {
+                codFornecedor = Const.SEM_FORNECEDOR_SELECIONADO,
+                nomeFornecedor = "Selecione um fornecedor"
+            };
+            listFornecedor.Add(fornecedor);
+
+            // Coloca os outros valores do banco para os fornecedores
+            foreach(Fornecedor fornecedorItem in listFornecedorAux)
+            {
+                  listFornecedor.Add(fornecedorItem);
+            }
+
+            // Declara a primeira categoria como nula
+            categoria = new Categoria
+            {
+                codCategoria = Const.SEM_CATEGORIA_SELECIONADA,
+                nomeCategoria = "Selecione uma categoria"
+            };
+            listCategoria.Add(categoria);
+
+            // Insere as categorias do banco na lista
+            foreach(Categoria categoriaItem in listCategoriaAux)
+            {
+                listCategoria.Add(categoriaItem);
+            }
+
+
+            // Carrega a view para apresenta na tela 
+            view = new ViewModelCadastrarProduto
+            {
+                categorias = listCategoria,
+                fornecedores = listFornecedor
+            };
+
+
+            return View(view);
+        }
+
+        public IActionResult CategoriaDoProduto(int codCategoria)
+        {
+            if(codCategoria == Const.RacaoSeca || codCategoria == Const.RacaoUmida || codCategoria == Const.Petisco)
+            {
+                
+            }
+            return RedirectToAction(Actions.CadastarProduto, Controladores.Produto);
+        }
+
     }
 }

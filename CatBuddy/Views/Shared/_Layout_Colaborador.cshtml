@@ -26,22 +26,33 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <ul class="nav navbar-collapse collapse justify-content-around" aria-expanded="false">
                     <li>
-                    <div class="nav ">
-                        <a class="navbar-brand" asp-controller="Colaborador" asp-action="Index"><img src="~/img/logo.png" style="height:12vh;" /></a>
-                    </div>
+                        <div class="nav ">
+                            <a class="navbar-brand" asp-controller="Colaborador" asp-action="Index"><img src="~/img/logo.png" style="height:12vh;" /></a>
+                        </div>
+                    </li>
+                    <li class="d-flex">
+                        <div class="dropdown me-5">
+                            <div class="text-white font-paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
+                                Produtos
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" asp-action="CadastrarProduto" asp-controller="Produto">Cadastrar produto</a></li>
+                                <li><a class="dropdown-item" >Informações Produtos</a></li>
+                            </ul>
+                        </div>
+                        <div >
+                            <a class="text-white font-paytone-one-regular tamanho-fonte-nav-bar text-decoration-none" href="#">Funcionario</a>
+                        </div>
                     </li>
                     <li>
-                    <div>
-                        <a asp-controller="Colaborador" asp-action="CadastrarProduto"></a>
-                    </div>
-                    </li>
-                    <li>
-                    <li class="nav-item"><a asp-controller="Colaborador" asp-action="Sair" class="bi bi-box-arrow-right text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
+                        <ul class="nav navbar-collapse collapse flex-grow-0 text-decoration-none">
+                            <li class="nav-item"><a asp-controller="Colaborador" asp-action="Sair" class="bi bi-box-arrow-right text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
+                        </ul>
                     </li>
                 </ul>
-  
             </div>
         </nav>
     </header>

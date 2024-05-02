@@ -21,5 +21,9 @@ namespace CatBuddy.Utils
         public const int RoupasGatos = 9;
         public const int MimosHumanos = 10;
 
+        // PRODUTOS
+        public const int SEM_FORNECEDOR_SELECIONADO = 0;
+        public const int SEM_CATEGORIA_SELECIONADA = 0;
+
     }
 }

@@ -71,7 +71,7 @@ namespace CatBuddy.Repository
                     produto.Sabor = (string)mySqlDataReader["sabor"];
                     produto.Cor = (string)mySqlDataReader["cor"];
                     produto.MedidasAproximadas = (string)mySqlDataReader["medidasAproximadas"];
-                    produto.Composição = (string)mySqlDataReader["composicao"];
+                    produto.Composicao = (string)mySqlDataReader["composicao"];
                     produto.Preco = (float)mySqlDataReader["preco"];
                     produto.ImgPath = (string)mySqlDataReader["imgPath"];
                     produto.NomeProduto = (string)mySqlDataReader["ds_nome"];
@@ -172,7 +172,7 @@ namespace CatBuddy.Repository
                             Sabor = (string)produtoItem["sabor"],
                             Cor = (string)produtoItem["cor"],
                             MedidasAproximadas = (string)produtoItem["medidasAproximadas"],
-                            Composição = (string)produtoItem["composicao"],
+                            Composicao = (string)produtoItem["composicao"],
                             Preco = (float)produtoItem["preco"],
                             ImgPath = (string)produtoItem["imgPath"],
                             NomeProduto = (string)produtoItem["ds_nome"],
@@ -216,6 +216,80 @@ namespace CatBuddy.Repository
 
                 conexao.Close();
             }
+        }
+        public List<Categoria> RetornaCategorias()
+        {
+            List<Categoria> listCategoria = new List<Categoria>();
+            Categoria categoria;
+            MySqlDataAdapter mySqlDataAdapter;
+            MySqlDataReader mySqlDataReader;
+
+            // Montando a sintaxe do SQL
+            _SintaxeSQl = "SELECT * FROM tbl_categoria";
+
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                conexao.Open();
+
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                // Adapter para o comando
+                mySqlDataAdapter = new MySqlDataAdapter(cmd);
+
+                // leitor dos dados 
+                mySqlDataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                // Gravar os dados na model
+                while (mySqlDataReader.Read())
+                {
+                    categoria = new Categoria
+                    {
+                        codCategoria = (int)mySqlDataReader["cod_id_categoria"],
+                        nomeCategoria = mySqlDataReader["nomeCategoria"].ToString()
+                    };
+
+                    listCategoria.Add(categoria);
+                }
+            }
+            return listCategoria;
+        }
+        public List<Fornecedor> RetornaFornecedores()
+        {
+            List<Fornecedor> listfornecedor = new List<Fornecedor>();
+            Fornecedor fornecedor;
+            MySqlDataAdapter mySqlDataAdapter;
+            MySqlDataReader mySqlDataReader;
+
+            // Montando a sintaxe do SQL
+            _SintaxeSQl = "SELECT * FROM tbl_fornecedor";
+
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                conexao.Open();
+
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                // Adapter para o comando
+                mySqlDataAdapter = new MySqlDataAdapter(cmd);
+
+                // leitor dos dados 
+                mySqlDataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                // Gravar os dados na model
+                while (mySqlDataReader.Read())
+                {
+                    fornecedor = new Fornecedor
+                    {
+                        codFornecedor = (int)mySqlDataReader["cod_id_fornecedor"],
+                        nomeFornecedor = mySqlDataReader["nomeFantasia"].ToString(),
+                        cnpj = mySqlDataReader["cnpj"].ToString()
+                    };
+
+                    listfornecedor.Add(fornecedor);
+                }
+            }
+
+            return listfornecedor;
         }
     }
 }

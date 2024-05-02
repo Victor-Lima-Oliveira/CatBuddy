@@ -11,6 +11,8 @@ namespace CatBuddy.Repository.Contract
         public IEnumerable<Produto> retornaProdutos();
         public void VendeProduto(int codProduto, int qtdEstoque);
         public InfoNutricionais RetornaInformacacoesNutricionais(int codProduto);
+        public List<Categoria> RetornaCategorias();
+        public List<Fornecedor> RetornaFornecedores();
 
     }
 }

@@ -1,0 +1,194 @@
+﻿@model CatBuddy.Models.ViewModelCadastrarProduto
+
+@{
+    ViewData["Title"] = "CadastrarProduto";
+    Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
+}
+
+<h1 class="text-yellow font-paytone-one-regular">Cadastrar Produto</h1>
+<hr />
+<div class="container">
+    <div class="">
+        <form asp-action="CadastrarProduto" class="form-inline">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label asp-for="produto.NomeProduto" class="control-label"></label>
+                    <input asp-for="produto.NomeProduto" class="form-control" />
+                    <span asp-validation-for="produto.NomeProduto" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="produto.QtdEstoque" class="control-label"></label>
+                    <input asp-for="produto.QtdEstoque" class="form-control" />
+                    <span asp-validation-for="produto.QtdEstoque" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="produto.Preco" class="control-label"></label>
+                    <input asp-for="produto.Preco" class="form-control" />
+                    <span asp-validation-for="produto.Preco" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="produto.Idade" class="control-label"></label>
+                    <input asp-for="produto.Idade" class="form-control" placeholder="Esse produto é indicado para gatos de qual idade?" />
+                    <span asp-validation-for="produto.Idade" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="produto.Sabor" class="control-label"></label>
+                    <input asp-for="produto.Sabor" class="form-control" />
+                    <span asp-validation-for="produto.Sabor" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="produto.Cor" class="control-label"></label>
+                    <input asp-for="produto.Cor" class="form-control" />
+                    <span asp-validation-for="produto.Cor" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="produto.MedidasAproximadas" class="control-label"></label>
+                    <input asp-for="produto.MedidasAproximadas" class="form-control" />
+                    <span asp-validation-for="produto.MedidasAproximadas" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="produto.Material" class="control-label"></label>
+                    <input asp-for="produto.Material" class="form-control" />
+                    <span asp-validation-for="produto.Material" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="produto.Composicao" class="control-label"></label>
+                    <input asp-for="produto.Composicao" class="form-control" />
+                    <span asp-validation-for="produto.Composicao" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="produto.NomeCategoria" class="control-label"></label>
+                    <select class="form-select form-select-md " id="categoria">
+                        @foreach (Categoria categoriaItem in Model.categorias)
+                        {
+                            <option value="@categoriaItem.codCategoria">@categoriaItem.nomeCategoria</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label asp-for="produto.NomeFornecedor" class="control-label"></label>
+                    <select class="form-select form-select-md " id="categoria">
+                        @foreach (Fornecedor fornecedorItem in Model.fornecedores)
+                        {
+                            <option value="@fornecedorItem.codFornecedor">@fornecedorItem.nomeFornecedor</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="produto.Descricao" class="control-label"></label>
+                <textarea asp-for="produto.Descricao" class="form-control" rows="8"></textarea>
+                <span asp-validation-for="produto.Descricao" class="text-danger"></span>
+            </div>
+
+            @*Tabela de informações nutricionais*@
+            <div id="informacoesNutricionais" class="mt-3 mb-3">
+                <h4 class="text-yellow font-paytone-one-regular">Informações Nutricionais</h4>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label asp-for="infoNutricionais.TamanhoOuPorcao" class="control-label"></label>
+                        <input asp-for="infoNutricionais.TamanhoOuPorcao" class="form-control" />
+                        <span asp-validation-for="infoNutricionais.TamanhoOuPorcao" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label asp-for="infoNutricionais.caloriaPorPorcao" class="control-label"></label>
+                        <input asp-for="infoNutricionais.caloriaPorPorcao" class="form-control" />
+                        <span asp-validation-for="infoNutricionais.caloriaPorPorcao" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label asp-for="infoNutricionais.proteinas" class="control-label"></label>
+                        <input asp-for="infoNutricionais.proteinas" class="form-control" />
+                        <span asp-validation-for="infoNutricionais.proteinas" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label asp-for="infoNutricionais.carboidratos" class="control-label"></label>
+                        <input asp-for="infoNutricionais.carboidratos" class="form-control" />
+                        <span asp-validation-for="infoNutricionais.carboidratos" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label asp-for="infoNutricionais.vitaminas" class="control-label"></label>
+                        <input asp-for="infoNutricionais.vitaminas" class="form-control" />
+                        <span asp-validation-for="infoNutricionais.vitaminas" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label asp-for="infoNutricionais.mineirais" class="control-label"></label>
+                        <input asp-for="infoNutricionais.mineirais" class="form-control" />
+                        <span asp-validation-for="infoNutricionais.mineirais" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label asp-for="infoNutricionais.fibraDietrica" class="control-label"></label>
+                        <input asp-for="infoNutricionais.fibraDietrica" class="form-control" />
+                        <span asp-validation-for="infoNutricionais.fibraDietrica" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label asp-for="infoNutricionais.Colesterol" class="control-label"></label>
+                        <input asp-for="infoNutricionais.Colesterol" class="form-control" />
+                        <span asp-validation-for="infoNutricionais.Colesterol" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label asp-for="infoNutricionais.Sodio" class="control-label"></label>
+                        <input asp-for="infoNutricionais.Sodio" class="form-control" />
+                        <span asp-validation-for="infoNutricionais.Sodio" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-5">
+                <input type="submit" value="Adicionar" class="btn btn-yellow" />
+            </div>
+            <div class="form-group mt-1">
+                <a asp-action="PaginaPrincipal" asp-controller="Colaborador" class="btn btn-darkFuchsia">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#informacoesNutricionais').hide(); // Oculta a div no carregamento da página
+    });
+
+    $(document).ready(function () {
+        $('#categoria').change(function () {
+            var categoriaSelecionada = $(this).val(); // Obter o valor selecionado
+
+            // Verificar se a categoria selecionada deve ocultar ou mostrar a div
+            if (categoriaSelecionada == 1 || categoriaSelecionada == 2 || categoriaSelecionada == 3) {
+                $('#informacoesNutricionais').show(); // Oculta a div
+            } else {
+                $('#informacoesNutricionais').hide(); // Mostra a div
+            }
+        });
+    });
+</script>
