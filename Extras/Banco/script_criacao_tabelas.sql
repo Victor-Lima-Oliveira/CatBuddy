@@ -62,7 +62,7 @@ proteinas varchar(10),
 carboidratos varchar(10),
 vitaminas varchar(10),
 mineirais varchar(10),
-fibraDiétrica varchar(10),
+fibraDietrica varchar(10),
 Colesterol varchar(10),
 Sodio varchar(10));
 

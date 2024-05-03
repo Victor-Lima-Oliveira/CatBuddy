@@ -10,6 +10,9 @@ namespace CatBuddy.Controllers
     {
         private IProdutoRepository _produtoRepository;
         private CarrinhoDeCompraCookie _carrinhoDeCompraCookie;
+
+        protected List<Categoria> listCategoria = new List<Categoria>();
+        protected List<Fornecedor> listFornecedor = new List<Fornecedor>();
         public ProdutoController(IProdutoRepository produtoRepository, CarrinhoDeCompraCookie carrinhoDeCompraCookie)
         {
             _produtoRepository = produtoRepository;
@@ -94,7 +97,6 @@ namespace CatBuddy.Controllers
         {
             try
             {
-
                 // Busca os dados do produto
                 Produto produto = _produtoRepository.retornaProduto(produtoSelecionado.produto.CodIdProduto);
 
@@ -131,68 +133,79 @@ namespace CatBuddy.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult CadastrarProduto()
         {
-            List<Categoria> listCategoria = new List<Categoria>();
-            List<Fornecedor> listFornecedor = new List<Fornecedor>();
-            List<Categoria> listCategoriaAux = new List<Categoria>();
-            List<Fornecedor> listFornecedorAux = new List<Fornecedor>();
+            List<Categoria> listCategoriaAux;
+            List<Fornecedor> listFornecedorAux;
             ViewModelCadastrarProduto view;
             Fornecedor fornecedor;
             Categoria categoria;
 
-            // Retorna as listas de categoria e fornecedor
-            listFornecedorAux = _produtoRepository.RetornaFornecedores();
-            listCategoriaAux = _produtoRepository.RetornaCategorias();
-
-            // Declara o primeiro valor como selecione
-            fornecedor = new Fornecedor
+            try
             {
-                codFornecedor = Const.SEM_FORNECEDOR_SELECIONADO,
-                nomeFornecedor = "Selecione um fornecedor"
-            };
-            listFornecedor.Add(fornecedor);
+                // Retorna as listas de categoria e fornecedor
+                listFornecedorAux = _produtoRepository.RetornaFornecedores();
+                listCategoriaAux = _produtoRepository.RetornaCategorias();
 
-            // Coloca os outros valores do banco para os fornecedores
-            foreach(Fornecedor fornecedorItem in listFornecedorAux)
-            {
-                  listFornecedor.Add(fornecedorItem);
+                // Declara o primeiro valor como selecione
+                fornecedor = new Fornecedor
+                {
+                    codFornecedor = Const.SEM_FORNECEDOR_SELECIONADO,
+                    nomeFornecedor = "Selecione um fornecedor"
+                };
+                listFornecedor.Add(fornecedor);
+
+                // Coloca os outros valores do banco para os fornecedores
+                foreach (Fornecedor fornecedorItem in listFornecedorAux)
+                {
+                    listFornecedor.Add(fornecedorItem);
+                }
+
+                // Declara a primeira categoria como nula
+                categoria = new Categoria
+                {
+                    codCategoria = Const.SEM_CATEGORIA_SELECIONADA,
+                    nomeCategoria = "Selecione uma categoria"
+                };
+                listCategoria.Add(categoria);
+
+                // Insere as categorias do banco na lista
+                foreach (Categoria categoriaItem in listCategoriaAux)
+                {
+                    listCategoria.Add(categoriaItem);
+                }
+
+
+                // Carrega a view para apresenta na tela 
+                view = new ViewModelCadastrarProduto
+                {
+                    listCategoria = listCategoria,
+                    listFornecedor = listFornecedor
+                };
+
+                return View(view);
             }
-
-            // Declara a primeira categoria como nula
-            categoria = new Categoria
+            catch(Exception err)
             {
-                codCategoria = Const.SEM_CATEGORIA_SELECIONADA,
-                nomeCategoria = "Selecione uma categoria"
-            };
-            listCategoria.Add(categoria);
-
-            // Insere as categorias do banco na lista
-            foreach(Categoria categoriaItem in listCategoriaAux)
-            {
-                listCategoria.Add(categoriaItem);
+                TempData[Const.ErroTempData] = err.Message;
+                return RedirectToAction(Const.ErroAction, Const.ErroController);
             }
-
-
-            // Carrega a view para apresenta na tela 
-            view = new ViewModelCadastrarProduto
-            {
-                categorias = listCategoria,
-                fornecedores = listFornecedor
-            };
-
-
-            return View(view);
         }
 
-        public IActionResult CategoriaDoProduto(int codCategoria)
+        [HttpPost]
+        public IActionResult CadastrarProduto(ViewModelCadastrarProduto view)
         {
-            if(codCategoria == Const.RacaoSeca || codCategoria == Const.RacaoUmida || codCategoria == Const.Petisco)
+            if (ModelState.IsValid)
             {
-                
+                return RedirectToAction(Actions.PaginaPrincipal, Controladores.Colaborador);
             }
-            return RedirectToAction(Actions.CadastarProduto, Controladores.Produto);
+            else
+            {
+                view.listCategoria = listCategoria;
+                view.listFornecedor= listFornecedor;
+                return View(view);
+            }
         }
-
     }
 }

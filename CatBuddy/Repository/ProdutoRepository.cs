@@ -2,6 +2,7 @@
 using CatBuddy.Repository.Contract;
 using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
 using System.Data;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
@@ -29,9 +30,91 @@ namespace CatBuddy.Repository
             throw new NotImplementedException();
         }
 
-        public void insereProduto(Produto produto)
+        public int insereProduto(Produto produto)
         {
-            throw new NotImplementedException();
+            StringBuilder sbAux = new StringBuilder();
+            int idProduto;
+
+            sbAux.Append(" INSERT INTO tbl_produto VALUE( ");
+            sbAux.Append(" null, @codCategoria, @descricao, @qtdEstoque, @codFornecedor, ");
+            sbAux.Append(" @idade, @sabor, @cor, @medidasAproximadas, @material, ");
+            sbAux.Append(" @composicao, @preco, @imgPath, @ds_nome);  ");
+            sbAux.Append(" SELECT LAST_INSERT_ID(); ");
+
+            _SintaxeSQl = sbAux.ToString();
+
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                // Passagem de parametros
+                cmd.Parameters.Add("@codCategoria", MySqlDbType.Int32).Value = produto.CodCategoria;
+                cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = produto.Descricao;
+                cmd.Parameters.Add("@qtdEstoque", MySqlDbType.Int32).Value = produto.QtdEstoque;
+                cmd.Parameters.Add("@codFornecedor", MySqlDbType.Int32).Value = produto.CodFornecedor;
+                cmd.Parameters.Add("@idade", MySqlDbType.VarChar).Value = produto.Idade;
+                cmd.Parameters.Add("@sabor", MySqlDbType.VarChar).Value = produto.Sabor;
+                cmd.Parameters.Add("@cor", MySqlDbType.VarChar).Value = produto.Cor;
+                cmd.Parameters.Add("@medidasAproximadas", MySqlDbType.VarChar).Value = produto.MedidasAproximadas;
+                cmd.Parameters.Add("@material", MySqlDbType.VarChar).Value = produto.Material;
+                cmd.Parameters.Add("@composicao", MySqlDbType.VarChar).Value = produto.Composicao;
+                cmd.Parameters.Add("@preco", MySqlDbType.VarChar).Value = produto.Preco;
+                cmd.Parameters.Add("@imgPath", MySqlDbType.VarChar).Value = produto.ImgPath;
+                cmd.Parameters.Add("@ds_nome", MySqlDbType.VarChar).Value = produto.NomeProduto;
+
+                // Abrir conexão com o banco
+                conexao.Open();
+
+                // Executar o insert e recuperar o ID
+                idProduto = Convert.ToInt32(cmd.ExecuteScalar());
+
+                // Fechar conexão com o banco 
+                conexao.Close();
+            }
+
+            return idProduto;
+        }
+
+        /// <summary>
+        /// Insere as informações nutricionais do produto
+        /// </summary>
+        public void insereInformacoesNutricionais(InfoNutricionais info)
+        {
+            StringBuilder sbAux = new StringBuilder();
+
+            sbAux.Append(" INSERT INTO tbl_infonutricionais VALUES( ");
+            sbAux.Append(" null, @codProduto, @TamanhoOuPorcao, @caloriaPorPorcao ");
+            sbAux.Append(" @proteinas, @carboidratos, @vitaminas, @mineirais,  ");
+            sbAux.Append(" @fibraDietrica, @Colesterol, @Sodio ");
+
+            _SintaxeSQl = sbAux.ToString();
+
+            using(var conexao = new MySqlConnection(_conexao))
+            {
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                // Passagem de parametros
+                cmd.Parameters.Add("@codProduto", MySqlDbType.Int32).Value = info.cod_produto;
+                cmd.Parameters.Add("@TamanhoOuPorcao", MySqlDbType.VarChar).Value = info.TamanhoOuPorcao;
+                cmd.Parameters.Add("@caloriaPorPorcao", MySqlDbType.VarChar).Value = info.caloriaPorPorcao;
+                cmd.Parameters.Add("@proteinas", MySqlDbType.VarChar).Value = info.proteinas;
+                cmd.Parameters.Add("@carboidratos", MySqlDbType.VarChar).Value = info.carboidratos;
+                cmd.Parameters.Add("@vitaminas", MySqlDbType.VarChar).Value = info.vitaminas;
+                cmd.Parameters.Add("@mineirais", MySqlDbType.VarChar).Value = info.mineirais;
+                cmd.Parameters.Add("@fibraDietrica", MySqlDbType.VarChar).Value = info.fibraDietrica;
+                cmd.Parameters.Add("@Colesterol", MySqlDbType.VarChar).Value = info.Colesterol;
+                cmd.Parameters.Add("@Sodio", MySqlDbType.VarChar).Value = info.Sodio;
+
+                // Abre a conexao
+                conexao.Open();
+
+                // Executa o insert 
+                cmd.ExecuteNonQuery();
+
+                // Fecha a conexao 
+                conexao.Close();
+            }
         }
 
         public Produto retornaProduto(int idProduto)

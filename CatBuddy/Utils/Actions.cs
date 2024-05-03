@@ -6,6 +6,7 @@ namespace CatBuddy.Utils
     {
         // Produto controller
         public const string CadastarProduto  = "CadastrarProduto";
+        public const string PaginaPrincipal = "PaginaPrincipal";
 
 
     

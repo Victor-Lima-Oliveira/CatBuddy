@@ -2,7 +2,7 @@
 {
     public class Categoria
     {
-        public int codCategoria {  get; set; }
+        public int? codCategoria {  get; set; }
         public string? nomeCategoria { get; set; }
     }
 }

@@ -2,9 +2,9 @@
 {
     public class ViewModelCadastrarProduto
     {
-        public Produto produto;
-        public InfoNutricionais infoNutricionais;
-        public List<Categoria> categorias;
-        public List<Fornecedor> fornecedores;
+        public Produto produto { get; set; }
+        public InfoNutricionais? infoNutricionais { get; set; }
+        public List<Categoria>? listCategoria { get; set; }
+        public List<Fornecedor>? listFornecedor { get; set; }
     }
 }

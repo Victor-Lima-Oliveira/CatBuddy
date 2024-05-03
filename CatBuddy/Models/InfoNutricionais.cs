@@ -4,8 +4,8 @@ namespace CatBuddy.Models
 {
     public class InfoNutricionais
     {
-        public int cod_id_info {get; set;}
-        public int cod_produto { get; set; }
+        public int? cod_id_info {get; set;}
+        public int? cod_produto { get; set; }
 
         [Display(Name = "Tamanho ou porção")]
         public string? TamanhoOuPorcao { get; set; }

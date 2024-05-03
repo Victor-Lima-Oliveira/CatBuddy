@@ -1,4 +1,5 @@
-﻿using CatBuddy.Repository.Contract;
+﻿using CatBuddy.Models;
+using CatBuddy.Repository.Contract;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Text;
@@ -23,7 +24,7 @@ namespace CatBuddy.Repository
         public int CadastrarPedido(int codUsuario, float valorTotal, int codPagamento)
         {
             StringBuilder sbAux = new StringBuilder();
-            int codPedido;            
+            int codPedido;
 
             // Sintaxe SQL
             sbAux.Append(" INSERT INTO tbl_pedido VALUE( null, ");
@@ -42,7 +43,7 @@ namespace CatBuddy.Repository
                 cmd.Parameters.Add("@codUsuario", MySqlDbType.Int32).Value = codUsuario;
                 cmd.Parameters.Add("@codPagamento", MySqlDbType.Int32).Value = codPagamento;
                 cmd.Parameters.Add("@valorTotal", MySqlDbType.Float).Value = valorTotal;
-                cmd.Parameters.Add("@dtAtual", MySqlDbType.Datetime).Value = DateTime.Now;
+                cmd.Parameters.Add("@dtAtual", MySqlDbType.DateTime).Value = DateTime.Now;
 
                 // Abre a conexao
                 conexao.Open();
@@ -61,7 +62,7 @@ namespace CatBuddy.Repository
         public void CadastrarItemPedido(int codPedido, int codProduto, int Qtd, float subtotal)
         {
             StringBuilder sbAux = new StringBuilder();
-            
+
             // Monta a sintaxe SQL
             sbAux.Append(" INSERT INTO tbl_itempedido value( ");
             sbAux.Append(" @codProduto, @codPedido, @qtd, @subtotal); ");
@@ -95,9 +96,9 @@ namespace CatBuddy.Repository
         {
             // TODO: Atualizar o estoque da loja 
         }
-    
 
-  
+
+
 
 
     }
