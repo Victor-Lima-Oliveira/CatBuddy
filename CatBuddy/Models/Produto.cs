@@ -48,7 +48,7 @@ namespace CatBuddy.Models
         public string? Composicao { get; set; }
 
 
-        [MaxLength(200), Display(Name = "Foto*"), Required(ErrorMessage = "A Foto é obrigatória")]
+        [MaxLength(200), Display(Name = "Foto*")]
         public string ImgPath { get; set; }
 
 

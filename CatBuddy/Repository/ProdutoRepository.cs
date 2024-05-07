@@ -90,7 +90,7 @@ namespace CatBuddy.Repository
 
             _SintaxeSQl = sbAux.ToString();
 
-            using(var conexao = new MySqlConnection(_conexao))
+            using (var conexao = new MySqlConnection(_conexao))
             {
                 MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
 
@@ -148,20 +148,20 @@ namespace CatBuddy.Repository
                 while (mySqlDataReader.Read())
                 {
                     produto.CodIdProduto = (int)mySqlDataReader["cod_id_produto"];
-                    produto.Descricao = (string)mySqlDataReader["descricao"];
+                    produto.Descricao = mySqlDataReader["descricao"].ToString();
                     produto.QtdEstoque = (int)mySqlDataReader["qtdEstoque"];
-                    produto.Idade = (string)mySqlDataReader["idade"];
-                    produto.Sabor = (string)mySqlDataReader["sabor"];
-                    produto.Cor = (string)mySqlDataReader["cor"];
-                    produto.MedidasAproximadas = (string)mySqlDataReader["medidasAproximadas"];
-                    produto.Composicao = (string)mySqlDataReader["composicao"];
+                    produto.Idade = mySqlDataReader["idade"].ToString();
+                    produto.Sabor = mySqlDataReader["sabor"].ToString();
+                    produto.Cor = mySqlDataReader["cor"].ToString();
+                    produto.MedidasAproximadas = mySqlDataReader["medidasAproximadas"].ToString();
+                    produto.Composicao = mySqlDataReader["composicao"].ToString();
                     produto.Preco = (float)mySqlDataReader["preco"];
-                    produto.ImgPath = (string)mySqlDataReader["imgPath"];
-                    produto.NomeProduto = (string)mySqlDataReader["ds_nome"];
+                    produto.ImgPath = mySqlDataReader["imgPath"].ToString();
+                    produto.NomeProduto = mySqlDataReader["ds_nome"].ToString();
                     produto.CodCategoria = (int)mySqlDataReader["codCategoria"];
-                    produto.NomeCategoria = (string)mySqlDataReader["Categoria"];
+                    produto.NomeCategoria = mySqlDataReader["Categoria"].ToString();
                     produto.CodFornecedor = (int)mySqlDataReader["codFornecedor"];
-                    produto.NomeFornecedor = (string)mySqlDataReader["fornecedor"];
+                    produto.NomeFornecedor = mySqlDataReader["fornecedor"].ToString();
                 }
             }
             return produto;

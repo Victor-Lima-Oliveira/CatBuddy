@@ -8,7 +8,7 @@
 <h1 class="text-yellow font-paytone-one-regular">Cadastrar Produto</h1>
 <hr />
 <div class="container">
-    <form asp-action="CadastrarProduto" asp-controller="Produto" method="post">
+    <form asp-action="CadastrarProduto" asp-controller="Produto" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input asp-for="produto.CodIdProduto" Class="visually-hidden" type="number" value="0" />
         <div class="row">
@@ -86,12 +86,12 @@
                 </select>
             </div>
             <div class="form-group col-md-4">
+                
                 <label asp-for="produto.ImgPath" class="control-label"></label>
-                <input asp-for="produto.ImgPath" class="form-control" type="file" />
-                <span asp-validation-for="produto.ImgPath" class="text-danger"></span>
+                <input asp-for="produto.ImgPath" value="aaaaa" class="visibility-hidden"/>
+                <input name="file" id="file" class="form-control" type="file" />
             </div>
         </div>
-
         <div class="form-group">
             <label asp-for="produto.Descricao" class="control-label"></label>
             <textarea asp-for="produto.Descricao" class="form-control" rows="8"></textarea>

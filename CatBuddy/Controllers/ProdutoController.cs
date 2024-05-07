@@ -194,17 +194,31 @@ namespace CatBuddy.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastrarProduto(ViewModelCadastrarProduto view)
+        public IActionResult CadastrarProduto(ViewModelCadastrarProduto view, IFormFile file)
         {
-            if (ModelState.IsValid)
+            try
             {
-                return RedirectToAction(Actions.PaginaPrincipal, Controladores.Colaborador);
+                view.produto.ImgPath = "aaa";
+                if (ModelState.IsValid)
+                {
+                    _produtoRepository.insereProduto(view.produto);
+
+                    GerenciadorArquivos.CadastrarImagemProduto(file);
+
+                    ViewBag.AvisoPaginaPrincipal = "Produto cadastrado com sucesso!";
+                    return RedirectToAction(Actions.PaginaPrincipal, Controladores.Colaborador);
+                }
+                else
+                {
+                    view.listCategoria = listCategoria;
+                    view.listFornecedor = listFornecedor;
+                    return View(view);
+                }
             }
-            else
+            catch (Exception err)
             {
-                view.listCategoria = listCategoria;
-                view.listFornecedor= listFornecedor;
-                return View(view);
+                TempData[Const.ErroTempData] = err.Message;
+                return RedirectToAction(Const.ErroAction, Const.ErroController);
             }
         }
     }

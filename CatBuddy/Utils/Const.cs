@@ -9,6 +9,8 @@ namespace CatBuddy.Utils
         public const string ErroTempData  = "ERRO";
         public const int ErroProdutoNaoEncontrado  = 1;
 
+        public const string AvisoPaginaPrincipal = "ViewBagPaginaPrincipal";
+
         // Categorias 
         public const int RacaoSeca = 1;
         public const int RacaoUmida = 2;
