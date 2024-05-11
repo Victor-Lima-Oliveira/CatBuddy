@@ -37,8 +37,8 @@ namespace CatBuddy.Repository
 
             sbAux.Append(" INSERT INTO tbl_produto VALUE( ");
             sbAux.Append(" null, @codCategoria, @descricao, @qtdEstoque, @codFornecedor, ");
-            sbAux.Append(" @idade, @sabor, @cor, @medidasAproximadas, @material, ");
-            sbAux.Append(" @composicao, @preco, @imgPath, @ds_nome);  ");
+            sbAux.Append(" @idadeRecomendada, @sabor, @cor, @medidasAproximadas, @material, ");
+            sbAux.Append(" @composicao, @preco, @imgPath, @imgPathInfoNutricionais, @ds_nome);  ");
             sbAux.Append(" SELECT LAST_INSERT_ID(); ");
 
             _SintaxeSQl = sbAux.ToString();
@@ -53,7 +53,7 @@ namespace CatBuddy.Repository
                 cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = produto.Descricao;
                 cmd.Parameters.Add("@qtdEstoque", MySqlDbType.Int32).Value = produto.QtdEstoque;
                 cmd.Parameters.Add("@codFornecedor", MySqlDbType.Int32).Value = produto.CodFornecedor;
-                cmd.Parameters.Add("@idade", MySqlDbType.VarChar).Value = produto.Idade;
+                cmd.Parameters.Add("@idadeRecomendada", MySqlDbType.VarChar).Value = produto.Idade;
                 cmd.Parameters.Add("@sabor", MySqlDbType.VarChar).Value = produto.Sabor;
                 cmd.Parameters.Add("@cor", MySqlDbType.VarChar).Value = produto.Cor;
                 cmd.Parameters.Add("@medidasAproximadas", MySqlDbType.VarChar).Value = produto.MedidasAproximadas;
@@ -61,6 +61,7 @@ namespace CatBuddy.Repository
                 cmd.Parameters.Add("@composicao", MySqlDbType.VarChar).Value = produto.Composicao;
                 cmd.Parameters.Add("@preco", MySqlDbType.VarChar).Value = produto.Preco;
                 cmd.Parameters.Add("@imgPath", MySqlDbType.VarChar).Value = produto.ImgPath;
+                cmd.Parameters.Add("@imgPathInfoNutricionais", MySqlDbType.VarChar).Value = produto.imgPathinfoNutricionais;
                 cmd.Parameters.Add("@ds_nome", MySqlDbType.VarChar).Value = produto.NomeProduto;
 
                 // Abrir conexão com o banco

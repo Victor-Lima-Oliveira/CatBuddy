@@ -162,12 +162,11 @@ namespace CatBuddy.Controllers
         {
             try
             {
-                view.produto.ImgPath = "aaa";
                 if (ModelState.IsValid)
                 {
-                    _produtoRepository.insereProduto(view.produto);
+                    view.produto.ImgPath = GerenciadorArquivos.CadastrarImagemProduto(file);
 
-                    GerenciadorArquivos.CadastrarImagemProduto(file);
+                    _produtoRepository.insereProduto(view.produto);
 
                     ViewBag.AvisoPaginaPrincipal = "Produto cadastrado com sucesso!";
                     return RedirectToAction(Actions.PaginaPrincipal, Controladores.Colaborador);

@@ -8,7 +8,8 @@
         public static string CadastrarImagemProduto(IFormFile file)
         {
             // Nome do caminho da imagem + horario para evitar conflito de arquivos com mesmo nome 
-            string nomeArquivo = Path.GetFileName(file.FileName) + DateTime.Now.ToString();
+            
+            string nomeArquivo = DateTime.Now.ToString("ddMMyyyyHHmmss") + Path.GetFileName(file.FileName);
 
             // Caminho para salvar a imagem de produtos
             string Caminho = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/produtos", nomeArquivo);
@@ -20,7 +21,7 @@
             }
 
             // Retorna a string para cadastrar no banco
-            return Path.Combine("/Imagem", nomeArquivo).Replace("\\", "/");
+            return Path.Combine("img/produtos/", nomeArquivo).Replace("\\", " /");
         }
 
     }
