@@ -1,3 +1,5 @@
+ use db_catBuddy;
+
  -- Insert fixos
  insert into tbl_logradouro values
 (default, 'Rua'), -- 1
@@ -27,3 +29,11 @@ insert into tbl_categoria values
  (default, 'Pix'),
  (default, 'Cartão de Crédito'),
  (default, 'Boleto');
+ 
+ insert into tbl_genero values -- Genero 
+ (null, "Feminino"), 
+ (null, "Masculino"), 
+ (null, "Gênero neutro"), 
+ (null, "Não binário"), 
+ (null, "Prefiro não informar");
+ 

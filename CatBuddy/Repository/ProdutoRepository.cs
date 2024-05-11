@@ -76,47 +76,7 @@ namespace CatBuddy.Repository
             return idProduto;
         }
 
-        /// <summary>
-        /// Insere as informações nutricionais do produto
-        /// </summary>
-        public void insereInformacoesNutricionais(InfoNutricionais info)
-        {
-            StringBuilder sbAux = new StringBuilder();
-
-            sbAux.Append(" INSERT INTO tbl_infonutricionais VALUES( ");
-            sbAux.Append(" null, @codProduto, @TamanhoOuPorcao, @caloriaPorPorcao ");
-            sbAux.Append(" @proteinas, @carboidratos, @vitaminas, @mineirais,  ");
-            sbAux.Append(" @fibraDietrica, @Colesterol, @Sodio ");
-
-            _SintaxeSQl = sbAux.ToString();
-
-            using (var conexao = new MySqlConnection(_conexao))
-            {
-                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
-
-                // Passagem de parametros
-                cmd.Parameters.Add("@codProduto", MySqlDbType.Int32).Value = info.cod_produto;
-                cmd.Parameters.Add("@TamanhoOuPorcao", MySqlDbType.VarChar).Value = info.TamanhoOuPorcao;
-                cmd.Parameters.Add("@caloriaPorPorcao", MySqlDbType.VarChar).Value = info.caloriaPorPorcao;
-                cmd.Parameters.Add("@proteinas", MySqlDbType.VarChar).Value = info.proteinas;
-                cmd.Parameters.Add("@carboidratos", MySqlDbType.VarChar).Value = info.carboidratos;
-                cmd.Parameters.Add("@vitaminas", MySqlDbType.VarChar).Value = info.vitaminas;
-                cmd.Parameters.Add("@mineirais", MySqlDbType.VarChar).Value = info.mineirais;
-                cmd.Parameters.Add("@fibraDietrica", MySqlDbType.VarChar).Value = info.fibraDietrica;
-                cmd.Parameters.Add("@Colesterol", MySqlDbType.VarChar).Value = info.Colesterol;
-                cmd.Parameters.Add("@Sodio", MySqlDbType.VarChar).Value = info.Sodio;
-
-                // Abre a conexao
-                conexao.Open();
-
-                // Executa o insert 
-                cmd.ExecuteNonQuery();
-
-                // Fecha a conexao 
-                conexao.Close();
-            }
-        }
-
+      
         public Produto retornaProduto(int idProduto)
         {
             Produto produto;
@@ -150,7 +110,7 @@ namespace CatBuddy.Repository
                     produto.CodIdProduto = (int)mySqlDataReader["cod_id_produto"];
                     produto.Descricao = mySqlDataReader["descricao"].ToString();
                     produto.QtdEstoque = (int)mySqlDataReader["qtdEstoque"];
-                    produto.Idade = mySqlDataReader["idade"].ToString();
+                    produto.Idade = mySqlDataReader["idadeRecomendada"].ToString();
                     produto.Sabor = mySqlDataReader["sabor"].ToString();
                     produto.Cor = mySqlDataReader["cor"].ToString();
                     produto.MedidasAproximadas = mySqlDataReader["medidasAproximadas"].ToString();
@@ -162,54 +122,10 @@ namespace CatBuddy.Repository
                     produto.NomeCategoria = mySqlDataReader["Categoria"].ToString();
                     produto.CodFornecedor = (int)mySqlDataReader["codFornecedor"];
                     produto.NomeFornecedor = mySqlDataReader["fornecedor"].ToString();
+                    produto.imgPathinfoNutricionais = mySqlDataReader["imgPathinfoNutricionais"].ToString();
                 }
             }
             return produto;
-        }
-
-        public InfoNutricionais RetornaInformacacoesNutricionais(int codProduto)
-        {
-            InfoNutricionais informacoesNutricionais;
-            MySqlDataAdapter mySqlDataAdapter;
-            MySqlDataReader mySqlDataReader;
-
-            _SintaxeSQl = "SELECT * FROM tbl_infonutricionais WHERE cod_produto = @CodIdProduto";
-
-            using (var conexao = new MySqlConnection(_conexao))
-            {
-                conexao.Open();
-
-                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
-
-                //Adicionar parametros
-                cmd.Parameters.Add("@CodIdProduto", MySqlDbType.Int32).Value = codProduto;
-
-                // Adapter para o comando
-                mySqlDataAdapter = new MySqlDataAdapter(cmd);
-
-                // Instancia do produto
-                informacoesNutricionais = new InfoNutricionais();
-
-                // leitor dos dados do livro
-                mySqlDataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-                // Gravar os dados na model
-                while (mySqlDataReader.Read())
-                {
-                    informacoesNutricionais.cod_id_info = (int)mySqlDataReader["cod_id_infonutricionais"];
-                    informacoesNutricionais.cod_produto = (int)mySqlDataReader["cod_produto"];
-                    informacoesNutricionais.TamanhoOuPorcao = mySqlDataReader["TamanhoOuPorcao"].ToString();
-                    informacoesNutricionais.caloriaPorPorcao = mySqlDataReader["caloriaPorPorcao"].ToString();
-                    informacoesNutricionais.proteinas = mySqlDataReader["proteinas"].ToString();
-                    informacoesNutricionais.carboidratos = mySqlDataReader["carboidratos"].ToString();
-                    informacoesNutricionais.vitaminas = mySqlDataReader["vitaminas"].ToString();
-                    informacoesNutricionais.mineirais = mySqlDataReader["mineirais"].ToString();
-                    informacoesNutricionais.fibraDietrica = mySqlDataReader["fibraDiétrica"].ToString();
-                    informacoesNutricionais.Colesterol = mySqlDataReader["Colesterol"].ToString();
-                    informacoesNutricionais.Sodio = mySqlDataReader["Sodio"].ToString();
-                }
-            }
-            return informacoesNutricionais;
         }
 
         public IEnumerable<Produto> retornaProdutos()

@@ -14,14 +14,9 @@ CREATE TABLE tbl_categoria (
 CREATE TABLE tbl_fornecedor (
     cod_id_fornecedor int PRIMARY KEY auto_increment,
     cnpj varchar(14) UNIQUE,
-    nomeFantasia varchar(35));
-        
-CREATE TABLE tbl_contatoFornecedor (
-	cod_id_contato int PRIMARY KEY auto_increment,
-	numero varchar(11),
-	nomeContato varchar(20),
-	cod_fornecedor int,
-	foreign key (cod_fornecedor) references tbl_fornecedor (cod_id_fornecedor));
+    nomeFantasia varchar(35),
+    telefone varchar(11),
+    nomeContato varchar(50));
 
 CREATE TABLE tbl_enderecoFornecedor (
     cod_id_endereco int PRIMARY KEY auto_increment,
@@ -41,7 +36,7 @@ CREATE TABLE tbl_produto (
     descricao text not null,
     qtdEstoque int,
     cod_fornecedor int not null,
-    idade varchar(30),
+    idadeRecomendada varchar(30),
     sabor varchar(45),
     cor varchar(45),
     medidasAproximadas varchar(45),
@@ -49,50 +44,50 @@ CREATE TABLE tbl_produto (
     composicao text,
     preco float not null,
     imgPath varchar(200),
+    imgPathinfoNutricionais varchar(200),
     ds_nome varchar(100),
     foreign key (cod_categoria) references tbl_categoria (cod_id_categoria),
     foreign key (cod_fornecedor) references tbl_fornecedor (cod_id_fornecedor));
 
-create table tbl_infonutricionais (
-cod_id_infonutricionais int primary key auto_increment,
-cod_produto int unique, 
-TamanhoOuPorcao varchar(10),
-caloriaPorPorcao varchar(10),
-proteinas varchar(10),
-carboidratos varchar(10),
-vitaminas varchar(10),
-mineirais varchar(10),
-fibraDietrica varchar(10),
-Colesterol varchar(10),
-Sodio varchar(10));
-
-CREATE TABLE tbl_Usuario (
-    cod_id_usuario int PRIMARY KEY auto_increment,
-    NivelAcesso int,
-    nomeUsuario varchar(50),
-    CPF varchar(11));
+    CREATE TABLE tbl_genero (
+    cod_id_genero int primary key auto_increment,
+    ds_genero varchar(20) not null unique);
     
--- TODO: Criar a tabela vacina 
-CREATE TABLE tbl_carteiraVacina (
-    cod_id_carteirinha int PRIMARY KEY auto_increment,
-    cod_vacina int,
-    nomeGato varchar(30),
-    pesoGato varchar(5),
-    IsFemeaGato bool,
-    PelagemGato varchar(20),
-    dataNascimentoGato datetime,
-    Raca varchar(20));
+CREATE TABLE tbl_cliente (
+    cod_id_cliente int PRIMARY KEY auto_increment,
+	nomeUsuario varchar(50) not null,
+    dtNascimento datetime not null,
+    CPF varchar(11) not null unique,
+    email varchar(100) not null unique, 
+    telefone varchar(11),
+    senha varchar(260) not null,
+    cod_genero int ,
+    foreign key (cod_genero) references tbl_genero (cod_id_genero));
+    
+Create table tbl_colaborador (
+    cod_id_fornecedor int primary key auto_increment, 
+    nomeColaborador varchar(50) not null, 
+    email varchar(100) not null unique,
+    CPF varchar(11) not null unique,
+    telefone varchar(11),
+    senha varchar(260) not null,
+    nivelDeAcesso int not null,
+    endereco varchar(100) not null,
+    bairro varchar(35) not null,
+    cep varchar(8) not null,
+    cod_genero int not null,
+    foreign key (cod_genero) references tbl_genero (cod_id_genero));
 
-CREATE TABLE tbl_enderecoUsuario (
+CREATE TABLE tbl_enderecoCliente (
     cod_id_endereco int PRIMARY KEY auto_increment,
     enderecoUsuario varchar(35),
     bairroUsuario varchar(35),
     cepUsuario varchar(8),
     cod_logradouro int,
     nomeEnderecoUsuario varchar(35),
-    cod_usuario int,
+    cod_cliente int,
     foreign key (cod_logradouro) references tbl_logradouro (cod_id_logradouro),
-    foreign key (cod_usuario) references tbl_usuario (cod_id_usuario));
+    foreign key (cod_cliente) references tbl_cliente (cod_id_cliente));
 
 create table tbl_tiposDePagamento(
 cod_id_pagamento int primary key auto_increment,
@@ -100,11 +95,11 @@ nomePagamento varchar(30));
 
 CREATE TABLE tbl_pedido (
     cod_id_pedido int PRIMARY KEY auto_increment,
-    cod_usuario int,
+    cod_cliente int,
     cod_pagamento int,
     valorTotal float,
     dataPedido datetime,
-    foreign key (cod_usuario) references tbl_usuario (cod_id_usuario),
+    foreign key (cod_cliente) references tbl_cliente (cod_id_cliente),
     foreign key (cod_pagamento) references tbl_tiposDePagamento (cod_id_pagamento));
     
     create table tbl_itemPedido(
@@ -121,7 +116,7 @@ SELECT
 t1.cod_id_produto, 
 t1.descricao,
  t1.qtdestoque,
- t1.idade, 
+ t1.idadeRecomendada, 
  t1.sabor, 
  t1.cor,
 t1.medidasaproximadas, 
@@ -129,6 +124,7 @@ t1.material,
  t1.composicao, 
  t1.preco, 
  t1.imgpath,
+ t1.imgPathinfoNutricionais,
  t1.ds_nome,
  t2.cod_id_fornecedor "codFornecedor",
 t2.nomeFantasia "fornecedor" ,
@@ -137,3 +133,8 @@ t3.nomeCategoria "Categoria"
 FROM tbl_produto t1 
 INNER JOIN tbl_fornecedor t2 ON  t1.cod_fornecedor = t2.cod_id_fornecedor
 INNER JOIN tbl_categoria t3 ON t1.cod_categoria = t3.cod_id_categoria;
+
+select *from  vwProduto;
+
+describe tbl_categoria;
+

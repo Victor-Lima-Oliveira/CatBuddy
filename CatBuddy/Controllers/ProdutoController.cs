@@ -22,8 +22,7 @@ namespace CatBuddy.Controllers
         {
             ViewProdutoeInformacoesNutricionais view;
             Produto produtoSelecionado;
-            InfoNutricionais infoNutricionais;
-            int categoriaAux;
+
             try
             {
                 if (id != 0)
@@ -35,50 +34,15 @@ namespace CatBuddy.Controllers
                     {
                         return RedirectToAction("MostrarErro", "Erro", Const.ErroProdutoNaoEncontrado);
                     }
-                    else
+
+                    // prepara a view com os dados 
+                    view = new ViewProdutoeInformacoesNutricionais
                     {
-                        // Variavel para facilitar a vizualização do código
-                        categoriaAux = produtoSelecionado.CodCategoria;
+                        produto = produtoSelecionado,
+                        PossuiInformacoesNutricionais = false
+                    };
 
-                        // Se for um alimento
-                        if (categoriaAux == Const.RacaoUmida || categoriaAux == Const.RacaoSeca || categoriaAux == Const.Petisco)
-                        {
-                            // Busca as informações nutricionais 
-                            infoNutricionais = _produtoRepository.RetornaInformacacoesNutricionais(produtoSelecionado.CodIdProduto);
-
-                            // Se não tiver cadastrado as informações nutricionais
-                            if (infoNutricionais.cod_produto == 0)
-                            {
-                                view = new ViewProdutoeInformacoesNutricionais
-                                {
-                                    produto = produtoSelecionado,
-                                    PossuiInformacoesNutricionais = false
-                                };
-                            }
-                            else
-                            {
-                                view = new ViewProdutoeInformacoesNutricionais
-                                {
-                                    produto = produtoSelecionado,
-                                    infoNutricionais = infoNutricionais,
-                                    PossuiInformacoesNutricionais = true
-                                };
-                            }
-
-                        }
-                        // Se não for um alimento
-                        else
-                        {
-                            // prepara a view com os dados 
-                            view = new ViewProdutoeInformacoesNutricionais
-                            {
-                                produto = produtoSelecionado,
-                                PossuiInformacoesNutricionais = false
-                            };
-                        }
-
-                        return View(view);
-                    }
+                    return View(view);
                 }
                 else
                 {
@@ -186,7 +150,7 @@ namespace CatBuddy.Controllers
 
                 return View(view);
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 TempData[Const.ErroTempData] = err.Message;
                 return RedirectToAction(Const.ErroAction, Const.ErroController);

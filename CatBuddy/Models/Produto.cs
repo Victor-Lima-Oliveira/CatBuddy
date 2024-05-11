@@ -51,6 +51,9 @@ namespace CatBuddy.Models
         [MaxLength(200), Display(Name = "Foto*")]
         public string ImgPath { get; set; }
 
+        [MaxLength(200), Display(Name = "Foto Informações nutricionais")]
+        public string imgPathinfoNutricionais { get; set; }
+
 
         public int QtdDeProduto { get; set; }
 
