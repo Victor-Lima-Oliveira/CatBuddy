@@ -1,14 +1,18 @@
-﻿@{
+﻿@model IEnumerable<CatBuddy.Models.Categoria>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <style>
-    /* Estilo personalizado para o carrossel ocupar toda a largura da tela,
-    Essa tela possui estrutura completamente diferente por isso */
-    
-    .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
-        max-width: 100%; /* Todos os conteudos irão ocupar a tela inteira */
-        padding: 0px; /* Retirar o padding da tela inteira*/
+    /* Estilo personalizado para o carrossel ocupar toda a largura da tela */
+
+    .conteinerCarrossel {
+        width: 100vw; /* Define a largura igual à largura da tela */
+        position: relative; /* Mantém o conteúdo no fluxo do documento */
+        left: 50%; /* Move o conteúdo para a esquerda em 50% da largura da tela */
+        right: 50%; /* Move o conteúdo para a direita em 50% da largura da tela */
+        transform: translateX(-50%); /* Centraliza o conteúdo horizontalmente */
     }
 
     .carousel-item img {
@@ -16,8 +20,8 @@
         height: 60vh; /* Mantém a proporção da imagem */
     }
 
-    .navbar-expand-xxl, .navbar-expand-xxl, .navbar-expand-lg, .navbar-expand-md, .navbar-expand-sm, .navbar{
-        margin-bottom:0rem !important; /* Retirar a distancia entre navbar e carrossel*/
+    .navbar-expand-xxl, .navbar-expand-xxl, .navbar-expand-lg, .navbar-expand-md, .navbar-expand-sm, .navbar {
+        margin-bottom: 0rem !important; /* Retirar a distancia entre navbar e carrossel*/
     }
 
     .bi-chevron-right, .bi-chevron-left {
@@ -47,6 +51,39 @@
         </div>
     </div>
 </div>
+
+@*Categorias*@
+<div class="conteinerfluid mt-2 overflow-hidden ">
+    <div class="carousel slide d-inline-flex " id="categoriasExemplo">
+        <div class="carousel-inner d-inline-flex gap-5">
+            @foreach (Categoria categoriaItem in Model)
+            {
+
+                <div class=" align-content-center  bg-darkFuchsia" style="width:180px; height: 150px;border-radius: 50%;">
+                    <a href="#" class="text-center text-white">@categoriaItem.nomeCategoria</a>
+                </div>
+            }
+        </div>
+    </div>
+    <button style="position: absolute" class="carousel-control-prev" type="button" data-bs-target="#categoriasExemplo" data-bs-slide="prev">
+        <i class="bi bi-chevron-left text-yellow"></i>
+    </button>
+    <button style="position: absolute" class="carousel-control-next" type="button" data-bs-target="#categoriasExemplo" data-bs-slide="next">
+        <i class="bi bi-chevron-right text-yellow"></i>
+    </button>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        // Adiciona um manipulador de eventos para o evento 'slide'
+        $('#categoriasExemplo').on('slide.bs.carousel', function () {
+            // Move o scroll horizontalmente
+            $('.overflow-auto-x').scrollLeft($('.overflow-auto-x').scrollLeft() + 180);
+        });
+    });
+</script>
 
 
 
