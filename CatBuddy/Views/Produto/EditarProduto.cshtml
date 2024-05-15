@@ -1,11 +1,16 @@
 ﻿@model CatBuddy.Models.ViewModelProduto
 
 @{
-    ViewData["Title"] = "CadastrarProduto";
+    ViewData["Title"] = "EditarProduto";
     Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
 }
-
-<h1 class="text-yellow font-paytone-one-regular">Cadastrar Produto</h1>
+<div class="row">
+    <div class="col-11">
+        <h1 class="text-yellow font-paytone-one-regular">Editar Produto</h1>
+        <h6 class="text-darkFuchsia font-paytone-one-regular">@Model.produto.NomeProduto</h6>
+    </div>
+    <img src="~/@Model.produto.ImgPath" style="width: 100px; height: 100px;" />
+</div>
 <hr />
 <div class="container">
     <form asp-action="CadastrarProduto" asp-controller="Produto" method="post" enctype="multipart/form-data">
@@ -98,13 +103,12 @@
         </div>
 
         @*Adicionar o input informações nutricionais*@
-            <div id="informacoesNutricionais" class="mt-3 mb-3">
-               
-            </div>
-        
+        <div id="informacoesNutricionais" class="mt-3 mb-3">
+        </div>
+
 
         <div class="form-group mt-5">
-            <input type="submit" value="Adicionar" class="btn btn-yellow" />
+            <input type="submit" value="Editar" class="btn btn-yellow" />
         </div>
         <div class="form-group mt-1">
             <a asp-action="PaginaPrincipal" asp-controller="Colaborador" class="btn btn-darkFuchsia">Voltar</a>
@@ -113,26 +117,7 @@
 </div>
 
 
+<div>
+    <a asp-action="VizualizarProdutos" asp-controller="Produto">Voltar</a>
+</div>
 
-
-
-
-
-<script>
-    $(document).ready(function () {
-        $('#informacoesNutricionais').hide(); // Oculta a div no carregamento da página
-    });
-
-    $(document).ready(function () {
-        $('#categoria').change(function () {
-            var categoriaSelecionada = $(this).val(); // Obter o valor selecionado
-
-            // Verificar se a categoria selecionada deve ocultar ou mostrar a div
-            if (categoriaSelecionada == 1 || categoriaSelecionada == 2 || categoriaSelecionada == 3) {
-                $('#informacoesNutricionais').show(); // Oculta a div
-            } else {
-                $('#informacoesNutricionais').hide(); // Mostra a div
-            }
-        });
-    });
-</script>

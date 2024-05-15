@@ -102,7 +102,7 @@ namespace CatBuddy.Controllers
         {
             List<Categoria> listCategoriaAux;
             List<Fornecedor> listFornecedorAux;
-            ViewModelCadastrarProduto view;
+            ViewModelProduto view;
             Fornecedor fornecedor;
             Categoria categoria;
 
@@ -142,7 +142,7 @@ namespace CatBuddy.Controllers
 
 
                 // Carrega a view para apresenta na tela 
-                view = new ViewModelCadastrarProduto
+                view = new ViewModelProduto
                 {
                     listCategoria = listCategoria,
                     listFornecedor = listFornecedor
@@ -158,7 +158,7 @@ namespace CatBuddy.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastrarProduto(ViewModelCadastrarProduto view, IFormFile file)
+        public IActionResult CadastrarProduto(ViewModelProduto view, IFormFile file)
         {
             try
             {
@@ -177,6 +177,31 @@ namespace CatBuddy.Controllers
                     view.listFornecedor = listFornecedor;
                     return View(view);
                 }
+            }
+            catch (Exception err)
+            {
+                TempData[Const.ErroTempData] = err.Message;
+                return RedirectToAction(Const.ErroAction, Const.ErroController);
+            }
+        }
+
+        public IActionResult VizualizarProdutos()
+        {
+            return View(_produtoRepository.retornaProdutos());
+        }
+
+        public IActionResult EditarProduto(int codProduto)
+        {
+            try
+            {
+                ViewModelProduto view = new ViewModelProduto()
+                {
+                    produto = _produtoRepository.retornaProduto(codProduto),
+                    listCategoria = _produtoRepository.RetornaCategorias(),
+                    listFornecedor = _produtoRepository.RetornaFornecedores()
+                };
+
+                return View(view);
             }
             catch (Exception err)
             {

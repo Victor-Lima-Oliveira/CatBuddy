@@ -138,7 +138,7 @@ namespace CatBuddy.Repository
 
             // Montar a sintaxe SQL 
             // TODO: realizar as restrições por categoria
-            sbAux.Append(" SELECT * FROM tbl_produto");
+            sbAux.Append(" SELECT * FROM vwproduto ORDER BY cod_id_produto ");
 
             // Juntar os dados SQL 
             _SintaxeSQl = sbAux.ToString();
@@ -166,20 +166,20 @@ namespace CatBuddy.Repository
                         new Produto
                         {
                             CodIdProduto = (int)produtoItem["cod_id_produto"],
-                            Descricao = (string)produtoItem["descricao"],
+                            Descricao = produtoItem["descricao"].ToString(),
                             QtdEstoque = (int)produtoItem["qtdEstoque"],
-                            Idade = (string)produtoItem["idade"],
-                            Sabor = (string)produtoItem["sabor"],
-                            Cor = (string)produtoItem["cor"],
-                            MedidasAproximadas = (string)produtoItem["medidasAproximadas"],
-                            Composicao = (string)produtoItem["composicao"],
+                            Idade = produtoItem["idadeRecomendada"].ToString(),
+                            Sabor = produtoItem["sabor"].ToString(),
+                            Cor = produtoItem["cor"].ToString(),
+                            MedidasAproximadas = produtoItem["medidasAproximadas"].ToString(),
+                            Composicao = produtoItem["composicao"].ToString(),
                             Preco = (float)produtoItem["preco"],
-                            ImgPath = (string)produtoItem["imgPath"],
-                            NomeProduto = (string)produtoItem["ds_nome"],
+                            ImgPath = produtoItem["imgPath"].ToString(),
+                            NomeProduto = produtoItem["ds_nome"].ToString(),
                             CodCategoria = (int)produtoItem["codFornecedor"],
-                            NomeCategoria = (string)produtoItem["Categoria"],
+                            NomeCategoria = produtoItem["Categoria"].ToString(),
                             CodFornecedor = (int)produtoItem["codFornecedor"],
-                            NomeFornecedor = (string)produtoItem["fornecedor"]
+                            NomeFornecedor = produtoItem["fornecedor"].ToString()
                         });
                 }
 

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CatBuddy.Models.Produto>
+
+@{
+    ViewData["Title"] = "VizualizarProdutos";
+    Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
+}
+
+<h1 class="text-yellow font-paytone-one-regular">Lista de produtos</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th>
+                Produto
+            </th>
+            <th>
+                Estoque
+            </th>
+            <th>
+                Preço
+            </th>
+            <th>
+                Fornecedor
+            </th>
+            <th>
+                Categoria
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <div>
+                        <img src="~/@item.ImgPath" style="width: 90px; height: 100px" />
+                    </div>
+                </td>
+                <td>
+                    <span>
+                        <b>Código produto: </b>@Html.DisplayFor(modelitem => item.CodIdProduto) <br />
+                    </span>
+                    <span>
+                        @Html.DisplayFor(modelItem => item.NomeProduto) <br />
+                    </span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QtdEstoque)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Preco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeFornecedor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCategoria)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarProduto", "Produto", new { codProduto = item.CodIdProduto }) |
+                    @Html.ActionLink("Detalhar", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Deletar", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
