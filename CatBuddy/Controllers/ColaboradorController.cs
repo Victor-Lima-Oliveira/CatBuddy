@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CatBuddy.Utils;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CatBuddy.Controllers
 {
@@ -17,9 +18,13 @@ namespace CatBuddy.Controllers
 
         public IActionResult PaginaPrincipal()
         {
+            if (TempData[Const.AvisoPaginaPrincipalSucesso] != null)
+            {
+                ViewBag.AvisoPaginaPrincipal = TempData[Const.AvisoPaginaPrincipalSucesso];
+            }
             return View();
         }
-        public IActionResult CadastrarProduto()
+        public IActionResult CadastrarColaborador()
         {
             return View();
         }

@@ -79,7 +79,7 @@ namespace CatBuddy.Controllers
                         QtdDeProduto = produtoSelecionado.produto.QtdDeProduto,
                         NomeProduto = produto.NomeProduto,
                         Preco = produto.Preco,
-                        Subtotal = (float)Math.Round(produtoSelecionado.produto.QtdDeProduto * produto.Preco, 2),
+                        Subtotal = (float) Math.Round(produtoSelecionado.produto.QtdDeProduto * Convert.ToDouble(produto.Preco), 2),
                         NomeFornecedor = produto.NomeFornecedor
                     };
 
@@ -100,55 +100,9 @@ namespace CatBuddy.Controllers
         [HttpGet]
         public IActionResult CadastrarProduto()
         {
-            List<Categoria> listCategoriaAux;
-            List<Fornecedor> listFornecedorAux;
-            ViewModelProduto view;
-            Fornecedor fornecedor;
-            Categoria categoria;
-
             try
             {
-                // Retorna as listas de categoria e fornecedor
-                listFornecedorAux = _produtoRepository.RetornaFornecedores();
-                listCategoriaAux = _produtoRepository.RetornaCategorias();
-
-                // Declara o primeiro valor como selecione
-                fornecedor = new Fornecedor
-                {
-                    codFornecedor = Const.SEM_FORNECEDOR_SELECIONADO,
-                    nomeFornecedor = "Selecione um fornecedor"
-                };
-                listFornecedor.Add(fornecedor);
-
-                // Coloca os outros valores do banco para os fornecedores
-                foreach (Fornecedor fornecedorItem in listFornecedorAux)
-                {
-                    listFornecedor.Add(fornecedorItem);
-                }
-
-                // Declara a primeira categoria como nula
-                categoria = new Categoria
-                {
-                    codCategoria = Const.SEM_CATEGORIA_SELECIONADA,
-                    nomeCategoria = "Selecione uma categoria"
-                };
-                listCategoria.Add(categoria);
-
-                // Insere as categorias do banco na lista
-                foreach (Categoria categoriaItem in listCategoriaAux)
-                {
-                    listCategoria.Add(categoriaItem);
-                }
-
-
-                // Carrega a view para apresenta na tela 
-                view = new ViewModelProduto
-                {
-                    listCategoria = listCategoria,
-                    listFornecedor = listFornecedor
-                };
-
-                return View(view);
+                return View(CarregaOsSelectsDosProdutos());
             }
             catch (Exception err)
             {
@@ -157,24 +111,26 @@ namespace CatBuddy.Controllers
             }
         }
 
+      
+
         [HttpPost]
-        public IActionResult CadastrarProduto(ViewModelProduto view, IFormFile file)
+        public IActionResult CadastrarProduto(ViewModelProduto view)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    view.produto.ImgPath = GerenciadorArquivos.CadastrarImagemProduto(file);
+                    view.produto.ImgPath = GerenciadorArquivos.CadastrarImagemProduto(view.produto.ImgProduto);
 
                     _produtoRepository.insereProduto(view.produto);
 
-                    ViewBag.AvisoPaginaPrincipal = "Produto cadastrado com sucesso!";
-                    return RedirectToAction(Actions.PaginaPrincipal, Controladores.Colaborador);
+                    TempData[Const.AvisoPaginaVizualizarProdutos] = "Produto cadastrado com sucesso!";
+                    return RedirectToAction(Actions.VizualizarProdutos, Controladores.Produto);
                 }
                 else
                 {
-                    view.listCategoria = listCategoria;
-                    view.listFornecedor = listFornecedor;
+                    view.listCategoria = _produtoRepository.RetornaCategorias();
+                    view.listFornecedor = _produtoRepository.RetornaFornecedores();
                     return View(view);
                 }
             }
@@ -187,6 +143,10 @@ namespace CatBuddy.Controllers
 
         public IActionResult VizualizarProdutos()
         {
+            if (TempData[Const.AvisoPaginaVizualizarProdutos] != null)
+            {
+                ViewBag.AvisoPaginaVizualizarProdutos = TempData[Const.AvisoPaginaVizualizarProdutos];
+            }
             return View(_produtoRepository.retornaProdutos());
         }
 
@@ -194,20 +154,117 @@ namespace CatBuddy.Controllers
         {
             try
             {
-                ViewModelProduto view = new ViewModelProduto()
-                {
-                    produto = _produtoRepository.retornaProduto(codProduto),
-                    listCategoria = _produtoRepository.RetornaCategorias(),
-                    listFornecedor = _produtoRepository.RetornaFornecedores()
-                };
-
-                return View(view);
+                return View(CarregaOsSelectsDosProdutos(codProduto));
             }
             catch (Exception err)
             {
                 TempData[Const.ErroTempData] = err.Message;
                 return RedirectToAction(Const.ErroAction, Const.ErroController);
             }
+        }
+
+        [HttpPost]
+        public IActionResult EditarProduto(ViewModelProduto view)
+        {
+            Produto produtoAux;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    // Se receber uma nova imagem
+                    if(view.produto.ImgProduto != null && view.produto.ImgProduto.Length > 0)
+                    {
+                        // Recupera as informações antigas
+                        produtoAux = _produtoRepository.retornaProduto(view.produto.CodIdProduto);
+
+                        // Exclui a imagem antiga
+                        GerenciadorArquivos.DeletarImagemProduto(produtoAux.ImgPath);
+
+                        // Salva a nova foto no servidor
+                        view.produto.ImgPath = GerenciadorArquivos.CadastrarImagemProduto(view.produto.ImgProduto);
+                    }
+     
+                    // Aualiza a foto
+                    _produtoRepository.atualizaProduto(view.produto);
+
+                    TempData[Const.AvisoPaginaVizualizarProdutos] = "Produto Editado com sucesso!";
+                    return RedirectToAction(Actions.VizualizarProdutos, Controladores.Produto);
+                }
+                else
+                {
+                    view.listCategoria = _produtoRepository.RetornaCategorias();
+                    view.listFornecedor = _produtoRepository.RetornaFornecedores();
+                    return View(view);
+                }
+            }
+            catch (Exception err)
+            {
+                TempData[Const.ErroTempData] = err.Message;
+                return RedirectToAction(Const.ErroAction, Const.ErroController);
+            }
+        }
+
+        private ViewModelProduto CarregaOsSelectsDosProdutos(int codIdProduto = 0)
+        {
+            List<Categoria> listCategoriaAux;
+            List<Fornecedor> listFornecedorAux;
+            ViewModelProduto view;
+            Fornecedor fornecedor;
+            Categoria categoria;
+
+            // Retorna as listas de categoria e fornecedor
+            listFornecedorAux = _produtoRepository.RetornaFornecedores();
+            listCategoriaAux = _produtoRepository.RetornaCategorias();
+
+            // Declara o primeiro valor como selecione
+            fornecedor = new Fornecedor
+            {
+                codFornecedor = Const.SEM_FORNECEDOR_SELECIONADO,
+                nomeFornecedor = "Selecione um fornecedor"
+            };
+            listFornecedor.Add(fornecedor);
+
+            // Coloca os outros valores do banco para os fornecedores
+            foreach (Fornecedor fornecedorItem in listFornecedorAux)
+            {
+                listFornecedor.Add(fornecedorItem);
+            }
+
+            // Declara a primeira categoria como nula
+            categoria = new Categoria
+            {
+                codCategoria = Const.SEM_CATEGORIA_SELECIONADA,
+                nomeCategoria = "Selecione uma categoria"
+            };
+            listCategoria.Add(categoria);
+
+            // Insere as categorias do banco na lista
+            foreach (Categoria categoriaItem in listCategoriaAux)
+            {
+                listCategoria.Add(categoriaItem);
+            }
+
+            if(codIdProduto != 0)
+            {
+                Produto produtoAux = _produtoRepository.retornaProduto(codIdProduto);
+                view = new ViewModelProduto
+                {
+                    listCategoria = listCategoria,
+                    listFornecedor = listFornecedor,
+                    produto = produtoAux
+                };
+
+                return view;
+            }
+
+            // Carrega a view para apresenta na tela 
+            view = new ViewModelProduto
+            {
+                listCategoria = listCategoria,
+                listFornecedor = listFornecedor
+            };
+
+            return view;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace CatBuddy.Utils
         public const string CadastarProduto  = "CadastrarProduto";
         public const string PaginaPrincipal = "PaginaPrincipal";
         public const string EditarProduto = "EditarProduto";
-        public const string InformacoesTodosProdutos = "VizualizarProdutos";
+        public const string VizualizarProdutos = "VizualizarProdutos";
 
 
     

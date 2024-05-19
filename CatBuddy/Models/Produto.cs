@@ -15,14 +15,15 @@ namespace CatBuddy.Models
         public string NomeProduto { get; set; }
 
 
-        [Display(Name = "Quantidade em Estoque*"), Required(ErrorMessage = "A quantidade no Estoque é obrigatório"),
+        [Display(Name = "Quantidade em Estoque*"), 
+            Required(ErrorMessage = "A quantidade no Estoque é obrigatório"),
             Range(1, int.MaxValue, ErrorMessage = "O campo Quantidade deve ser um número inteiro positivo.")]
-        public int QtdEstoque { get; set; } = 0;
+        public int? QtdEstoque { get; set; }
 
 
         [Display(Name = "Preço*"), Required(ErrorMessage = "O Preço é obrigatório")]
            [ Range(0.01, double.MaxValue, ErrorMessage = "O campo Preço deve ser um número positivo.")]
-        public float Preco { get; set; } = 0;
+        public float? Preco { get; set; }
 
 
         [MaxLength(30)]
@@ -49,7 +50,9 @@ namespace CatBuddy.Models
 
 
         [MaxLength(200), Display(Name = "Foto*")]
-        public string ImgPath { get; set; }
+        public string? ImgPath { get; set; }
+
+        public IFormFile? ImgProduto { get; set; }
 
         [MaxLength(200), Display(Name = "Foto Informações nutricionais")]
         public string? imgPathinfoNutricionais { get; set; }

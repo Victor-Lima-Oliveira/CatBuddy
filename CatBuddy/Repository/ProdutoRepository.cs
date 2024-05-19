@@ -22,7 +22,60 @@ namespace CatBuddy.Repository
         }
         public void atualizaProduto(Produto produto)
         {
-            throw new NotImplementedException();
+            StringBuilder sbAux = new StringBuilder();
+
+            sbAux.Append(" UPDATE tbl_produto SET  ");
+            sbAux.Append(" cod_categoria = @codCategoria , descricao = @descricao, qtdEstoque = @qtdEstoque, ");
+            sbAux.Append(" cod_fornecedor = @codFornecedor, ");
+            sbAux.Append(" preco = @preco, ds_nome = @ds_nome ");
+
+            // Verifica se recebeu alguma coisa, para montar a sintaxe SQL
+            if (produto.Idade != null) sbAux.Append(" ,idadeRecomendada = @idadeRecomendada ");
+            if (produto.Sabor != null) sbAux.Append(" ,sabor = @sabor ");
+            if (produto.Cor != null) sbAux.Append(" ,cor = @cor ");
+            if (produto.MedidasAproximadas != null) sbAux.Append(" ,medidasAproximadas = @medidasAproximadas ");
+            if (produto.Material != null) sbAux.Append(" ,material = @material ");
+            if (produto.Composicao != null) sbAux.Append(" ,composicao = @composicao ");
+            if (produto.ImgPath != null) sbAux.Append(" ,imgPath = @imgPath ");
+            if (produto.imgPathinfoNutricionais != null) sbAux.Append(" ,imgPathinfoNutricionais = @imgPathInfoNutricionais ");
+
+            sbAux.Append(" where cod_id_produto = @codProduto ");
+
+            // Monta o comando
+            _SintaxeSQl = sbAux.ToString();
+
+            // Abre a conexão
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                // Passagem de parametros
+                cmd.Parameters.Add("@codProduto",MySqlDbType.Int32).Value = produto.CodIdProduto;
+                cmd.Parameters.Add("@codCategoria", MySqlDbType.Int32).Value = produto.CodCategoria;
+                cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = produto.Descricao;
+                cmd.Parameters.Add("@qtdEstoque", MySqlDbType.Int32).Value = produto.QtdEstoque;
+                cmd.Parameters.Add("@codFornecedor", MySqlDbType.Int32).Value = produto.CodFornecedor;
+                cmd.Parameters.Add("@preco", MySqlDbType.VarChar).Value = produto.Preco;
+                cmd.Parameters.Add("@ds_nome", MySqlDbType.VarChar).Value = produto.NomeProduto;
+                cmd.Parameters.Add("@idadeRecomendada", MySqlDbType.VarChar).Value = produto.Idade;
+                cmd.Parameters.Add("@sabor", MySqlDbType.VarChar).Value = produto.Sabor;
+                cmd.Parameters.Add("@cor", MySqlDbType.VarChar).Value = produto.Cor;
+                cmd.Parameters.Add("@medidasAproximadas", MySqlDbType.VarChar).Value = produto.MedidasAproximadas;
+                cmd.Parameters.Add("@material", MySqlDbType.VarChar).Value = produto.Material;
+                cmd.Parameters.Add("@composicao", MySqlDbType.VarChar).Value = produto.Composicao;
+                cmd.Parameters.Add("@imgPath", MySqlDbType.VarChar).Value = produto.ImgPath;
+                cmd.Parameters.Add("@imgPathInfoNutricionais", MySqlDbType.VarChar).Value = produto.imgPathinfoNutricionais;
+
+                // Abrir conexão com o banco
+                conexao.Open();
+
+                // Executar o insert e recuperar o ID
+                cmd.ExecuteNonQuery();
+
+                // Fechar conexão com o banco 
+                conexao.Close();
+            }
+
         }
 
         public void deletaProduto(int id)
@@ -77,7 +130,7 @@ namespace CatBuddy.Repository
             return idProduto;
         }
 
-      
+
         public Produto retornaProduto(int idProduto)
         {
             Produto produto;
@@ -138,7 +191,7 @@ namespace CatBuddy.Repository
 
             // Montar a sintaxe SQL 
             // TODO: realizar as restrições por categoria
-            sbAux.Append(" SELECT * FROM vwproduto ORDER BY cod_id_produto ");
+            sbAux.Append(" SELECT * FROM vwproduto ORDER BY cod_id_produto DESC ");
 
             // Juntar os dados SQL 
             _SintaxeSQl = sbAux.ToString();

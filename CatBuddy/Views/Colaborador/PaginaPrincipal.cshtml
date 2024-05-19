@@ -4,9 +4,13 @@
     Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
 }
 
-    <div class="alert alert-sucess">
+@if (TempData["ViewBagPaginaPrincipalSucesso"] != null)
+{
+    <div class="alert alert-success">
         @ViewBag.AvisoPaginaPrincipal
     </div>
+}
+
 
 <h2 class="text-yellow font-paytone-one-regular">Olá Usuario, Bem vindo ao portal CatBuddy</h2>
 

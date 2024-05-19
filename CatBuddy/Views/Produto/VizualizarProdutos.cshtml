@@ -5,6 +5,13 @@
     Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
 }
 
+@if (TempData["ViewBagPaginaVizualizarSucesso"] != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.AvisoPaginaVizualizarProdutos
+    </div>
+}
+
 <h1 class="text-yellow font-paytone-one-regular">Lista de produtos</h1>
 <table class="table">
     <thead>

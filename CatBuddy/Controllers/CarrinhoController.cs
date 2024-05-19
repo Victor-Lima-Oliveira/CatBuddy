@@ -37,7 +37,7 @@ namespace CatBuddy.Controllers
                     QtdDeProduto = qtdDeProduto,
                     NomeProduto = produto.NomeProduto,
                     Preco = produto.Preco,
-                    Subtotal = (float)Math.Round(qtdDeProduto * produto.Preco, 2),
+                    Subtotal = (float)Math.Round(qtdDeProduto * Convert.ToDouble(produto.Preco), 2),
                 };
 
                 _carrinhoDeCompraCookie.AdicionarAoCarrinho(produtoNoCarrinho);
@@ -120,7 +120,7 @@ namespace CatBuddy.Controllers
                     produtoAux = _produtoRepository.retornaProduto(produtoItemCarrinho.CodIdProduto);
 
                     // Verifica qual será o estoque pós venda
-                    qtdEstoqueAux = produtoAux.QtdEstoque - produtoItemCarrinho.QtdDeProduto;
+                    qtdEstoqueAux = Convert.ToInt32(produtoAux.QtdEstoque - produtoItemCarrinho.QtdDeProduto);
 
                     // Retira a quantidade comprada do estoque 
                     _produtoRepository.VendeProduto(produtoAux.CodIdProduto, qtdEstoqueAux);
