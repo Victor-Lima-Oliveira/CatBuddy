@@ -65,10 +65,20 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeCategoria)
                 </td>
-                <td>
-                    @Html.ActionLink("Editar", "EditarProduto", "Produto", new { codProduto = item.CodIdProduto }) |
-                    @Html.ActionLink("Detalhar", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Deletar", "Delete", new { /* id=item.PrimaryKey */ })
+                <td >
+                    <a class="btn btn-warning text-white"
+                       asp-action="EditarProduto"
+                       asp-controller="Produto"
+                       asp-route-codProduto="@item.CodIdProduto">Editar</a> |
+                    <a class="btn btn-info text-white"
+                       asp-action="DetalhamentoProduto"
+                       asp-controller="Produto"
+                       asp-route-codProduto="@item.CodIdProduto">Detalhar</a> |
+                    <a class="btn btn-danger text-white"
+                       asp-route-codProduto="@item.CodIdProduto">
+                        Deletar
+                    </a>
+                    &nbsp;
                 </td>
             </tr>
         }

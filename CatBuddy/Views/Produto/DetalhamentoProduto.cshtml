@@ -1,0 +1,197 @@
+﻿@model CatBuddy.Models.Produto
+
+@{
+    ViewData["Title"] = "DetalhamentoProduto";
+    Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
+}
+
+<h1 class="font-paytone-one-regular text-yellow">Detalhe do produto</h1>
+<h6 class="text-darkFuchsia font-paytone-one-regular">@Model.NomeProduto</h6>
+
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-9" style="height: max-content">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td>
+                        <label class=""><b>Código do produto</b></label>
+                    </td>
+                    <td>
+                        <label>@Model.CodIdProduto</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class=""><b>Quantidade em estoque</b></label>
+                    </td>
+                    <td>
+                        <label>@Model.QtdEstoque</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class=""><b>Preço</b></label>
+                    </td>
+                    <td>
+                        <label>@Model.Preco</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class=""><b>Idade recomendada</b></label>
+                    </td>
+                    <td>
+                        @if (String.IsNullOrEmpty(Model.Idade))
+                        {
+                            <label>Sem informações</label>
+                        }
+                        else
+                        {
+                            <label>@Model.Idade</label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class=""><b>Sabor</b></label>
+                    </td>
+                    <td>
+                        @if (String.IsNullOrEmpty(Model.Sabor))
+                        {
+                            <label>Sem informações</label>
+                        }
+                        else
+                        {
+                            <label>@Model.Sabor</label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class=""><b>Cor</b></label>
+                    </td>
+                    <td>
+                        @if (String.IsNullOrEmpty(Model.Cor))
+                        {
+                            <label>Sem informações</label>
+                        }
+                        else
+                        {
+                            <label>@Model.Cor</label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class=""><b>Medidas aproximadas</b></label>
+                    </td>
+                    <td>
+                        @if (String.IsNullOrEmpty(Model.MedidasAproximadas))
+                        {
+                            <label>Sem informações</label>
+                        }
+                        else
+                        {
+                            <label>@Model.MedidasAproximadas</label>
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-3">
+            <img src="~/@Model.ImgPath" class="card-img img-thumbnail" style="height: 29vh" />
+        </div>
+
+        <div class="col-12">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td>
+                        <label class=""><b>Material</b></label>
+                    </td>
+                    <td>
+                        @if (String.IsNullOrEmpty(Model.Material))
+                        {
+                            <label>Sem informações</label>
+                        }
+                        else
+                        {
+                            <label>@Model.Material</label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class=""><b>Composição</b></label>
+                    </td>
+                    <td>
+                        @if (String.IsNullOrEmpty(Model.Composicao))
+                        {
+                            <label>Sem informações</label>
+                        }
+                        else
+                        {
+                            <label>@Model.Composicao</label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class=""><b>Fornecedor</b></label>
+                    </td>
+                    <td>
+                        @if (String.IsNullOrEmpty(Model.NomeFornecedor))
+                        {
+                            <label>Sem informações</label>
+                        }
+                        else
+                        {
+                            <label>@Model.NomeFornecedor</label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class=""><b>Categoria</b></label>
+                    </td>
+                    <td>
+                        @if (String.IsNullOrEmpty(Model.NomeCategoria))
+                        {
+                            <label>Sem informações</label>
+                        }
+                        else
+                        {
+                            <label>@Model.NomeCategoria</label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class=""><b>Descrição</b></label>
+                    </td>
+                    <td>
+                        @if (String.IsNullOrEmpty(Model.Descricao))
+                        {
+                            <label>Sem informações</label>
+                        }
+                        else
+                        {
+                            <label>@Model.Descricao</label>
+                        }
+                    </td>
+                </tr>
+            </table>
+
+
+
+        </div>
+    </div>
+    <a class="btn btn-warning"
+       asp-action="EditarProduto"
+       asp-controller="produto"
+       asp-route-codProduto="@Model.CodIdProduto">Editar</a>
+    <a class="btn btn-darkFuchsia"
+        asp-action="VizualizarProdutos"
+       asp-controller="Produto">Voltar</a>
+</div>

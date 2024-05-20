@@ -204,6 +204,11 @@ namespace CatBuddy.Controllers
             }
         }
 
+        public IActionResult DetalhamentoProduto(int codProduto)
+        {
+            return View(_produtoRepository.retornaProduto(codProduto));
+        }
+
         private ViewModelProduto CarregaOsSelectsDosProdutos(int codIdProduto = 0)
         {
             List<Categoria> listCategoriaAux;
