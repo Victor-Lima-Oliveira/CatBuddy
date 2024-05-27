@@ -3,9 +3,17 @@
 @{
     ViewData["Title"] = "VizualizarProdutos";
     Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
+    int qtdDeProdutos = 0;
 }
 
 @if (TempData["ViewBagPaginaVizualizarSucesso"] != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.AvisoPaginaVizualizarProdutos
+    </div>
+}
+
+@if (TempData["AvisoDeletadoComSucesso"] != null)
 {
     <div class="alert alert-success">
         @ViewBag.AvisoPaginaVizualizarProdutos
@@ -39,6 +47,7 @@
     <tbody>
         @foreach (var item in Model)
         {
+
             <tr>
                 <td>
                     <div>
@@ -75,12 +84,55 @@
                        asp-controller="Produto"
                        asp-route-codProduto="@item.CodIdProduto">Detalhar</a> |
                     <a class="btn btn-danger text-white"
+                       asp-action="AbrirDialogDeletar"
+                       asp-controller="Produto"
+                       asp-route-nomeProduto="@item.NomeProduto"
                        asp-route-codProduto="@item.CodIdProduto">
                         Deletar
                     </a>
                     &nbsp;
                 </td>
             </tr>
+
+            qtdDeProdutos++;
+            if (qtdDeProdutos == 25)
+                break;
         }
     </tbody>
 </table>
+
+@if (ViewBag.OpenDialog == "true")
+{
+    <div id="overlay" onclick="fecharDialog()">
+        <dialog id="Dialog" open style="position: fixed; top: 50%; background-color: var(--white); border: none; border-radius: 15px; color: var(--darkFuchsia); width: 35%;">
+            <b>@ViewBag.nomeProduto</b>
+            <p>Realmente deseja <b>DELETAR</b> esse produto?</p>
+            <div class="d-flex justify-content-end gap-2">
+                <a asp-action="CancelarDeletarProduto" class="btn btn-success">Sair</a>
+                <a asp-action="DeletarProduto" class="btn btn-danger">Deletar</a>
+            </div>
+        </dialog>
+    </div>
+}
+
+<script>
+    function fecharDialog() {
+        var dialog = document.getElementById('meuDialog');
+
+        $.ajax({
+            url: '/Produto/CancelarDeletarProduto',
+            type: 'GET',
+            success: function () {
+                location.reload();
+            },
+            error: function () {
+                alert('Erro ao atualizar a página, tente novamente mais tarde');
+            }
+        });
+    }
+
+    // Impedir que o clique no diálogo se propague para o overlay
+    document.getElementById('Dialog').addEventListener('click', function (event) {
+        event.stopPropagation();
+    });
+</script>

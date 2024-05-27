@@ -55,7 +55,7 @@ namespace CatBuddy.Repository
                 cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = produto.Descricao;
                 cmd.Parameters.Add("@qtdEstoque", MySqlDbType.Int32).Value = produto.QtdEstoque;
                 cmd.Parameters.Add("@codFornecedor", MySqlDbType.Int32).Value = produto.CodFornecedor;
-                cmd.Parameters.Add("@preco", MySqlDbType.VarChar).Value = produto.Preco;
+                cmd.Parameters.Add("@preco", MySqlDbType.Float).Value = produto.Preco;
                 cmd.Parameters.Add("@ds_nome", MySqlDbType.VarChar).Value = produto.NomeProduto;
                 cmd.Parameters.Add("@idadeRecomendada", MySqlDbType.VarChar).Value = produto.Idade;
                 cmd.Parameters.Add("@sabor", MySqlDbType.VarChar).Value = produto.Sabor;
@@ -78,9 +78,27 @@ namespace CatBuddy.Repository
 
         }
 
-        public void deletaProduto(int id)
+        public void deletaProduto(int codProduto)
         {
-            throw new NotImplementedException();
+            StringBuilder sbAux = new StringBuilder();
+
+            sbAux.Append(" DELETE FROM tbl_produto ");
+            sbAux.Append(" WHERE cod_id_produto = @codProduto ");
+
+            _SintaxeSQl = sbAux.ToString();
+
+            using(var conexao = new MySqlConnection(_conexao))
+            {
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                cmd.Parameters.Add("@codProduto", MySqlDbType.Int32).Value = codProduto;
+
+                conexao.Open();
+
+                cmd.ExecuteNonQuery();  
+
+                conexao.Close();
+            }
         }
 
         public int insereProduto(Produto produto)

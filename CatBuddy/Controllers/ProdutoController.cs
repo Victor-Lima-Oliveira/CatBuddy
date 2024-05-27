@@ -147,6 +147,18 @@ namespace CatBuddy.Controllers
             {
                 ViewBag.AvisoPaginaVizualizarProdutos = TempData[Const.AvisoPaginaVizualizarProdutos];
             }
+
+            if (TempData["AvisoDeletadoComSucesso"] != null)
+            {
+                ViewBag.AvisoPaginaVizualizarProdutos = TempData["AvisoDeletadoComSucesso"];
+            }
+
+            if (TempData["OpenDialog"] != null)
+            {
+                ViewBag.nomeProduto = TempData["nomeProduto"];
+                ViewBag.OpenDialog = "true";
+            }
+
             return View(_produtoRepository.retornaProdutos());
         }
 
@@ -207,6 +219,38 @@ namespace CatBuddy.Controllers
         public IActionResult DetalhamentoProduto(int codProduto)
         {
             return View(_produtoRepository.retornaProduto(codProduto));
+        }
+
+        public IActionResult AbrirDialogDeletar(string nomeProduto, int CodProduto)
+        {
+            TempData["OpenDialog"] = true;
+            TempData["nomeProduto"] = nomeProduto;
+            TempData["ExcluirCodProduto"] = CodProduto;
+            return RedirectToAction(nameof(VizualizarProdutos));
+        }
+
+        public IActionResult DeletarProduto()
+        {
+            int codProdutoAExcluir;
+
+            if(TempData["ExcluirCodProduto"] != null)
+            {
+                codProdutoAExcluir = (int) TempData["ExcluirCodProduto"];
+                _produtoRepository.deletaProduto(codProdutoAExcluir);
+                TempData["AvisoDeletadoComSucesso"] = "Produto deletado com sucesso!";
+                TempData["ExcluirCodProduto"] = null;
+            }
+
+            return RedirectToAction(nameof(VizualizarProdutos));
+        }
+
+        public IActionResult CancelarDeletarProduto()
+        {
+            TempData["ExcluirCodProduto"] = null;
+            TempData["OpenDialog"] = null;
+            TempData["nomeProduto"] = null;
+
+            return RedirectToAction(nameof(VizualizarProdutos));
         }
 
         private ViewModelProduto CarregaOsSelectsDosProdutos(int codIdProduto = 0)
