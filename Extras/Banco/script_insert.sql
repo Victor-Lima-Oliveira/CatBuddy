@@ -37,3 +37,10 @@ insert into tbl_categoria values
  (null, "Não binário"), 
  (null, "Prefiro não informar");
  
+ insert into tbl_nivelDeAcesso values 
+ (null, "Vendedor"), 
+ (null, "Desenvolvedor"),
+ (null, "Gerente"),
+ (null, "RH"),
+ (null, "Master");
+ 

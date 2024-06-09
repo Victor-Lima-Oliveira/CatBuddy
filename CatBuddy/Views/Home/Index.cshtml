@@ -52,38 +52,6 @@
     </div>
 </div>
 
-@*Categorias*@
-<div class="conteinerfluid mt-2 overflow-hidden ">
-    <div class="carousel slide d-inline-flex " id="categoriasExemplo">
-        <div class="carousel-inner d-inline-flex gap-5">
-            @foreach (Categoria categoriaItem in Model)
-            {
-
-                <div class=" align-content-center bg-darkFuchsia" style="width:180px; height: 150px;border-radius: 50%;">
-                    <a href="#" class="text-center text-white">@categoriaItem.nomeCategoria</a>
-                </div>
-            }
-        </div>
-    </div>
-    <button style="position: absolute" class="carousel-control-prev" type="button" data-bs-target="#categoriasExemplo" data-bs-slide="prev">
-        <i class="bi bi-chevron-left text-yellow"></i>
-    </button>
-    <button style="position: absolute" class="carousel-control-next" type="button" data-bs-target="#categoriasExemplo" data-bs-slide="next">
-        <i class="bi bi-chevron-right text-yellow"></i>
-    </button>
-</div>
-
-
-
-<script>
-    $(document).ready(function () {
-        // Adiciona um manipulador de eventos para o evento 'slide'
-        $('#categoriasExemplo').on('slide.bs.carousel', function () {
-            // Move o scroll horizontalmente
-            $('.overflow-auto-x').scrollLeft($('.overflow-auto-x').scrollLeft() + 180);
-        });
-    });
-</script>
 
 
 

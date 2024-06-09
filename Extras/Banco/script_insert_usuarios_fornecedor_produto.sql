@@ -1,5 +1,4 @@
 use db_catBuddy;
-
 -- Insertsd para testes 
 insert into tbl_fornecedor values
 (default,'11462614000373', 'PremieR Pet', '1136547856', 'Julio Cesar'), -- 1
@@ -247,6 +246,12 @@ insert into tbl_produto values -- Whiskas
  'Whiskas Gatos Filhotes Carne e Leite');
 
 -- Insere um usuario no sistema 
-insert into tbl_cliente value(null, "ROBESVALDO", "1988-12-25", "57812365478", "robesvaldo@gmail.com", "11946885123", "senhasegura", 2);
+insert into tbl_cliente value(null, "ROBESVALDO", 
+"1988-12-25",	
+ "57812365478",
+ "robesvaldo@gmail.com", 
+ "11946885123", 
+ "senhasegura", 
+ 2, true);
 
 

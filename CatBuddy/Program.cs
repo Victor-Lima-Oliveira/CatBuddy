@@ -1,4 +1,6 @@
 ﻿using CatBuddy.httpContext;
+using CatBuddy.LibrariesSessao.Login;
+using CatBuddy.LibrariesSessao;
 using CatBuddy.Repository;
 using CatBuddy.Repository.Contract;
 using Microsoft.AspNetCore.Diagnostics;
@@ -17,6 +19,8 @@ builder.Services.AddHttpContextAccessor();
 // Adiciona as interfaces como serviços do projeto
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IColaboradorRepository, ColaboradorRepository>();
 
 
 // Configuração da utiização de cookies 
@@ -42,6 +46,11 @@ builder.Services.AddMvc().AddSessionStateTempDataProvider();
 // Guardar os dados na memoria
 builder.Services.AddMemoryCache();
 
+// Adiciona a sessão como serviço 
+builder.Services.AddScoped<Sessao>();
+builder.Services.AddScoped<LoginCliente>();
+builder.Services.AddScoped<LoginColaborador>();
+
 // Adiciona os cookies como serviço 
 builder.Services.AddScoped<CarrinhoDeCompraCookie>();
 builder.Services.AddScoped<Cookie>();
@@ -53,7 +62,12 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
 app.UseStaticFiles();
+
+// Utilizacao de cookies e sessao
+app.UseCookiePolicy();
+app.UseSession();
 
 app.UseRouting();
 
