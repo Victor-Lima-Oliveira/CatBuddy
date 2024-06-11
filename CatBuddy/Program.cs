@@ -5,6 +5,7 @@ using CatBuddy.Repository;
 using CatBuddy.Repository.Contract;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
+using CatBuddy.LibrariesSessao.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,6 +69,9 @@ app.UseStaticFiles();
 // Utilizacao de cookies e sessao
 app.UseCookiePolicy();
 app.UseSession();
+
+// Protege todas as actions com http post
+app.UseMiddleware<ValidateAntiForgeryTokenMiddleware>();
 
 app.UseRouting();
 

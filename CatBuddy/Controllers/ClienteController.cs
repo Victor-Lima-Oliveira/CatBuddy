@@ -1,4 +1,5 @@
-﻿using CatBuddy.LibrariesSessao.Login;
+﻿using CatBuddy.LibrariesSessao.Filtro;
+using CatBuddy.LibrariesSessao.Login;
 using CatBuddy.Models;
 using CatBuddy.Repository.Contract;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace CatBuddy.Controllers
         private IClienteRepository _clienteRepository;
         private LoginCliente _loginCliente;
 
-        ClienteController(IClienteRepository clienteRepository, LoginCliente loginCliente)
+        public ClienteController(IClienteRepository clienteRepository, LoginCliente loginCliente)
         {
             _clienteRepository = clienteRepository;
             _loginCliente = loginCliente;
@@ -18,6 +19,13 @@ namespace CatBuddy.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [ClienteAutorizacao]
+        public IActionResult PainelCliente()
+        {
+            Cliente cliente = _loginCliente.ObterCliente();
+            return View(cliente);
         }
 
         public IActionResult Login()
@@ -29,12 +37,17 @@ namespace CatBuddy.Controllers
         public IActionResult Login([FromForm] Cliente cliente)
         {
             Cliente clienteDoBanco = _clienteRepository.Login(cliente.Email, cliente.Senha);
-            
-            if(clienteDoBanco.Email != null && clienteDoBanco.Senha != null)
+
+            if (clienteDoBanco.Email != null && clienteDoBanco.Senha != null)
             {
                 _loginCliente.Login(clienteDoBanco);
+                return new RedirectResult(Url.Action(nameof(PainelCliente)));
             }
-            return View(cliente);
+            else
+            {
+                ViewData["MSG_E"] = "Usuário não localizado, verifique se o e-mail e senha estão digitados corretamente";
+                return View();
+            }
         }
     }
 }

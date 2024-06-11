@@ -46,8 +46,8 @@ namespace CatBuddy.Repository
                     {
                         cod_id_colaborador = Convert.ToInt32(dr["cod_id_colaborador"]),
                         nomeColaborador = Convert.ToString(dr["nomeColaborador"].ToString()),
-                        Email = Convert.ToString(dr["EmailCol"]),
-                        Senha = Convert.ToString(dr["SenhaCol"]),
+                        Email = Convert.ToString(dr["email"]),
+                        Senha = Convert.ToString(dr["senha"]),
                         NivelDeAcesso = Convert.ToInt32(dr["cod_nivelDeAcesso"]),
                         CPF = Convert.ToString(dr["CPF"]),
                         codGenero = Convert.ToInt32(dr["cod_genero"]),
