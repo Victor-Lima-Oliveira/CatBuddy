@@ -261,5 +261,13 @@ insert into tbl_cliente value(null, "ROBESVALDO",
  "11478562314", 
  "senhasegura",
  3, 2, true);
+ 
+ insert into tbl_colaborador value (null,
+ "Vendedor",
+ "Vendedor@gmail.com",
+ "45621478533",
+ "11954123057",
+ "senhasegura",
+ 1,2,true);
 
 
