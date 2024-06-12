@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using CatBuddy.Utils
+@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    // Recupera os dados da sessão do colaborador
+    Colaborador colaborador = JsonConvert.DeserializeObject<Colaborador>(HttpContextAccessor.HttpContext.Session.GetString("Login.Colaborador"));
+}
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
@@ -43,12 +53,23 @@
                                 <li><a class="dropdown-item" asp-action="VizualizarProdutos" asp-controller="Produto">Informações Produtos</a></li>
                             </ul>
                         </div>
-                        <div >
-                            <a class="text-white font-paytone-one-regular tamanho-fonte-nav-bar text-decoration-none" href="#">Funcionario</a>
-                        </div>
+       
+                        @if (colaborador != null && (colaborador.NivelDeAcesso == Const.GERENTE || colaborador.NivelDeAcesso == Const.RH))
+                        {
+                            <div class ="dropdown me-5">
+                                <div class="text-white font-paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
+                                    Funcionario
+                                </div>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" asp-action="CadastrarColaborador" asp-controller="Colaborador">Cadastrar novo colaborador</a></li>
+                                    <li><a class="dropdown-item" asp-action="VisualizarColaboradores" asp-controller="Colaborador">Colaboradores</a></li>
+                                </ul>
+                            </div>
+                        }
                     </li>
                     <li>
                         <ul class="nav navbar-collapse collapse flex-grow-0 text-decoration-none">
+                            <li class="nav-item text-white">Olá, @colaborador.nomeColaborador</li>
                             <li class="nav-item"><a asp-controller="Colaborador" asp-action="Sair" class="bi bi-box-arrow-right text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
                         </ul>
                     </li>

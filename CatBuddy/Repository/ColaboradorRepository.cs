@@ -104,7 +104,7 @@ namespace CatBuddy.Repository
                 conexao.Open();
 
                 // Monta o comando
-                MySqlCommand cmd = new MySqlCommand("select * from tbl_colaborador", conexao);
+                MySqlCommand cmd = new MySqlCommand("select * from tbl_colaborador where IsColaboradorAtivo = true ", conexao);
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -118,15 +118,15 @@ namespace CatBuddy.Repository
                     listColaborador.Add(
                         new Colaborador
                         {
-                            cod_id_colaborador = Convert.ToInt32(dr["Id"]),
-                            nomeColaborador = (string)(dr["Nome"]),
+                            cod_id_colaborador = Convert.ToInt32(dr["cod_id_colaborador"]),
+                            nomeColaborador = (string)(dr["nomeColaborador"]),
                             Senha = (string)(dr["Senha"]),
                             Email = (string)(dr["Email"]),
-                            NivelDeAcesso = Convert.ToInt32(dr["NivelDeAcesso"]),
+                            NivelDeAcesso = Convert.ToInt32(dr["cod_nivelDeAcesso"]),
                             Telefone = Convert.ToString(dr["telefone"]),
                             CPF = Convert.ToString(dr["CPF"]),
                             codGenero = Convert.ToInt32(dr["cod_genero"]),
-                            IsColaboradorAtivo = Convert.ToBoolean(dr["cod_genero"])
+                            IsColaboradorAtivo = Convert.ToBoolean(dr["IsColaboradorAtivo"])
                         });
                 }
                 return listColaborador;

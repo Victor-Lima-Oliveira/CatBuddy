@@ -30,6 +30,11 @@ namespace CatBuddy.Controllers
             return RedirectToAction(nameof(PainelColaborador), "Colaborador");
         }
 
+        public IActionResult VisualizarColaboradores()
+        {
+            return View(_colaboradorRepository.ObterTodosColaboradores());
+        }
+
         [ColaboradorAutorizacao]
         public IActionResult PainelColaborador()
         {

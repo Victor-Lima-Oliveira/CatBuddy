@@ -28,5 +28,9 @@ namespace CatBuddy.Utils
         public const int SEM_FORNECEDOR_SELECIONADO = 0;
         public const int SEM_CATEGORIA_SELECIONADA = 0;
 
+        // Nivel de acesso 
+        public const int GERENTE = 3;
+        public const int RH = 4;
+
     }
 }

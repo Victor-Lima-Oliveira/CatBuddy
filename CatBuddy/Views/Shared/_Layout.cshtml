@@ -1,4 +1,19 @@
-﻿<!DOCTYPE html>
+﻿@using Newtonsoft.Json
+@inject IHttpContextAccessor httpContext
+
+@{
+    Cliente cliente = null;
+
+    // Se possui usuário na sessão
+    if (httpContext.HttpContext.Session.GetString("Login.Cliente") != null)
+    {
+        // Recebe os dados do usuário
+         cliente = JsonConvert.DeserializeObject<Cliente>(httpContext.HttpContext.Session.GetString("Login.Cliente"));
+    }
+}
+
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
@@ -59,7 +74,15 @@
                         <ul class="nav navbar-collapse collapse flex-grow-0 text-decoration-none">
                             <li class="nav-item"><a class="bi bi-search text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" ></a></li>
                             <li class="nav-item"><a class="bi bi-basket text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Carrinho" asp-controller="Carrinho"></a></li>
-                            <li class="nav-item"><a class="bi bi-person text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Login" asp-controller="Cliente"></a></li>
+                            @if(cliente == null)
+                            {
+                                <li class="nav-item"><a class="bi bi-person text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Login" asp-controller="Cliente"></a></li>
+                            }
+                            else
+                            {
+                                <li class="nav-item text-white">Olá, @cliente.nomeUsuario</li>
+                                <li class="nav-item"><a asp-controller="Cliente" asp-action="Sair" class="bi bi-box-arrow-right text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
+                            }
                         </ul>
                     </li>
                 </ul>

@@ -28,6 +28,13 @@ namespace CatBuddy.Controllers
             return View(cliente);
         }
 
+        public IActionResult Sair()
+        {
+            _loginCliente.Logout();
+
+            return RedirectToAction("index", "Home");
+        }
+
         public IActionResult Login()
         {
             return View();
