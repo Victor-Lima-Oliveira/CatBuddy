@@ -1,0 +1,78 @@
+﻿@model CatBuddy.Models.ViewColaborador
+
+@{
+    ViewData["Title"] = "CadastrarColaborador";
+    Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
+}
+
+<h1>Novo Colaborador</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CadastrarColaborador">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Colaborador.nomeColaborador" class="control-label"></label>
+                <input asp-for="Colaborador.nomeColaborador" class="form-control" />
+                <span asp-validation-for="Colaborador.nomeColaborador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Colaborador.CPF" class="control-label"></label>
+                <input asp-for="Colaborador.CPF" class="form-control cpf" />
+                <span asp-validation-for="Colaborador.CPF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Colaborador.Email" class="control-label"></label>
+                <input asp-for="Colaborador.Email" class="form-control" />
+                <span asp-validation-for="Colaborador.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Colaborador.Telefone" class="control-label"></label><i>- Opcional</i>
+                <input asp-for="Colaborador.Telefone" class="form-control phone_with_ddd" />
+                <span asp-validation-for="Colaborador.Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Colaborador.Senha" class="control-label"></label>
+                <input asp-for="Colaborador.Senha" class="form-control" />
+                <span asp-validation-for="Colaborador.Senha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Colaborador.confirmaSenha" class="control-label"></label>
+                <input asp-for="Colaborador.confirmaSenha" class="form-control" />
+                <span asp-validation-for="Colaborador.confirmaSenha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ListGenero" class="control-label"></label>
+                <select asp-for="Colaborador.codGenero" class="form-control">
+                    <option value="0">Selecione uma opção</option>
+                    @foreach (Genero genero in Model.ListGenero)
+                    {
+                        <option value="@genero.cod_id_genero">@genero.ds_genero</option>
+                    }
+                </select>
+                <span asp-validation-for="Colaborador.codGenero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ListNivelAcesso" class="control-label"></label>
+                <select asp-for="Colaborador.NivelDeAcesso" class="form-control">
+                    <option value="0">Selecione uma opção</option>
+                    @foreach (NivelAcesso nivelAcesso in Model.ListNivelAcesso)
+                    {
+                        <option value="@nivelAcesso.cod_id_NivelAcesso">@nivelAcesso.ds_nivelAcesso</option>
+                    }
+                </select>
+                <span asp-validation-for="Colaborador.NivelDeAcesso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

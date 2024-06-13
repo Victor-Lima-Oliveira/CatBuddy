@@ -16,5 +16,7 @@ namespace CatBuddy.Repository.Contract
         Colaborador ObterColaborador(int Id);
         List<Colaborador> ObterColaboradorPorEmail(string Email);
         IEnumerable<Colaborador> ObterTodosColaboradores();
+
+        public List<NivelAcesso> ObtemNivelDeAcesso();
     }
 }

@@ -6,7 +6,7 @@ namespace CatBuddy.Models
     {
 
         [Display(Name = "Código do Cliente")]
-        public int cod_id_colaborador { get; set; }
+        public int? cod_id_colaborador { get; set; }
 
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "O nome é obrigatório!")]
@@ -24,7 +24,7 @@ namespace CatBuddy.Models
 
         [Display(Name = "Celular")]
         [StringLength(11, MinimumLength = 10, ErrorMessage = "Digite um Telefone válido!")]
-        public string Telefone { get; set; }
+        public string? Telefone { get; set; }
 
         [Display(Name = "Senha")]
         [Required(ErrorMessage = "A Senha é obrigatória!")]
@@ -34,6 +34,7 @@ namespace CatBuddy.Models
         [Display(Name = "Confirme a senha")]
         [Required(ErrorMessage = "Confirme a sua Senha!")]
         [Compare("Senha", ErrorMessage = "A Senhas são diferentes")]
+        [DataType(DataType.Password)]
         public string confirmaSenha { get; set; }
 
         [Required(ErrorMessage = "Selecione um Gênero")]
@@ -43,6 +44,6 @@ namespace CatBuddy.Models
         [Required(ErrorMessage = "O Nível de Acesso é obrigatório!")]
         public  int NivelDeAcesso { get; set; }
 
-        public  bool  IsColaboradorAtivo { get; set; }
+        public  bool?  IsColaboradorAtivo { get; set; }
     }
 }

@@ -11,6 +11,9 @@ namespace CatBuddy.Repository
         // Propriedade privada para injetar Banco de Dados
         private readonly string _conexao;
 
+        // Variável auxiliar para facilitar visualização do código 
+        private string _SintaxeSQl;
+
         // Método Construtor da classe ClienteRepository
         public ColaboradorRepository(IConfiguration configuration)
         {
@@ -226,5 +229,43 @@ namespace CatBuddy.Repository
         {
             throw new NotImplementedException();
         }
+
+        public List<NivelAcesso> ObtemNivelDeAcesso()
+        {
+            List<NivelAcesso> listGenero = new List<NivelAcesso>();
+            NivelAcesso nivelAcesso;
+            MySqlDataAdapter mySqlDataAdapter;
+            MySqlDataReader mySqlDataReader;
+
+            // Montando a sintaxe do SQL
+            _SintaxeSQl = "SELECT * FROM tbl_niveldeacesso";
+
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                conexao.Open();
+
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                // Adapter para o comando
+                mySqlDataAdapter = new MySqlDataAdapter(cmd);
+
+                // leitor dos dados 
+                mySqlDataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                // Gravar os dados na model
+                while (mySqlDataReader.Read())
+                {
+                    nivelAcesso = new NivelAcesso()
+                    {
+                        cod_id_NivelAcesso = (int)mySqlDataReader["cod_id_nivelAcesso"],
+                        ds_nivelAcesso = mySqlDataReader["ds_nivelAcesso"].ToString()
+                    };
+
+                    listGenero.Add(nivelAcesso);
+                }
+            }
+            return listGenero;
+        }
+
     }
 }

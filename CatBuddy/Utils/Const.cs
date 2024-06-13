@@ -32,5 +32,9 @@ namespace CatBuddy.Utils
         public const int GERENTE = 3;
         public const int RH = 4;
 
+        // Validações 
+        public const int SEM_NIVEL_ACESSO = 0;
+        public const int SEM_GENERO = 0;
+
     }
 }

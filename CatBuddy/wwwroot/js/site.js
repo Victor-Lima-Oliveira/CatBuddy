@@ -16,10 +16,10 @@ $(document).ready(function () {
     $('.date_time').mask('00/00/0000 00:00:00');
     $('.cep').mask('00000-000');
     $('.phone').mask('0000-0000');
-    $('.phone_with_ddd').mask('(00) 0000-0000');
+    $('.phone_with_ddd').mask('(00) 0000-0000', { placeholder: "(00) 0000-0000" });
     $('.phone_us').mask('(000) 000-0000');
     $('.mixed').mask('AAA 000-S0S');
-    $('.cpf').mask('000.000.000-00', { reverse: true });
+    $('.cpf').mask('000.000.000-00', { reverse: true, placeholder: "000.000.000-00" });
     $('.cnpj').mask('00.000.000/0000-00', { reverse: true });
     $('.money').mask('000.000.000.000.000,00', { reverse: true });
     $('.money2').mask("#.##0,00", { reverse: true });
@@ -30,10 +30,8 @@ $(document).ready(function () {
             }
         }
     });
-    $('.ip_address').mask('099.099.099.099');
     $('.percent').mask('##0,00%', { reverse: true });
     $('.clear-if-not-match').mask("00/00/0000", { clearIfNotMatch: true });
-    $('.placeholder').mask("00/00/0000", { placeholder: "__/__/____" });
     $('.fallback').mask("00r00r0000", {
         translation: {
             'r': {
