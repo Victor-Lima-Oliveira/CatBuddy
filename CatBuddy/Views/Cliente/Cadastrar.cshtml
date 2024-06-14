@@ -1,0 +1,72 @@
+﻿@model CatBuddy.Models.ViewCliente
+
+@{
+    ViewData["Title"] = "Cadastrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CadastrarCliente</h1>
+
+<h4>Cliente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Cadastrar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="cliente.nomeUsuario" class="control-label"></label>
+                <input asp-for="cliente.nomeUsuario" class="form-control placeholder-name" />
+                <span asp-validation-for="cliente.nomeUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cliente.DtNascimento" class="control-label"></label>
+                <input asp-for="cliente.DtNascimento" class="form-control" type="date" />
+                <span asp-validation-for="cliente.DtNascimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cliente.CPF" class="control-label"></label>
+                <input asp-for="cliente.CPF" class="form-control cpf" />
+                <span asp-validation-for="cliente.CPF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cliente.Email" class="control-label"></label>
+                <input asp-for="cliente.Email" class="form-control placeholder-email" />
+                <span asp-validation-for="cliente.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cliente.Telefone" class="control-label"></label><i>- opcional</i>
+                <input asp-for="cliente.Telefone" class="form-control phone_with_ddd" />
+                <span asp-validation-for="cliente.Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cliente.Senha" class="control-label"></label>
+                <input asp-for="cliente.Senha" class="form-control placeholder-password" />
+                <span asp-validation-for="cliente.Senha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cliente.confirmaSenha" class="control-label"></label>
+                <input asp-for="cliente.confirmaSenha" class="form-control placeholder-password" />
+                <span asp-validation-for="cliente.confirmaSenha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ListGenero" class="control-label"></label>
+                <select asp-for="cliente.codGenero" class="form-control">
+                    <option value="0" >Selecione um gênero</option>
+                    @foreach (Genero genero in Model.ListGenero)
+                    {
+                        <option value="@genero.cod_id_genero">@genero.ds_genero</option>
+                    }
+                </select>
+                <span asp-validation-for="cliente.codGenero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

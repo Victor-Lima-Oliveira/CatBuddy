@@ -110,10 +110,12 @@ CREATE TABLE tbl_pedido (
     create table tbl_itemPedido(
 cod_produto int not null,
 cod_pedido int not null,
+cod_cliente int not null,
 qtd int not null,
 subtotal float not null,
 foreign key (cod_produto) references tbl_produto (cod_id_produto),
-foreign key (cod_pedido) references tbl_pedido (cod_id_pedido));
+foreign key (cod_pedido) references tbl_pedido (cod_id_pedido),
+foreign key (cod_cliente) references tbl_cliente (cod_id_cliente));
 
 -- Criada uma view do produto para facilitar as consultas
 create view vwProduto as

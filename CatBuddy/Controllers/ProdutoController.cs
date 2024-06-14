@@ -125,7 +125,7 @@ namespace CatBuddy.Controllers
                     _produtoRepository.insereProduto(view.produto);
 
                     TempData[Const.AvisoPaginaVizualizarProdutos] = "Produto cadastrado com sucesso!";
-                    return RedirectToAction(Actions.VizualizarProdutos, Controladores.Produto);
+                    return RedirectToAction("VizualizarProdutos", "Produto");
                 }
                 else
                 {
@@ -200,7 +200,7 @@ namespace CatBuddy.Controllers
                     _produtoRepository.atualizaProduto(view.produto);
 
                     TempData[Const.AvisoPaginaVizualizarProdutos] = "Produto Editado com sucesso!";
-                    return RedirectToAction(Actions.VizualizarProdutos, Controladores.Produto);
+                    return RedirectToAction("VizualizarProdutos", "Produto");
                 }
                 else
                 {

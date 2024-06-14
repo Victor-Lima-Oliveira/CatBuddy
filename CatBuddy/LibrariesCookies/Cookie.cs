@@ -20,10 +20,13 @@
         private void Cadastrar(string key, string value)
         {
             // Instância utilizada para criar um cookie 
-            CookieOptions options = new CookieOptions();
-
-            // Define o tempo que o cookie irá durar
-            options.Expires = DateTime.Now.AddDays(7);
+            CookieOptions options = new CookieOptions()
+            {
+                Expires = DateTime.Now.AddDays(7),
+                IsEssential = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+            };
 
             // Define a chave, valor para o cookie, options é utilizada para a criação de um novo cookie
             _httpContextAccessor.HttpContext.Response.Cookies.Append(key, value, options);

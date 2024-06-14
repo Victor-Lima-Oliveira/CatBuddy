@@ -58,7 +58,7 @@ namespace CatBuddy.Repository
             // Sintaxe SQL
             sbAux.Append(" insert into tbl_cliente values ");
             sbAux.Append(" (default, @Nome, @Nascimento, @CPF, @Email, ");
-            sbAux.Append("  @Telefone, @Senha, @Genero, @Situacao ) ");
+            sbAux.Append("  @Telefone, @Senha, @Genero, true ) ");
 
 
             using (var conexao = new MySqlConnection(_conexao))
@@ -76,7 +76,6 @@ namespace CatBuddy.Repository
                 cmd.Parameters.Add("@Telefone", MySqlDbType.VarChar).Value = cliente.Telefone;
                 cmd.Parameters.Add("@Email", MySqlDbType.VarChar).Value = cliente.Email;
                 cmd.Parameters.Add("@Senha", MySqlDbType.VarChar).Value = cliente.Senha;
-                cmd.Parameters.Add("@Situacao", MySqlDbType.VarChar).Value = cliente.IsClienteAtivo;
 
                 // Executa o comando
                 cmd.ExecuteNonQuery();

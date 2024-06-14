@@ -10,8 +10,30 @@ $('.dropdown').hover(function () {
     $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(300);
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Recupera a classe de todo o projeto
+    var password = document.getElementsByClassName("placeholder-password");
+    var email = document.getElementsByClassName("placeholder-email");
+    var nome = document.getElementsByClassName("placeholder-name");
+
+    // Percorre todas as classes e insere o placeholder
+    for (var i = 0; i < nome.length; i++) {
+        nome[i].placeholder = "Insira seu nome aqui";
+    }
+
+    // Percorre todas as classes e insere o placeholder
+    for (var i = 0; i < email.length; i++) {
+        email[i].placeholder = "Insira seu email aqui";
+    }
+
+    // Percorre todas as classes e insere o placeholder
+    for (var i = 0; i < password.length; i++) {
+        password[i].placeholder = "**********";
+    };
+});
+
 $(document).ready(function () {
-    $('.date').mask('00/00/0000');
+    $('.date').mask('00/00/0000', { placeholder: "01/01/2000" });
     $('.time').mask('00:00:00');
     $('.date_time').mask('00/00/0000 00:00:00');
     $('.cep').mask('00000-000');

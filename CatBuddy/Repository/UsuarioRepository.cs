@@ -24,7 +24,7 @@ namespace CatBuddy.Repository
             MySqlDataReader mySqlDataReader;
 
             // Montando a sintaxe do SQL
-            _SintaxeSQl = "SELECT * FROM tbl_genero";
+            _SintaxeSQl = "SELECT * FROM tbl_genero order by cod_id_genero";
 
             using (var conexao = new MySqlConnection(_conexao))
             {

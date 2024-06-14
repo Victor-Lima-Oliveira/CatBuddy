@@ -59,13 +59,13 @@ namespace CatBuddy.Repository
         /// <summary>
         /// Cadastra os itens do pedido
         /// </summary>
-        public void CadastrarItemPedido(int codPedido, int codProduto, int Qtd, float subtotal)
+        public void CadastrarItemPedido(int codPedido, int codProduto, int codCliente, int Qtd, float subtotal)
         {
             StringBuilder sbAux = new StringBuilder();
 
             // Monta a sintaxe SQL
             sbAux.Append(" INSERT INTO tbl_itempedido value( ");
-            sbAux.Append(" @codProduto, @codPedido, @qtd, @subtotal); ");
+            sbAux.Append(" @codProduto, @codPedido, @codCliente, @qtd, @subtotal); ");
 
             // Monta o comando 
             _SintaxeSQl = sbAux.ToString();
@@ -80,6 +80,7 @@ namespace CatBuddy.Repository
                 // Passagem de parametros
                 cmd.Parameters.Add("@codProduto", MySqlDbType.Int32).Value = codProduto;
                 cmd.Parameters.Add("@codPedido", MySqlDbType.Int32).Value = codPedido;
+                cmd.Parameters.Add("@codCliente", MySqlDbType.Int32).Value = codCliente;
                 cmd.Parameters.Add("@qtd", MySqlDbType.Int32).Value = Qtd;
                 cmd.Parameters.Add("@subtotal", MySqlDbType.Float).Value = subtotal;
 

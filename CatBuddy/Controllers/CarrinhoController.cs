@@ -3,6 +3,9 @@ using CatBuddy.Models;
 using CatBuddy.Repository.Contract;
 using CatBuddy.Utils;
 using Microsoft.AspNetCore.Mvc;
+using MySqlX.XDevAPI;
+using Newtonsoft.Json;
+using System.Transactions;
 
 namespace CatBuddy.Controllers
 {
@@ -10,18 +13,22 @@ namespace CatBuddy.Controllers
     {
         private IProdutoRepository _produtoRepository;
         private IPedidoRepository _pedidoRepository;
+        private IHttpContextAccessor _httpContextAccessor;
         private CarrinhoDeCompraCookie _carrinhoDeCompraCookie;
+        
         public CarrinhoController(IProdutoRepository produtoRepository,
             CarrinhoDeCompraCookie carrinhoDeCompraCookie,
-            IPedidoRepository pedidoRepository)
+            IPedidoRepository pedidoRepository, IHttpContextAccessor httpContextAccessor)
         {
             _produtoRepository = produtoRepository;
             _carrinhoDeCompraCookie = carrinhoDeCompraCookie;
             _pedidoRepository = pedidoRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
         public IActionResult Carrinho()
         {
-            return View(_carrinhoDeCompraCookie.ConsultarProdutosNoCarrinho());
+            List<Produto> listproduto = _carrinhoDeCompraCookie.ConsultarProdutosNoCarrinho();
+            return View(listproduto);
         }
 
         public IActionResult AlterarQuantidadeNosCookies(int codIdProduto, int qtdDeProduto)
@@ -81,49 +88,59 @@ namespace CatBuddy.Controllers
 
         public IActionResult FinalizarPedido(int codPagamento)
         {
-            // TODO: Criar uma transaction para adicionar produto e itens do produto 
-            // TODO: Recuperar o id do usuario
-
             List<Produto> listProdutosDoCarrinho;
             Produto produtoAux;
+            Cliente cliente;
             float valorTotal = 0;
             int codPedido;
             int qtdEstoqueAux;
-            
+
+
             try
             {
-                // Busca tudo que está no carrinho
-                listProdutosDoCarrinho = _carrinhoDeCompraCookie.ConsultarProdutosNoCarrinho();
+                // Recupera os dados do cliente da sessão
+                cliente = JsonConvert.DeserializeObject<Cliente>(_httpContextAccessor.HttpContext.Session.GetString("Login.Cliente"));
 
-                // Varre todo o carrinho para descobrir o valor total da compra
-                foreach (Produto produtoItem in listProdutosDoCarrinho)
+                // Inicia uma transação que garante a consistencia de dados
+                using (var scope = new TransactionScope())
                 {
-                    valorTotal += produtoItem.Subtotal;
-                }
+                    // Busca tudo que está no carrinho
+                    listProdutosDoCarrinho = _carrinhoDeCompraCookie.ConsultarProdutosNoCarrinho();
 
-                // Cadastra o pedido
-                codPedido = _pedidoRepository.CadastrarPedido(1, valorTotal, codPagamento);
+                    // Varre todo o carrinho para descobrir o valor total da compra
+                    foreach (Produto produtoItem in listProdutosDoCarrinho)
+                    {
+                        valorTotal += produtoItem.Subtotal;
+                    }
 
-                // Cadastra os itens do pedido 
-                foreach (Produto produtoItem in listProdutosDoCarrinho)
-                {
-                    _pedidoRepository.CadastrarItemPedido(codPedido,
-                        produtoItem.CodIdProduto,
-                        produtoItem.QtdDeProduto,
-                        produtoItem.Subtotal);
-                }
+                    // Cadastra o pedido
+                    codPedido = _pedidoRepository.CadastrarPedido(cliente.cod_id_cliente.Value, valorTotal, codPagamento);
 
-                // Atualiza a quantidade no estoque 
-                foreach(Produto produtoItemCarrinho in listProdutosDoCarrinho)
-                {
-                    // Retorna a quantidade do produto em estoque 
-                    produtoAux = _produtoRepository.retornaProduto(produtoItemCarrinho.CodIdProduto);
+                    // Cadastra os itens do pedido 
+                    foreach (Produto produtoItem in listProdutosDoCarrinho)
+                    {
+                        _pedidoRepository.CadastrarItemPedido(codPedido,
+                            produtoItem.CodIdProduto,
+                            cliente.cod_id_cliente.Value,
+                            produtoItem.QtdDeProduto,
+                            produtoItem.Subtotal);
+                    }
 
-                    // Verifica qual será o estoque pós venda
-                    qtdEstoqueAux = Convert.ToInt32(produtoAux.QtdEstoque - produtoItemCarrinho.QtdDeProduto);
+                    // Atualiza a quantidade no estoque 
+                    foreach (Produto produtoItemCarrinho in listProdutosDoCarrinho)
+                    {
+                        // Retorna a quantidade do produto em estoque 
+                        produtoAux = _produtoRepository.retornaProduto(produtoItemCarrinho.CodIdProduto);
 
-                    // Retira a quantidade comprada do estoque 
-                    _produtoRepository.VendeProduto(produtoAux.CodIdProduto, qtdEstoqueAux);
+                        // Verifica qual será o estoque pós venda
+                        qtdEstoqueAux = Convert.ToInt32(produtoAux.QtdEstoque - produtoItemCarrinho.QtdDeProduto);
+
+                        // Retira a quantidade comprada do estoque 
+                        _produtoRepository.VendeProduto(produtoAux.CodIdProduto, qtdEstoqueAux);
+                    }
+
+                    // Finaliza a transação
+                    scope.Complete();
                 }
 
                 // Limpa os cookies 
@@ -136,7 +153,7 @@ namespace CatBuddy.Controllers
                 TempData[Const.ErroTempData] = err.Message;
                 return RedirectToAction(Const.ErroAction, Const.ErroController);
             }
-           
+
         }
     }
 }
