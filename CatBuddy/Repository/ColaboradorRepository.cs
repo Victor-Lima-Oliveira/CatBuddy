@@ -73,7 +73,7 @@ namespace CatBuddy.Repository
             // Sintaxe SQL 
             sbAux.Append(" insert into tbl_colaborador values ");
             sbAux.Append(" (default, @Nome, @Email, @CPF, @telefone, ");
-            sbAux.Append(" @Senha, @NivelDeAcesso, @codGenero,  @situacao ) ");
+            sbAux.Append(" @Senha, @NivelDeAcesso, @codGenero,  1 ) ");
 
             using (var conexao = new MySqlConnection(_conexao))
             {
@@ -87,10 +87,9 @@ namespace CatBuddy.Repository
                 cmd.Parameters.Add("@Email", MySqlDbType.VarChar).Value = colaborador.Email;
                 cmd.Parameters.Add("@Senha", MySqlDbType.VarChar).Value = colaborador.Senha;
                 cmd.Parameters.Add("@CPF", MySqlDbType.VarChar).Value = colaborador.CPF;
-                cmd.Parameters.Add("@telefone", MySqlDbType.Datetime).Value = colaborador.Telefone;
+                cmd.Parameters.Add("@telefone", MySqlDbType.VarChar).Value = colaborador.Telefone;
                 cmd.Parameters.Add("@NivelDeAcesso", MySqlDbType.Int32).Value = colaborador.NivelDeAcesso;
                 cmd.Parameters.Add("@codGenero", MySqlDbType.Int32).Value = colaborador.codGenero;
-                cmd.Parameters.Add("@situacao", MySqlDbType.Int32).Value = colaborador.IsColaboradorAtivo;
 
                 // Executa o comando
                 cmd.ExecuteNonQuery();
@@ -160,13 +159,13 @@ namespace CatBuddy.Repository
                 {
                     colaborador = new Colaborador()
                     {
-                        cod_id_colaborador = (Int32)(dr["Id"]),
-                        nomeColaborador = (string)(dr["Nome"]),
+                        cod_id_colaborador = (Int32)(dr["cod_id_colaborador"]),
+                        nomeColaborador = (string)(dr["nomeColaborador"]),
                         Email = (string)(dr["Email"]),
                         Senha = (string)(dr["Senha"]),
-                        NivelDeAcesso = Convert.ToInt32(dr["NivelDeAcesso"]),
+                        NivelDeAcesso = Convert.ToInt32(dr["cod_nivelDeAcesso"]),
                         CPF = dr["CPF"].ToString(),
-                        Telefone = Convert.ToString(dr["dtNascimento"]),
+                        Telefone = Convert.ToString(dr["telefone"]),
                         codGenero = Convert.ToInt32(dr["cod_genero"]),
                         IsColaboradorAtivo = Convert.ToBoolean(dr["IsColaboradorAtivo"])
                     };
@@ -185,9 +184,9 @@ namespace CatBuddy.Repository
 
             // Sintaxe SQL 
             sbAux.Append(" update tbl_colaborador set nomeColaborador = @Nome, ");
-            sbAux.Append(" Email = @Email, Senha = @Senha, ");
+            sbAux.Append(" Email = @Email, ");
             sbAux.Append(" cod_nivelDeAcesso = @NivelDeAcesso, ");
-            sbAux.Append(" CPF = @CPF, telefone = @telefone ");
+            sbAux.Append(" CPF = @CPF, telefone = @telefone, ");
             sbAux.Append(" cod_genero = @codGenero ");
             sbAux.Append(" where cod_id_colaborador = @Id ");
 
@@ -202,7 +201,6 @@ namespace CatBuddy.Repository
                 cmd.Parameters.Add("@Id", MySqlDbType.VarChar).Value = colaborador.cod_id_colaborador;
                 cmd.Parameters.Add("@Nome", MySqlDbType.VarChar).Value = colaborador.nomeColaborador;
                 cmd.Parameters.Add("@Email", MySqlDbType.VarChar).Value = colaborador.Email;
-                cmd.Parameters.Add("@Senha", MySqlDbType.VarChar).Value = colaborador.Senha;
                 cmd.Parameters.Add("@NivelDeAcesso", MySqlDbType.Int32).Value = colaborador.NivelDeAcesso;
                 cmd.Parameters.Add("@CPF", MySqlDbType.VarChar).Value = colaborador.CPF;
                 cmd.Parameters.Add("@telefone", MySqlDbType.String).Value = colaborador.Telefone;
@@ -221,7 +219,26 @@ namespace CatBuddy.Repository
 
         public void Excluir(int Id)
         {
-            throw new NotImplementedException();
+            StringBuilder sbAux = new StringBuilder();
+
+            // Sintaxe SQL 
+            sbAux.Append(" update tbl_colaborador set IsColaboradorAtivo = false ");
+            sbAux.Append(" where cod_id_colaborador = @Id ");
+
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                conexao.Open();
+
+                // Monta o comando
+                MySqlCommand cmd = new MySqlCommand(sbAux.ToString(), conexao);
+
+                // Passagem de parametros
+                cmd.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+
+                // Executa o comando
+                cmd.ExecuteNonQuery();
+                conexao.Close();
+            }
         }
 
 

@@ -14,7 +14,7 @@ namespace CatBuddy.Models
         public string nomeColaborador { get; set; }
 
         [Required(ErrorMessage = "O CPF é obrigatório!")]
-        [StringLength(11, MinimumLength = 10, ErrorMessage = "Digite um CPF válido")]
+        [StringLength(14, MinimumLength = 13, ErrorMessage = "Digite um CPF válido")]
         public string CPF { get; set; }
 
         [Display(Name = "E-mail")]
@@ -23,7 +23,7 @@ namespace CatBuddy.Models
         public string Email { get; set; }
 
         [Display(Name = "Celular")]
-        [StringLength(11, MinimumLength = 10, ErrorMessage = "Digite um Telefone válido!")]
+        [StringLength(15, MinimumLength = 14, ErrorMessage = "Digite um Telefone válido!")]
         public string? Telefone { get; set; }
 
         [Display(Name = "Senha")]

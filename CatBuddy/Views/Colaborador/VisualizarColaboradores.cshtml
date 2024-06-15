@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<CatBuddy.Models.Colaborador>
 
 @{
-    ViewData["Title"] = "VisualizarColaboradores";
+    ViewData["Title"] = "Visualizar Colaboradores";
     Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
 }
 
-<h1>VisualizarColaboradores</h1>
+<h1>Visualizar Colaboradores</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="CadastrarColaborador" asp-controller="Colaborador">Cadastrar novo colaborador</a>
 </p>
 <table class="table">
     <thead>
@@ -26,41 +26,71 @@
                 @Html.DisplayNameFor(model => model.Telefone)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.codGenero)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.NivelDeAcesso)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.nomeColaborador)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CPF)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.codGenero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NivelDeAcesso)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeColaborador)
+                </td>
+                <td class="cpf">
+                    @Html.DisplayFor(modelItem => item.CPF)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td class="phone_with_ddd">
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NivelDeAcesso)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarColaborador", new { id = item.cod_id_colaborador }) |
+                    @Html.ActionLink("Deletar", "AbrirDialogDesativaColaborador", new { id = item.cod_id_colaborador, nomeColaborador = item.nomeColaborador })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@if (ViewBag.OpenDialog == "true")
+{
+    <div id="overlay" onclick="fecharDialog()">
+        <dialog id="Dialog" open style="position: fixed; top: 50%; background-color: var(--white); border: none; border-radius: 15px; color: var(--darkFuchsia); width: 35%;">
+            <b>@ViewBag.nomeColaborador</b>
+            <p>Realmente deseja <b>DESATIVAR</b> esse colaborador? Após desativado ele não poderá ser recuperado</p>
+            <div class="d-flex justify-content-end gap-2">
+                <a asp-action="CancelarDesativarColaborador" class="btn btn-success">Sair</a>
+                <a asp-action="DesativarColaborador" class="btn btn-danger">Deletar</a>
+            </div>
+        </dialog>
+    </div>
+}
+
+<script>
+    function fecharDialog() {
+        var dialog = document.getElementById('meuDialog');
+
+        $.ajax({
+            url: '/Colaborador/CancelarDesativarColaborador',
+            type: 'GET',
+            success: function () {
+                location.reload();
+            },
+            error: function () {
+                alert('Erro ao atualizar a página, tente novamente mais tarde');
+            }
+        });
+    }
+
+    // Impedir que o clique no diálogo se propague para o overlay
+    document.getElementById('Dialog').addEventListener('click', function (event) {
+        event.stopPropagation();
+    });
+</script>

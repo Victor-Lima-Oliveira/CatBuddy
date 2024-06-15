@@ -78,7 +78,7 @@ namespace CatBuddy.Controllers
             }
 
             // Se aconteceu algum erro retorna para a mesma página
-            return View(CarregaViewCliente(cliente));
+            return View(    CarregaViewCliente(cliente));
         }
 
         public IActionResult Sair()

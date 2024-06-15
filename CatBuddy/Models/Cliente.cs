@@ -27,7 +27,7 @@ namespace CatBuddy.Models
         public string Email { get; set; }
 
         [Display(Name = "Celular")]
-        [StringLength(14, MinimumLength = 13, ErrorMessage = "Digite um Telefone válido!")]    
+        [StringLength(15, MinimumLength = 14, ErrorMessage = "Digite um Telefone válido!")]    
         public  string? Telefone { get; set; }
 
         [Display(Name = "Senha")]

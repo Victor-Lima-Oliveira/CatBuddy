@@ -5,6 +5,7 @@ using CatBuddy.Repository;
 using CatBuddy.Repository.Contract;
 using CatBuddy.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CatBuddy.Controllers
 {
@@ -21,19 +22,59 @@ namespace CatBuddy.Controllers
             _usuarioRepository = usuarioRepository;
         }
 
-        /// <summary>
-        /// Login do funcionario
-        /// </summary>
+        [ColaboradorAutorizacao]
         public IActionResult Index()
         {
-            // TODO: Se o usuario não estiver cadastrado, abre o index
-            // Se estiver cadastrado, manda para a paginaPrincipal
-
             return RedirectToAction(nameof(PainelColaborador), "Colaborador");
         }
 
+        public IActionResult AbrirDialogDesativaColaborador(int id, string nomeColaborador)
+        {
+            TempData["OpenDialog"] = "true";
+            TempData["nomeColaborador"] = nomeColaborador;
+            TempData["idColaborador"] = id;
+            return RedirectToAction(nameof(VisualizarColaboradores));
+        }
+
+        public IActionResult DesativarColaborador()
+        {
+            try
+            {
+                // Desativa o colaborador no banco
+                _colaboradorRepository.Excluir(Convert.ToInt32(TempData["idColaborador"]));
+
+                TempData["OpenDialog"] = null;
+                TempData["nomeColaborador"] = null;
+                TempData["idColaborador"] = null;
+            }
+            catch (Exception err)
+            {
+
+            }
+            return RedirectToAction(nameof(VisualizarColaboradores));
+        }
+
+        public IActionResult CancelarDesativarColaborador()
+        {
+            TempData["OpenDialog"] = null;
+            TempData["nomeColaborador"] = null;
+            TempData["idColaborador"] = null;
+
+            return RedirectToAction(nameof(VisualizarColaboradores));
+        }
+
+        [ColaboradorAutorizacao]
         public IActionResult VisualizarColaboradores()
         {
+            if (TempData["OpenDialog"] != null)
+            {
+                ViewBag.OpenDialog = "true";
+            }
+            if (TempData["nomeColaborador"] != null)
+            {
+                ViewBag.nomeColaborador = TempData["nomeColaborador"];
+            }
+
             return View(_colaboradorRepository.ObterTodosColaboradores());
         }
 
@@ -47,9 +88,43 @@ namespace CatBuddy.Controllers
             return View(_loginColaborador.GetColaborador());
         }
 
+
+
+        [ColaboradorAutorizacao]
+        public IActionResult EditarColaborador(int id)
+        {
+            // Recupera o colaborador
+            Colaborador colaboradorAux = _colaboradorRepository.ObterColaborador(id);
+
+            // Abre a página
+            return View(CarregaViewColaborador(colaboradorAux));
+        }
+
+        [HttpPost]
+        [ColaboradorAutorizacao]
+        public IActionResult EditarColaborador(Colaborador colaborador)
+        {
+            // Se passar na validação
+            if (ModelState.IsValid && ValidaCampos(colaborador))
+            {
+                // Remove os caracteres extras
+                colaborador.CPF = Apoio.TransformaCPF(colaborador.CPF);
+                colaborador.Telefone = Apoio.TransformaTelefone(colaborador.Telefone);
+
+                // Atualiza o colaborador
+                _colaboradorRepository.Atualizar(colaborador);
+
+                // Volta para a página do layout
+                return RedirectToAction(nameof(VisualizarColaboradores));
+            }
+
+            // Retorna para a mesma view caso erro 
+            return View(CarregaViewColaborador(colaborador));
+        }
+
         [ColaboradorAutorizacao]
         public IActionResult CadastrarColaborador()
-        { 
+        {
             return View(CarregaViewColaborador());
         }
 
@@ -58,17 +133,27 @@ namespace CatBuddy.Controllers
         public IActionResult CadastrarColaborador(Colaborador colaborador)
         {
             // Se passou na validação
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && ValidaCampos(colaborador))
             {
-                // Se for selecionado um genero e um nivel de acesso, insere o colaborador no banco 
-                if(colaborador.codGenero != Const.SEM_GENERO && colaborador.NivelDeAcesso != Const.SEM_NIVEL_ACESSO)
-                {
-                    return RedirectToAction(nameof(VisualizarColaboradores));
-                }
+                // Remove os caracteres extras dos campos
+                colaborador.CPF = Apoio.TransformaCPF(colaborador.CPF);
+                colaborador.Telefone = Apoio.TransformaTelefone(colaborador.Telefone);
+
+                // Cadastra o usuario no banco 
+                _colaboradorRepository.Cadastrar(colaborador);
+
+                // Recupera os dados do colaborador 
+                colaborador = _colaboradorRepository.Login(colaborador.Email, colaborador.Senha);
+
+                // Salva os dados do colaborador na sessão 
+                _loginColaborador.Login(colaborador);
+
+                // Redireciona para a lista de colaboradores
+                return RedirectToAction(nameof(VisualizarColaboradores));
             }
-            
+
             // Se não passou na validação, apresenta a mesma página 
-            return View(CarregaViewColaborador());
+            return View(CarregaViewColaborador(colaborador));
         }
 
         public IActionResult Sair()
@@ -101,16 +186,43 @@ namespace CatBuddy.Controllers
             }
         }
 
-        public ViewColaborador CarregaViewColaborador()
+        public ViewColaborador CarregaViewColaborador(Colaborador colaborador = null)
         {
-            ViewColaborador viewColaborador = new ViewColaborador()
-            {
-                Colaborador = new Colaborador(),
-                ListGenero = _usuarioRepository.RetornaGenero(),
-                ListNivelAcesso = _colaboradorRepository.ObtemNivelDeAcesso(),
-            };
+            ViewColaborador viewColaborador = new ViewColaborador();
+            viewColaborador.ListGenero = _usuarioRepository.RetornaGenero();
+            viewColaborador.ListNivelAcesso = _colaboradorRepository.ObtemNivelDeAcesso();
 
-            return viewColaborador; 
+            if (colaborador == null)
+            {
+                viewColaborador.Colaborador = new Colaborador();
+            }
+            else
+            {
+                viewColaborador.Colaborador = colaborador;
+            }
+
+            return viewColaborador;
+        }
+
+        public bool ValidaCampos(Colaborador colaborador)
+        {
+            bool bValido = true;
+
+            // Se o usuário selecionou um genero
+            if (colaborador.codGenero == Const.SEM_GENERO)
+            {
+                bValido = false;
+                ModelState.AddModelError("Colaborador.codGenero", "Selecione um gênero!");
+            }
+
+            // Se o usuario selecionou um nível de acesso
+            if (colaborador.NivelDeAcesso == Const.SEM_NIVEL_ACESSO)
+            {
+                bValido = false;
+                ModelState.AddModelError("Colaborador.NivelDeAcesso", "Selecione o nível de acesso!");
+            }
+
+            return bValido;
         }
     }
 }
