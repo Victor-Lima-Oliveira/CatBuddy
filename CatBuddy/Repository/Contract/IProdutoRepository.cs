@@ -8,7 +8,7 @@ namespace CatBuddy.Repository.Contract
         public void deletaProduto(int id);
         public void atualizaProduto(Produto produto);
         public Produto retornaProduto(int id);
-        public IEnumerable<Produto> retornaProdutos();
+        public IEnumerable<Produto> retornaProdutos(Produto produto = null);
         public void VendeProduto(int codProduto, int qtdEstoque);
         public List<Categoria> RetornaCategorias();
         public List<Fornecedor> RetornaFornecedores();

@@ -50,7 +50,7 @@ namespace CatBuddy.Repository
                 MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
 
                 // Passagem de parametros
-                cmd.Parameters.Add("@codProduto",MySqlDbType.Int32).Value = produto.CodIdProduto;
+                cmd.Parameters.Add("@codProduto", MySqlDbType.Int32).Value = produto.CodIdProduto;
                 cmd.Parameters.Add("@codCategoria", MySqlDbType.Int32).Value = produto.CodCategoria;
                 cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = produto.Descricao;
                 cmd.Parameters.Add("@qtdEstoque", MySqlDbType.Int32).Value = produto.QtdEstoque;
@@ -87,7 +87,7 @@ namespace CatBuddy.Repository
 
             _SintaxeSQl = sbAux.ToString();
 
-            using(var conexao = new MySqlConnection(_conexao))
+            using (var conexao = new MySqlConnection(_conexao))
             {
                 MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
 
@@ -95,7 +95,7 @@ namespace CatBuddy.Repository
 
                 conexao.Open();
 
-                cmd.ExecuteNonQuery();  
+                cmd.ExecuteNonQuery();
 
                 conexao.Close();
             }
@@ -200,7 +200,7 @@ namespace CatBuddy.Repository
             return produto;
         }
 
-        public IEnumerable<Produto> retornaProdutos()
+        public IEnumerable<Produto> retornaProdutos(Produto produto = null)
         {
             List<Produto> listProduto = new List<Produto>();
             StringBuilder sbAux = new StringBuilder();
@@ -208,21 +208,45 @@ namespace CatBuddy.Repository
             MySqlDataAdapter mySqlDataAdapter;
 
             // Montar a sintaxe SQL 
-            // TODO: realizar as restrições por categoria
-            sbAux.Append(" SELECT * FROM vwproduto ORDER BY cod_id_produto DESC ");
+            sbAux.Append(" SELECT * FROM vwproduto ");
+            sbAux.Append(" WHERE IsProdutoAtivo = true");
+
+            
+            if (produto != null)
+            {
+                if (!String.IsNullOrEmpty(produto.NomeProduto))
+                {
+                    sbAux.Append(" AND ds_nome LIKE @nome ");
+                }
+
+                if(produto.CodCategoria != 0)
+                {
+                    sbAux.Append(" AND codCategoria = @codCategoria");
+                }
+            }
+
+            // Ordena pela código do produto
+            sbAux.Append(" ORDER BY cod_id_produto DESC ");
 
             // Juntar os dados SQL 
             _SintaxeSQl = sbAux.ToString();
 
             using (var conexao = new MySqlConnection(_conexao))
             {
-                conexao.Open();
-
                 // Instancia do Data Table
                 dataTable = new DataTable();
 
+                // Abre conexão com o banco
+                conexao.Open();
+
                 // comando My SQL
                 MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                if(produto != null)
+                {
+                    cmd.Parameters.AddWithValue("@nome", "%" + produto.NomeProduto + "%");
+                    cmd.Parameters.AddWithValue("@codCategoria", produto.CodCategoria);
+                }
 
                 // Recuperação dos dados em um adapter
                 mySqlDataAdapter = new MySqlDataAdapter(cmd);
@@ -255,6 +279,11 @@ namespace CatBuddy.Repository
                 }
 
                 conexao.Close();
+            }
+
+            if(listProduto == null)
+            {
+                return new List<Produto>();
             }
 
             return listProduto;

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CatBuddy.Models.Produto>
+
+@{
+    ViewData["Title"] = "filtrarProduto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>filtrarProduto</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Código</th>
+        </tr>
+        <tr>
+            <th>NOME</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @item.CodIdProduto
+                </td>
+            <td>
+                @item.NomeProduto
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

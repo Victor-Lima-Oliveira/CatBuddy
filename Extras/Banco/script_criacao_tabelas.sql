@@ -50,6 +50,7 @@ CREATE TABLE tbl_produto (
     imgPath varchar(200),
     imgPathinfoNutricionais varchar(200),
     ds_nome varchar(100),
+    IsProdutoAtivo bool,
     foreign key (cod_categoria) references tbl_categoria (cod_id_categoria),
     foreign key (cod_fornecedor) references tbl_fornecedor (cod_id_fornecedor));
 
@@ -133,6 +134,7 @@ t1.material,
  t1.imgpath,
  t1.imgPathinfoNutricionais,
  t1.ds_nome,
+ t1.IsProdutoAtivo,
  t2.cod_id_fornecedor "codFornecedor",
 t2.nomeFantasia "fornecedor" ,
 t3.cod_id_categoria "codCategoria",
@@ -140,4 +142,3 @@ t3.nomeCategoria "Categoria"
 FROM tbl_produto t1 
 INNER JOIN tbl_fornecedor t2 ON  t1.cod_fornecedor = t2.cod_id_fornecedor
 INNER JOIN tbl_categoria t3 ON t1.cod_categoria = t3.cod_id_categoria;
-

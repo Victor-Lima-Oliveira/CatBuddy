@@ -3,6 +3,7 @@
 
 @{
     Cliente cliente = null;
+    Produto produto = new Produto();
 
     // Se possui usuário na sessão
     if (httpContext.HttpContext.Session.GetString("Login.Cliente") != null)

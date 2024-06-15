@@ -18,6 +18,14 @@ namespace CatBuddy.Controllers
             _produtoRepository = produtoRepository;
             _carrinhoDeCompraCookie = carrinhoDeCompraCookie;
         }
+        public IActionResult filtrarProduto(string nome)
+        {
+            
+            Produto produto = new Produto();
+            produto.NomeProduto = nome;
+
+            return View(_produtoRepository.retornaProdutos(produto));
+        }
         public IActionResult InformacoesProduto(int id)
         {
             ViewProdutoeInformacoesNutricionais view;

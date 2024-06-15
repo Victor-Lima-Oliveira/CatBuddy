@@ -28,6 +28,7 @@ namespace CatBuddy.Controllers
             return RedirectToAction(nameof(PainelColaborador), "Colaborador");
         }
 
+        [ColaboradorAutorizacao]
         public IActionResult AbrirDialogDesativaColaborador(int id, string nomeColaborador)
         {
             TempData["OpenDialog"] = "true";
@@ -36,6 +37,7 @@ namespace CatBuddy.Controllers
             return RedirectToAction(nameof(VisualizarColaboradores));
         }
 
+        [ColaboradorAutorizacao]
         public IActionResult DesativarColaborador()
         {
             try
@@ -54,6 +56,7 @@ namespace CatBuddy.Controllers
             return RedirectToAction(nameof(VisualizarColaboradores));
         }
 
+        [ColaboradorAutorizacao]
         public IActionResult CancelarDesativarColaborador()
         {
             TempData["OpenDialog"] = null;

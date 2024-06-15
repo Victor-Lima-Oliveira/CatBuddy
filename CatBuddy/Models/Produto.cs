@@ -11,18 +11,19 @@ namespace CatBuddy.Models
         public int CodIdProduto { get; set; }
 
 
-        [MaxLength(40), Display(Name ="Nome do produto*"), Required(ErrorMessage = "O Nome do Produto é obrigatório")]
+        [MaxLength(40), Display(Name = "Nome do produto"), Required(ErrorMessage = "O Nome do Produto é obrigatório")]
         public string NomeProduto { get; set; }
 
 
-        [Display(Name = "Quantidade em Estoque*"), 
-            Required(ErrorMessage = "A quantidade no Estoque é obrigatório"),
-            Range(1, int.MaxValue, ErrorMessage = "O campo Quantidade deve ser um número inteiro positivo.")]
+        [Display(Name = "Quantidade em Estoque")]
+        [Required(ErrorMessage = "A quantidade no Estoque é obrigatório")]
+        [Range(1, int.MaxValue, ErrorMessage = "O campo Quantidade deve ser um número inteiro positivo.")]
         public int? QtdEstoque { get; set; }
 
 
-        [Display(Name = "Preço*"), Required(ErrorMessage = "O Preço é obrigatório")]
-           [ Range(0.01, double.MaxValue, ErrorMessage = "O campo Preço deve ser um número positivo.")]
+        [Display(Name = "Preço R$")]
+        [Required(ErrorMessage = "O Preço é obrigatório")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "O campo Preço deve ser um número positivo.")]
         public float? Preco { get; set; }
 
 
@@ -49,7 +50,7 @@ namespace CatBuddy.Models
         public string? Composicao { get; set; }
 
 
-        [MaxLength(200), Display(Name = "Foto*")]
+        [MaxLength(200), Display(Name = "Foto")]
         public string? ImgPath { get; set; }
 
         public IFormFile? ImgProduto { get; set; }
@@ -68,7 +69,7 @@ namespace CatBuddy.Models
         public int CodFornecedor { get; set; }
 
 
-        [Display(Name = "Marca*")]
+        [Display(Name = "Marca")]
         public string? NomeFornecedor { get; set; }
 
 
@@ -76,11 +77,11 @@ namespace CatBuddy.Models
         public int CodCategoria { get; set; }
 
 
-        [Display(Name = "Categoria*")]
+        [Display(Name = "Categoria")]
         public string? NomeCategoria { get; set; }
 
 
-        [Display(Name = "Descrição*"), Required(ErrorMessage = "A Descrição do produto é obrigatória")]
+        [Display(Name = "Descrição"), Required(ErrorMessage = "A Descrição do produto é obrigatória")]
         public string Descricao { get; set; }
 
     }
