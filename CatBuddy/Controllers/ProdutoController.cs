@@ -1,4 +1,5 @@
 ﻿using CatBuddy.httpContext;
+using CatBuddy.LibrariesSessao.Filtro;
 using CatBuddy.Models;
 using CatBuddy.Repository.Contract;
 using CatBuddy.Utils;
@@ -106,6 +107,7 @@ namespace CatBuddy.Controllers
         }
 
         [HttpGet]
+        [ColaboradorAutorizacao]
         public IActionResult CadastrarProduto()
         {
             try
@@ -122,6 +124,7 @@ namespace CatBuddy.Controllers
       
 
         [HttpPost]
+        [ColaboradorAutorizacao]
         public IActionResult CadastrarProduto(ViewModelProduto view)
         {
             try
@@ -170,6 +173,7 @@ namespace CatBuddy.Controllers
             return View(_produtoRepository.retornaProdutos());
         }
 
+        [ColaboradorAutorizacao]
         public IActionResult EditarProduto(int codProduto)
         {
             try
@@ -184,6 +188,7 @@ namespace CatBuddy.Controllers
         }
 
         [HttpPost]
+        [ColaboradorAutorizacao]
         public IActionResult EditarProduto(ViewModelProduto view)
         {
             Produto produtoAux;
@@ -237,6 +242,7 @@ namespace CatBuddy.Controllers
             return RedirectToAction(nameof(VizualizarProdutos));
         }
 
+        [ColaboradorAutorizacao]
         public IActionResult DeletarProduto()
         {
             int codProdutoAExcluir;

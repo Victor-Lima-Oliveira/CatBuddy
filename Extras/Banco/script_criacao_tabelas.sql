@@ -142,3 +142,35 @@ t3.nomeCategoria "Categoria"
 FROM tbl_produto t1 
 INNER JOIN tbl_fornecedor t2 ON  t1.cod_fornecedor = t2.cod_id_fornecedor
 INNER JOIN tbl_categoria t3 ON t1.cod_categoria = t3.cod_id_categoria;
+
+-- Criada uma view do pedido para facilitar as consultas
+create view vwPedido as
+select 
+pedido.cod_id_pedido,
+pedido.cod_cliente,
+cliente.nomeUsuario,
+pedido.cod_pagamento,
+pagto.nomepagamento,
+pedido.valortotal,
+pedido.datapedido,
+(select count(cod_produto) from tbl_itempedido 
+where cod_pedido = pedido.cod_id_pedido AND cod_cliente = cliente.cod_id_cliente) as qtdProdutos
+from tbl_pedido pedido
+inner join tbl_cliente cliente on cliente.cod_id_cliente = pedido.cod_cliente
+inner join tbl_tiposdepagamento pagto on pagto.cod_id_pagamento = pedido.cod_pagamento;
+
+-- Criada uma view dos itens do pedido para facilitar consultas
+create  view vwItensPedido As 
+select
+item.cod_produto,
+produto.ds_nome,
+item.cod_pedido,
+pedido.valortotal,
+pedido.datapedido,
+item.qtd,
+item.subtotal,
+produto.imgPath,
+produto.isprodutoativo
+from tbl_itempedido item
+inner join tbl_produto produto on produto.cod_id_produto = item.cod_produto
+inner join tbl_pedido pedido on pedido.cod_id_pedido = item.cod_pedido;

@@ -13,13 +13,15 @@ namespace CatBuddy.Controllers
     {
         private IClienteRepository _clienteRepository;
         private IUsuarioRepository _usuarioRepository;
+        private IPedidoRepository _pedidoRepository;
         private LoginCliente _loginCliente;
 
-        public ClienteController(IClienteRepository clienteRepository, LoginCliente loginCliente, IUsuarioRepository usuarioRepository)
+        public ClienteController(IClienteRepository clienteRepository, LoginCliente loginCliente, IUsuarioRepository usuarioRepository, IPedidoRepository pedidoRepository)
         {
             _clienteRepository = clienteRepository;
             _loginCliente = loginCliente;
             _usuarioRepository = usuarioRepository;
+            _pedidoRepository = pedidoRepository;
         }
         public IActionResult Index()
         {
@@ -128,6 +130,17 @@ namespace CatBuddy.Controllers
             }
 
             return viewColaborador;
+        }
+
+        [ClienteAutorizacao]
+        public IActionResult VisualizarPedidos()
+        {
+            return View(_pedidoRepository.ObtemPedidos(_loginCliente.ObterCliente().cod_id_cliente.Value));
+        }
+
+        public IActionResult DetalharPedido(int codPedido)
+        {
+            return View(_pedidoRepository.ObtemItensPedido(codPedido));
         }
     }
 }

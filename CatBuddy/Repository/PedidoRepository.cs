@@ -92,15 +92,99 @@ namespace CatBuddy.Repository
                 conexao.Close();
             }
         }
-
-        public void FinalizarPedido(int codPedido, int codPagamento)
+        public List<ViewPedido> ObtemPedidos(int codCliente)
         {
-            // TODO: Atualizar o estoque da loja 
+
+            List<ViewPedido> listPedidos = new List<ViewPedido>();
+
+            _SintaxeSQl = "SELECT * FROM vwpedido WHERE cod_cliente = @codCliente";
+
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                conexao.Open();
+
+                // Monta o comando
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                // Passagem de parametro 
+                cmd.Parameters.AddWithValue("@codCliente", codCliente);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+                conexao.Close();
+
+                // Carrega a lista 
+                foreach (DataRow dr in dt.Rows)
+                {
+                    listPedidos.Add(
+                        new ViewPedido
+                        {
+                            nomepagamento = Convert.ToString(dr["nomepagamento"]),
+                            qtdProdutos = Convert.ToInt32(dr["qtdProdutos"]),
+                            nomeUsuario = Convert.ToString(dr["nomeUsuario"]),
+                            Pedido = new Pedido
+                            {
+                                cod_cliente = Convert.ToInt32(dr["cod_cliente"]),
+                                cod_id_pedido = Convert.ToInt32(dr["cod_id_pedido"]),
+                                cod_pagamento = Convert.ToInt32(dr["cod_pagamento"]),
+                                dataPedido = Convert.ToDateTime(dr["datapedido"]),
+                                valorTotal = Convert.ToDouble(dr["qtdProdutos"])
+                            }
+                        });
+                };
+
+            }
+            return listPedidos;
         }
 
+        public List<ViewItensPedido> ObtemItensPedido(int codPedido)
+        {
 
+            List<ViewItensPedido> listItensPedidos = new List<ViewItensPedido>();
 
+            _SintaxeSQl = "SELECT * FROM vwitenspedido WHERE cod_pedido = @codPedido";
 
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                conexao.Open();
 
+                // Monta o comando
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                // Passagem de parametro 
+                cmd.Parameters.AddWithValue("@codPedido", codPedido);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+                conexao.Close();
+
+                // Carrega a lista 
+                foreach (DataRow dr in dt.Rows)
+                {
+                    listItensPedidos.Add(
+                        new ViewItensPedido
+                        {
+                            nomeProduto = Convert.ToString(dr["ds_nome"]),
+                            isprodutoativo = Convert.ToBoolean(dr["isprodutoativo"]),
+                            datapedido = Convert.ToDateTime(dr["datapedido"]),
+                            valorTotal = Convert.ToDouble(dr["qtd"]),
+                            imgPath = Convert.ToString(dr["imgPath"]),
+                            ItemPedido = new ItemPedido
+                            {
+                                cod_pedido = Convert.ToInt32(dr["cod_pedido"]),
+                                cod_produto = Convert.ToInt32(dr["cod_produto"]),
+                                qtd = Convert.ToInt32(dr["qtd"]),
+                                subtotal = Convert.ToDouble(dr["subtotal"])
+                            }
+                        });
+                };
+
+            }
+            return listItensPedidos;
+        }
     }
 }
