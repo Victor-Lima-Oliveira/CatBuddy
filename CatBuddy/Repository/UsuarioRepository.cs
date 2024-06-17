@@ -52,5 +52,42 @@ namespace CatBuddy.Repository
             }
             return listGenero;
         }
+
+        public List<Logradouro> RetornaLogradouro()
+        {
+            List<Logradouro> listGenero = new List<Logradouro>();
+            Logradouro logradouro;
+            MySqlDataAdapter mySqlDataAdapter;
+            MySqlDataReader mySqlDataReader;
+
+            // Montando a sintaxe do SQL
+            _SintaxeSQl = "SELECT * FROM tbl_logradouro order by cod_id_logradouro";
+
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                conexao.Open();
+
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                // Adapter para o comando
+                mySqlDataAdapter = new MySqlDataAdapter(cmd);
+
+                // leitor dos dados 
+                mySqlDataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                // Gravar os dados na model
+                while (mySqlDataReader.Read())
+                {
+                    logradouro = new Logradouro()
+                    {
+                        codLogradouro = (int)mySqlDataReader["cod_id_logradouro"],
+                        nomeLogradouro = mySqlDataReader["nomeLogradouro"].ToString()
+                    };
+
+                    listGenero.Add(logradouro);
+                }
+            }
+            return listGenero;
+        }
     }
 }

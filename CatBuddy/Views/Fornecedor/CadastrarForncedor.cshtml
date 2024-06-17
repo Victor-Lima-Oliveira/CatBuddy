@@ -1,0 +1,67 @@
+﻿@model CatBuddy.Models.ViewFornecedor
+
+@{
+    ViewData["Title"] = "CadastrarForncedor";
+    Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
+}
+
+<h1>CadastrarForncedor</h1>
+
+<h4>Fornecedor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CadastrarForncedor">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Fornecedor.nomeFornecedor" class="control-label"></label>
+                <input asp-for="Fornecedor.nomeFornecedor" class="form-control" />
+                <span asp-validation-for="Fornecedor.nomeFornecedor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fornecedor.cnpj" class="control-label"></label>
+                <input asp-for="Fornecedor.cnpj" class="form-control cnpj" />
+                <span asp-validation-for="Fornecedor.cnpj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fornecedor.Telefone" class="control-label"></label><i> - opcional</i>
+                <input asp-for="Fornecedor.Telefone" class="form-control phone_with_ddd" />
+                <span asp-validation-for="Fornecedor.Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fornecedor.endereco" class="control-label"></label>
+                <input asp-for="Fornecedor.endereco" class="form-control" />
+                <span asp-validation-for="Fornecedor.endereco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fornecedor.bairro" class="control-label"></label>
+                <input asp-for="Fornecedor.bairro" class="form-control" />
+                <span asp-validation-for="Fornecedor.bairro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fornecedor.cep" class="control-label"></label>
+                <input asp-for="Fornecedor.cep" class="form-control cep" />
+                <span asp-validation-for="Fornecedor.cep" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ListLogradouro" class="control-label"></label>
+                <select asp-for="Fornecedor.CodLogradouro" class="form-control">
+                    @foreach (Logradouro logradouro in Model.ListLogradouro)
+                    {
+                        <option value="@logradouro.codLogradouro">@logradouro.nomeLogradouro</option>
+                    }
+                </select>
+                <span asp-validation-for="Fornecedor.codFornecedor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fornecedor.municipio" class="control-label"></label>
+                <input asp-for="Fornecedor.municipio" class="form-control" />
+                <span asp-validation-for="Fornecedor.municipio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

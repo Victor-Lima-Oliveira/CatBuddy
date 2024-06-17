@@ -29,8 +29,10 @@ namespace CatBuddy.Utils
         public const int SEM_CATEGORIA_SELECIONADA = 0;
 
         // Nivel de acesso 
+        public const int VENDEDOR = 1;
         public const int GERENTE = 3;
         public const int RH = 4;
+        public const int MASTER = 5;
 
         // Validações 
         public const int SEM_NIVEL_ACESSO = 0;

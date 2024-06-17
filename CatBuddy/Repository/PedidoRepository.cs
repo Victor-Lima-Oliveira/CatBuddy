@@ -178,7 +178,7 @@ namespace CatBuddy.Repository
                                 cod_pedido = Convert.ToInt32(dr["cod_pedido"]),
                                 cod_produto = Convert.ToInt32(dr["cod_produto"]),
                                 qtd = Convert.ToInt32(dr["qtd"]),
-                                subtotal = Convert.ToDouble(dr["subtotal"])
+                                subtotal = Math.Round(Convert.ToDouble(dr["subtotal"]), 2)
                             }
                         });
                 };

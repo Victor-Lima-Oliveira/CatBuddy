@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Temp\deploy\catbuddy</_PublishTargetUrl>
+    <History>True|2024-06-15T18:08:48.1877622Z;True|2024-06-15T15:06:11.8084415-03:00;False|2024-06-15T15:05:57.4999459-03:00;True|2024-06-15T14:56:50.3956136-03:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="ConexaoMySQL">
+      <Value>server=localhost%3buser id=root%3bpassword=root%3b database=db_catBuddy </Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

@@ -20,7 +20,7 @@ namespace CatBuddy.LibrariesSessao.Filtro
             // Se não tiver usuário logado, retorna um contexto de erro
             if(cliente == null)
             {
-                context.Result = new ContentResult() { Content = "Acesso negado." };
+                context.Result = new RedirectToActionResult("Login", "Cliente", null);
             }
         }
     }

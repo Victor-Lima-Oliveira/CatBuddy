@@ -17,22 +17,16 @@ CREATE TABLE tbl_genero (
 
 CREATE TABLE tbl_fornecedor (
     cod_id_fornecedor int PRIMARY KEY auto_increment,
-    cnpj varchar(14) UNIQUE,
+    cnpj varchar(14),
     nomeFantasia varchar(35),
     telefone varchar(11),
-    nomeContato varchar(50));
-
-CREATE TABLE tbl_enderecoFornecedor (
-    cod_id_endereco int PRIMARY KEY auto_increment,
     endereco varchar(100),
-    bairro varchar(35),
+    bairro varchar(35), 
     cep varchar(8),
     cod_logradouro int,
-    nomeEndereco varchar(35),
-    cod_fornecedor int,
-    municipio varchar (30),
-   foreign key (cod_fornecedor) references tbl_fornecedor (cod_id_fornecedor),
-   foreign key (cod_logradouro) references tbl_logradouro (cod_id_logradouro));
+    municipio varchar(30),
+    IsFornecedorAtivo bool,
+    foreign key (cod_logradouro) references tbl_logradouro (cod_id_logradouro));
    
 CREATE TABLE tbl_produto (
     cod_id_produto int PRIMARY KEY auto_increment,
@@ -174,3 +168,9 @@ produto.isprodutoativo
 from tbl_itempedido item
 inner join tbl_produto produto on produto.cod_id_produto = item.cod_produto
 inner join tbl_pedido pedido on pedido.cod_id_pedido = item.cod_pedido;
+
+-- Criada uma view dos fornecedor com o nome do logradouro
+create view vwFornecedor as 
+select * from 
+tbl_fornecedor fornecedor
+inner join tbl_logradouro logradouro on logradouro.cod_id_logradouro = fornecedor.cod_id_fornecedor;

@@ -12,7 +12,6 @@ namespace CatBuddy.Repository.Contract
         void Atualizar(Colaborador colaborador);
         void AtualizarSenha(Colaborador colaborador);
         void Excluir(int Id);
-
         Colaborador ObterColaborador(int Id);
         List<Colaborador> ObterColaboradorPorEmail(string Email);
         IEnumerable<Colaborador> ObterTodosColaboradores();

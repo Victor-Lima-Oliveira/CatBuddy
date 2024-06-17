@@ -1,14 +1,15 @@
 use db_catBuddy;
 -- Insertsd para testes 
 insert into tbl_fornecedor values
-(default,'11462614000373', 'PremieR Pet', '1136547856', 'Julio Cesar'), -- 1
-(default,'04707195000327', 'Farmina Pet' , '1139914383', 'Clayton Ribeiro'),  -- 2
-(default, '29737368003649', 'MARS BRASIL', '1139724522', 'Paloma Brito'); -- 3
-
-insert into tbl_enderecofornecedor values
-(default, 'Charles Goodyear, 712 Galpao100 Modulos a - B Lote Cururuquara Quadragleba B Unif 0', 'Cururuquara', '06524115', '2', 'Filial', '1', 'Santana de Parnaiba'),
-(default, 'dos Pires, 5285, Galpao37 38 e 39 Bloco a Cond Ind. Sp Empresarial','Rio Abaixo', '12952361', '7', 'Filial', '2', 'Atibaia'), 
-(default, 'Doutor Rafael de Barros, 209, Conj: 81 e 82; Cond: Ed. Varicred Iii', 'Paraiso', '04003041', '1', 'Filial', '3', 'Sao Paulo');
+(default,'11462614000373', 'PremieR Pet', '1136547856', 
+'Charles Goodyear, 712 Galpao100 Modulos a - B Lote Cururuquara Quadragleba B Unif 0', 
+'Cururuquara', '06524115', 1, 'Santana de Parnaiba', true ), -- 1
+(default,'04707195000327', 'Farmina Pet' , '1139914383', 
+'Av dos Pires, 5285, Galpao37 38 e 39 Bloco a Cond Ind. Sp Empresarial',
+'Rio Abaixo','12952361', 2, 'Atibaia', true ),  -- 2
+(default, '29737368003649', 'MARS BRASIL', '1139724522', 
+'Doutor Rafael de Barros, 209, Conj: 81 e 82; Cond: Ed. Varicred Iii',
+'Paraiso', '04003041', 1, 'Sao Paulo', true); -- 3
 
 insert into tbl_produto values -- premier renal
 (default, '1', 

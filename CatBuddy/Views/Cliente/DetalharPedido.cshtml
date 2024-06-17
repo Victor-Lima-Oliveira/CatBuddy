@@ -11,13 +11,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ItemPedido.cod_produto)
+                @Html.DisplayNameFor(model => model.imgPath)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ItemPedido.cod_pedido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ItemPedido.cod_cliente)
+                Preço unitário
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ItemPedido.qtd)
@@ -29,29 +26,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemPedido.cod_produto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemPedido.cod_pedido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemPedido.cod_cliente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemPedido.qtd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemPedido.subtotal)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/@item.imgPath" class="card-img img-thumbnail" style="height: 80px; width: 70px" />
+                </td>
+                <td>
+                    @item.ItemPedido.getPrecoUnitario()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemPedido.qtd)
+                </td>
+                <td>
+                    @item.ItemPedido.getSubtotal()
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

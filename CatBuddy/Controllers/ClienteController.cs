@@ -92,6 +92,10 @@ namespace CatBuddy.Controllers
 
         public IActionResult Login()
         {
+            if (_loginCliente.ObterCliente() != null)
+            {
+                return RedirectToAction(nameof(PainelCliente));
+            }
             return View();
         }
 

@@ -53,16 +53,28 @@
                                 <li><a class="dropdown-item" asp-action="VizualizarProdutos" asp-controller="Produto">Informações Produtos</a></li>
                             </ul>
                         </div>
-       
-                        @if (colaborador != null && (colaborador.NivelDeAcesso == Const.GERENTE || colaborador.NivelDeAcesso == Const.RH))
+
+                        @if (colaborador != null && (colaborador.NivelDeAcesso == Const.GERENTE || colaborador.NivelDeAcesso == Const.RH || colaborador.NivelDeAcesso == Const.MASTER))
                         {
-                            <div class ="dropdown me-5">
+                            <div class="dropdown me-5">
                                 <div class="text-white font-paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
                                     Funcionario
                                 </div>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" asp-action="CadastrarColaborador" asp-controller="Colaborador">Cadastrar novo colaborador</a></li>
                                     <li><a class="dropdown-item" asp-action="VisualizarColaboradores" asp-controller="Colaborador">Colaboradores</a></li>
+                                </ul>
+                            </div>
+                        }
+                        @if (colaborador != null && (colaborador.NivelDeAcesso == Const.GERENTE || colaborador.NivelDeAcesso == Const.VENDEDOR || colaborador.NivelDeAcesso == Const.MASTER))
+                        {
+                            <div class="dropdown me-5">
+                                <div class="text-white font-paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
+                                    Fornecedor
+                                </div>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" asp-action="CadastrarForncedor" asp-controller="Fornecedor">Cadastrar novo fornecedor</a></li>
+                                    <li><a class="dropdown-item" asp-action="VisualizarFornecedor" asp-controller="Fornecedor">Fornecedores</a></li>
                                 </ul>
                             </div>
                         }
@@ -77,6 +89,20 @@
             </div>
         </nav>
     </header>
+
+    @if (ViewBag.OpenDialog == "true")
+    {
+        <div id="overlay" onclick="fecharDialog()">
+            <dialog id="Dialog" open style="position: fixed; top: 50%; background-color: var(--white); border: none; border-radius: 15px; color: var(--darkFuchsia); width: 35%;">
+                <b>@ViewBag.nomeColaborador</b>
+                <p>Realmente deseja <b>DESATIVAR</b> esse colaborador? Após desativado ele não poderá ser recuperado</p>
+                <div class="d-flex justify-content-end gap-2">
+                    <a asp-action="CancelarDesativarColaborador" class="btn btn-success">Sair</a>
+                    <a asp-action="DesativarColaborador" class="btn btn-danger">Deletar</a>
+                </div>
+            </dialog>
+        </div>
+    }
 
     <div class="container">
         <main role="main" class="pb-3">

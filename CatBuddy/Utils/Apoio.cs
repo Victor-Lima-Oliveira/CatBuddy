@@ -7,9 +7,9 @@ namespace CatBuddy.Utils
         /// <summary>
         /// Remove os caracteres extras do CPF
         /// </summary>
-        public static string TransformaCPF (string CPF)
+        public static string TransformaCPF(string CPF)
         {
-            string CPFtransformado ;
+            string CPFtransformado;
 
             CPFtransformado = CPF.Replace(".", "");
             CPFtransformado = CPFtransformado.Replace("-", "");
@@ -20,18 +20,44 @@ namespace CatBuddy.Utils
         /// <summary>
         /// Remove os caracteres extras do telefone
         /// </summary>
-        /// <param name="Telefone"></param>
-        /// <returns></returns>
-        public static string TransformaTelefone (string Telefone)
+        public static string TransformaTelefone(string Telefone)
         {
-            string TelefoneTransformado;
+            //Se receber um telefone
+            if(Telefone != null && Telefone.Length != 0)
+            {
+                string TelefoneTransformado;
 
-            TelefoneTransformado = Telefone.Replace("(", "");
-            TelefoneTransformado = TelefoneTransformado.Replace(")", "");
-            TelefoneTransformado = TelefoneTransformado.Replace("-", "");
-            TelefoneTransformado = TelefoneTransformado.Replace(" ", "");
+                TelefoneTransformado = Telefone.Replace("(", "");
+                TelefoneTransformado = TelefoneTransformado.Replace(")", "");
+                TelefoneTransformado = TelefoneTransformado.Replace("-", "");
+                TelefoneTransformado = TelefoneTransformado.Replace(" ", "");
+                return TelefoneTransformado.Trim();
+            }
 
-            return TelefoneTransformado.Trim();
+            return String.Empty;
+        }
+
+        /// <summary>
+        ///  Remove os caracteres extras do CNPJ
+        /// </summary>
+        public static string TransformaCNPJ(string CNPJ)
+        {
+            string CNPJtransformado;
+
+            CNPJtransformado = CNPJ.Replace(".", "");
+            CNPJtransformado = CNPJtransformado.Replace("-", "");
+            CNPJtransformado = CNPJtransformado.Replace("/", "");
+
+            return CNPJtransformado.Trim();
+        }
+
+        public static string TransformaCEP(string CEP)
+        {
+            string CEPtransformado;
+
+            CEPtransformado = CEP.Replace("-", "");
+
+            return CEPtransformado.Trim();
         }
     }
 }

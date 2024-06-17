@@ -81,7 +81,7 @@
                             }
                             else
                             {
-                                <li class="nav-item text-white">Olá, @cliente.nomeUsuario</li>
+                                <li class="nav-item "><a asp-action="Login" asp-controller="Cliente" class="text-white text-decoration-none">Olá, @cliente.nomeUsuario</a></li>
                                 <li class="nav-item"><a asp-controller="Cliente" asp-action="Sair" class="bi bi-box-arrow-right text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
                             }
                         </ul>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CatBuddy.Models.ViewFornecedor>
+
+@{
+    ViewData["Title"] = "VisualizarFornecedor";
+    Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
+}
+
+<h1>VisualizarFornecedor</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fornecedor.nomeFornecedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fornecedor.cnpj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fornecedor.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fornecedor.municipio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Fornecedor.nomeFornecedor)
+            </td>
+            <td class="cnpj">
+                    @Html.DisplayFor(modelItem => item.Fornecedor.cnpj)
+            </td>
+            <td class="phone_with_ddd">
+                    @Html.DisplayFor(modelItem => item.Fornecedor.Telefone)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Fornecedor.municipio)
+            </td>
+            <td>
+                    @Html.ActionLink("Editar", "EditarFornecedor", new { id = item.Fornecedor.codFornecedor }) |
+                    @Html.ActionLink("Detalhe", "DetalheFornecedor", new { id = item.Fornecedor.codFornecedor }) |
+                @Html.ActionLink("Deletar", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
