@@ -125,24 +125,28 @@ namespace CatBuddy.Controllers
 
         [HttpPost]
         [ColaboradorAutorizacao]
-        public IActionResult CadastrarProduto(ViewModelProduto view)
+        public IActionResult CadastrarProduto(Produto produto)
         {
             try
             {
-                if (ModelState.IsValid)
+                bool bValido = ValidaCampos(produto);
+                
+                if (ModelState.IsValid && bValido)
                 {
-                    view.produto.ImgPath = GerenciadorArquivos.CadastrarImagemProduto(view.produto.ImgProduto);
+                    produto.ImgPath = GerenciadorArquivos.CadastrarImagemProduto(produto.ImgProduto);
 
-                    _produtoRepository.insereProduto(view.produto);
+                    produto.Preco = Apoio.TransformaPreco(produto.Preco.Value);
 
-                    TempData[Const.AvisoPaginaVizualizarProdutos] = "Produto cadastrado com sucesso!";
+                    _produtoRepository.insereProduto(produto);
+
+                    MainLayout.OpenSnackbar("Produto cadastrado com sucesso!");
                     return RedirectToAction("VizualizarProdutos", "Produto");
                 }
                 else
                 {
-                    view.listCategoria = _produtoRepository.RetornaCategorias();
-                    view.listFornecedor = _produtoRepository.RetornaFornecedores();
-                    return View(view);
+                    listCategoria = _produtoRepository.RetornaCategorias();
+                    listFornecedor = _produtoRepository.RetornaFornecedores();
+                    return View(new ViewModelProduto { listCategoria = listCategoria, listFornecedor = listFornecedor, produto = produto }) ;
                 }
             }
             catch (Exception err)
@@ -150,6 +154,29 @@ namespace CatBuddy.Controllers
                 TempData[Const.ErroTempData] = err.Message;
                 return RedirectToAction(Const.ErroAction, Const.ErroController);
             }
+        }
+
+        private bool ValidaCampos(Produto produto)
+        {
+            bool bvalido = true;
+
+            if(produto.CodCategoria == 0)
+            {
+                ModelState.AddModelError("produto.CodCategoria", "Escolha uma categoria para o produto");
+                bvalido = false;
+            }
+            if(produto.CodFornecedor == 0)
+            {
+                ModelState.AddModelError("produto.CodFornecedor", "Escolha um fornecedor para o produto");
+                bvalido = false;
+            }
+            if(produto.ImgProduto == null)
+            {
+                ModelState.AddModelError("produto.ImgProduto", "Escolha uma foto para o produto");
+                bvalido = false;
+            }
+
+            return bvalido;
         }
 
         public IActionResult VizualizarProdutos()
@@ -236,23 +263,23 @@ namespace CatBuddy.Controllers
 
         public IActionResult AbrirDialogDeletar(string nomeProduto, int CodProduto)
         {
-            TempData["OpenDialog"] = true;
-            TempData["nomeProduto"] = nomeProduto;
-            TempData["ExcluirCodProduto"] = CodProduto;
+            MainLayout.OpenDialog(nomeProduto, "Tem certeza que deseja DELETAR esse produto?", CodProduto);
             return RedirectToAction(nameof(VizualizarProdutos));
         }
 
         [ColaboradorAutorizacao]
-        public IActionResult DeletarProduto()
+        public IActionResult ExecutarDialog()
         {
-            int codProdutoAExcluir;
-
-            if(TempData["ExcluirCodProduto"] != null)
+            try
             {
-                codProdutoAExcluir = (int) TempData["ExcluirCodProduto"];
-                _produtoRepository.deletaProduto(codProdutoAExcluir);
-                TempData["AvisoDeletadoComSucesso"] = "Produto deletado com sucesso!";
-                TempData["ExcluirCodProduto"] = null;
+                _produtoRepository.deletaProduto(Convert.ToInt32(MainLayout.ObterParametro()));
+
+                MainLayout.CloseDialog();
+            }
+            catch (Exception err)
+            {
+                MainLayout.OpenDialog("ERRO", err.Message);
+                return RedirectToAction(nameof(VizualizarProdutos));
             }
 
             return RedirectToAction(nameof(VizualizarProdutos));

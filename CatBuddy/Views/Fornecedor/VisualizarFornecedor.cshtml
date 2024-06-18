@@ -26,26 +26,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
                     @Html.DisplayFor(modelItem => item.Fornecedor.nomeFornecedor)
-            </td>
-            <td class="cnpj">
+                </td>
+                <td class="cnpj">
                     @Html.DisplayFor(modelItem => item.Fornecedor.cnpj)
-            </td>
-            <td class="phone_with_ddd">
+                </td>
+                <td class="phone_with_ddd">
                     @Html.DisplayFor(modelItem => item.Fornecedor.Telefone)
-            </td>
-            <td>
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Fornecedor.municipio)
-            </td>
-            <td>
+                </td>
+                <td>
                     @Html.ActionLink("Editar", "EditarFornecedor", new { id = item.Fornecedor.codFornecedor }) |
                     @Html.ActionLink("Detalhe", "DetalheFornecedor", new { id = item.Fornecedor.codFornecedor }) |
-                @Html.ActionLink("Deletar", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+                    @Html.ActionLink("Deletar", "AbrirDialogDeletarFornecedor", new {  id=item.Fornecedor.codFornecedor, nome = item.Fornecedor.nomeFornecedor })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

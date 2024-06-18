@@ -4,6 +4,7 @@ namespace CatBuddy.Utils
 {
     public static class Apoio
     {
+
         /// <summary>
         /// Remove os caracteres extras do CPF
         /// </summary>
@@ -58,6 +59,16 @@ namespace CatBuddy.Utils
             CEPtransformado = CEP.Replace("-", "");
 
             return CEPtransformado.Trim();
+        }
+
+        public static float TransformaPreco(float preco)
+        {
+            string precoAux = preco.ToString();
+
+            precoAux = precoAux.Replace(".", "");
+            precoAux = precoAux.Replace(",", ".");
+
+            return (float)Convert.ToDouble(precoAux);
         }
     }
 }

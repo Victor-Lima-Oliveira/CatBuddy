@@ -25,10 +25,6 @@ html {
     --yellow--hover: #6D5310;
 }
 
-.password{
-    plac
-}
-
 .font-paytone-one-regular {
     font-family: "Paytone One", sans-serif;
     font-weight: 300;
@@ -66,4 +62,18 @@ body {
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
+}
+
+#snackbar {
+    min-width: 250px; /* Largura mínima do snackbar */
+    background-color: #fff; /* Fundo branco */
+    color: #333; /* Cor do texto */
+    border-radius: 4px; /* Borda arredondada */
+    padding: 16px; /* Espaçamento interno */
+    position: fixed; /* Posição fixa */
+    z-index: 5; /* Posição acima do conteúdo */
+    right: 12px; /* Distância do lado direito */
+    top: inherit; /* Distância do topo */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra */
+    transition: visibility 0s, opacity 0.5s ease-out; /* Transição suave */
 }

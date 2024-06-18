@@ -90,19 +90,58 @@
         </nav>
     </header>
 
-    @if (ViewBag.OpenDialog == "true")
+    @if (MainLayout.IsDialogOpen())
     {
-        <div id="overlay" onclick="fecharDialog()">
+        <div id="overlay" onclick="fecharDialog(event)">
             <dialog id="Dialog" open style="position: fixed; top: 50%; background-color: var(--white); border: none; border-radius: 15px; color: var(--darkFuchsia); width: 35%;">
-                <b>@ViewBag.nomeColaborador</b>
-                <p>Realmente deseja <b>DESATIVAR</b> esse colaborador? Após desativado ele não poderá ser recuperado</p>
+                <b>@MainLayout.TituloDialog</b>
+                <hr />
+                <p>@MainLayout.ConteudoDialog</p>
                 <div class="d-flex justify-content-end gap-2">
-                    <a asp-action="CancelarDesativarColaborador" class="btn btn-success">Sair</a>
-                    <a asp-action="DesativarColaborador" class="btn btn-danger">Deletar</a>
+                    <a id="Sair" onclick="fecharDialog()" class="btn btn-success text-white">Voltar</a>
+                    <a asp-action="ExecutarDialog" class="btn btn-danger">Deletar</a>
                 </div>
             </dialog>
         </div>
     }
+
+    @if (MainLayout.IsSnackBarOpen())
+    {
+        <div id="snackbar">@MainLayout.MensagemSnackbar</div>
+    }
+
+    <script>
+        function fecharDialog(event = null) {
+            const dialog = document.getElementById('Dialog');
+
+            // Verifica se o clique foi dentro do próprio dialog
+            if (dialog.contains(event.target)) {
+                if (event.target.id === 'Sair') {
+                    chamaApiFechaDialog();
+                }
+                return; // Se foi dentro do dialog, não faz nada
+            }
+            chamaApiFechaDialog()
+        }
+
+        function chamaApiFechaDialog() {
+
+            // Se for fora, chama a API que fecha o dialog
+            fetch('/api/front/CloseDialog', {
+                method: 'GET'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById('overlay').remove(); // Remove o overlay do DOM
+                    } else {
+                    }
+                })
+                .catch(error => {
+                    Alert('Estamos com problemas, chame um técnico');
+                });
+        }
+    </script>
+
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -119,6 +158,8 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/mask/jquery.mask.min.js"></script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

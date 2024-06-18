@@ -91,9 +91,27 @@ namespace CatBuddy.Repository
             }
         }
 
-        public void Excluir(int Id)
+        public void DeletarFornecedor(int Id)
         {
-            throw new NotImplementedException();
+            StringBuilder sbAux = new StringBuilder();
+
+            sbAux.Append(" UPDATE tbl_fornecedor SET IsFornecedorAtivo = false ");
+            sbAux.Append(" WHERE cod_id_fornecedor = @codFornecedor ");
+
+            _SintaxeSQl = sbAux.ToString();
+
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                MySqlCommand cmd = new MySqlCommand(_SintaxeSQl, conexao);
+
+                cmd.Parameters.Add("@codFornecedor", MySqlDbType.Int32).Value = Id;
+
+                conexao.Open();
+
+                cmd.ExecuteNonQuery();
+
+                conexao.Close();
+            }
         }
 
         public ViewFornecedor ObterFornecedor(int Id)

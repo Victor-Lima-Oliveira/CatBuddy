@@ -6,7 +6,7 @@ namespace CatBuddy.Repository.Contract
     {
         void Cadastrar(Fornecedor fornecedor);
         void Atualizar(Fornecedor fornecedor);
-        void Excluir(int Id);
+        void DeletarFornecedor(int Id);
         ViewFornecedor ObterFornecedor(int Id);
         List<ViewFornecedor> ObterFornecedores();
     }

@@ -31,33 +31,31 @@ namespace CatBuddy.Controllers
         [ColaboradorAutorizacao]
         public IActionResult AbrirDialogDesativaColaborador(int id, string nomeColaborador)
         {
-            TempData["OpenDialog"] = "true";
-            TempData["nomeColaborador"] = nomeColaborador;
-            TempData["idColaborador"] = id;
+            MainLayout.OpenDialog(nomeColaborador, "Deseja DELETAR esse colaborador?", id);
             return RedirectToAction(nameof(VisualizarColaboradores));
         }
 
         [ColaboradorAutorizacao]
-        public IActionResult DesativarColaborador()
+        public IActionResult ExecutarDialog()
         {
             try
             {
                 // Desativa o colaborador no banco
-                _colaboradorRepository.Excluir(Convert.ToInt32(TempData["idColaborador"]));
+                _colaboradorRepository.Excluir(Convert.ToInt32(MainLayout.ObterParametro()));
 
-                TempData["OpenDialog"] = null;
-                TempData["nomeColaborador"] = null;
-                TempData["idColaborador"] = null;
+                MainLayout.CloseDialog();
             }
             catch (Exception err)
             {
-
+                MainLayout.OpenDialog("ERRO", err.Message);
+                return RedirectToAction(nameof(VisualizarColaboradores));
             }
+
             return RedirectToAction(nameof(VisualizarColaboradores));
         }
 
         [ColaboradorAutorizacao]
-        public IActionResult CancelarDesativarColaborador()
+        public IActionResult FecharDialog()
         {
             TempData["OpenDialog"] = null;
             TempData["nomeColaborador"] = null;

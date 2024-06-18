@@ -58,27 +58,3 @@
         }
     </tbody>
 </table>
-
-
-
-<script>
-    function fecharDialog() {
-        var dialog = document.getElementById('meuDialog');
-
-        $.ajax({
-            url: '/Colaborador/CancelarDesativarColaborador',
-            type: 'GET',
-            success: function () {
-                location.reload();
-            },
-            error: function () {
-                alert('Erro ao atualizar a página, tente novamente mais tarde');
-            }
-        });
-    }
-
-    // Impedir que o clique no diálogo se propague para o overlay
-    document.getElementById('Dialog').addEventListener('click', function (event) {
-        event.stopPropagation();
-    });
-</script>

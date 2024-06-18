@@ -69,25 +69,31 @@
             <div class="form-group col-md-4">
                 <label asp-for="produto.NomeCategoria" class="control-label"></label>
                 <select class="form-select form-select-md" asp-for="produto.CodCategoria" id="categoria">
+                    <option value="0">Selecione um Categoria</option>
                     @foreach (Categoria categoriaItem in Model.listCategoria)
                     {
                         <option value="@categoriaItem.codCategoria">@categoriaItem.nomeCategoria</option>
                     }
                 </select>
+                <span asp-validation-for="produto.CodCategoria" class="text-danger"></span>
             </div>
 
             <div class="form-group col-md-4">
                 <label asp-for="produto.NomeFornecedor" class="control-label"></label>
                 <select class="form-select form-select-md" asp-for="produto.CodFornecedor">
+                    <option value="0">Selecione um Fornecedor</option>
                     @foreach (Fornecedor fornecedorItem in Model.listFornecedor)
                     {
                         <option value="@fornecedorItem.codFornecedor">@fornecedorItem.nomeFornecedor</option>
                     }
                 </select>
+                <span asp-validation-for="produto.CodFornecedor" class="text-danger"></span>
+
             </div>
             <div class="form-group col-md-4">
                 <label asp-for="produto.ImgPath" class="control-label"></label>
                 <input asp-for="produto.ImgProduto" type="file" class="form-control" />
+                <span asp-validation-for="produto.ImgProduto" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">

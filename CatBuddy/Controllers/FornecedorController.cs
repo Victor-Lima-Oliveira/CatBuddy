@@ -84,6 +84,36 @@ namespace CatBuddy.Controllers
             return RedirectToAction(nameof(VisualizarFornecedor));
         }
 
+        public IActionResult AbrirDialogDeletarFornecedor(int id, string nome)
+        {
+            try
+            {
+                MainLayout.OpenDialog(nome, "Tem certeza que deseja DELETAR esse fornecedor?", id);
+
+            }
+            catch (Exception err)
+            {
+                MainLayout.OpenDialog("ERRO", err.Message);
+
+            }
+            return RedirectToAction(nameof(VisualizarFornecedor));
+        }
+
+        public IActionResult ExecutarDialog()
+        {
+            try
+            {
+                _fornecedorRepository.DeletarFornecedor(Convert.ToInt32(MainLayout.ObterParametro()));
+
+                MainLayout.CloseDialog();
+            }
+            catch (Exception err)
+            {
+                MainLayout.OpenDialog("ERRO", err.Message);
+            }
+            return RedirectToAction(nameof(VisualizarFornecedor));
+        }
+
         public ViewFornecedor CarregaViewColaborador(Fornecedor fornecedor = null)
         {
             // Recupera os logradouros do banco

@@ -82,7 +82,7 @@ namespace CatBuddy.Repository
         {
             StringBuilder sbAux = new StringBuilder();
 
-            sbAux.Append(" DELETE FROM tbl_produto ");
+            sbAux.Append(" UPDATE tbl_produto SET IsProdutoAtivo = false ");
             sbAux.Append(" WHERE cod_id_produto = @codProduto ");
 
             _SintaxeSQl = sbAux.ToString();
@@ -109,7 +109,7 @@ namespace CatBuddy.Repository
             sbAux.Append(" INSERT INTO tbl_produto VALUE( ");
             sbAux.Append(" null, @codCategoria, @descricao, @qtdEstoque, @codFornecedor, ");
             sbAux.Append(" @idadeRecomendada, @sabor, @cor, @medidasAproximadas, @material, ");
-            sbAux.Append(" @composicao, @preco, @imgPath, @imgPathInfoNutricionais, @ds_nome);  ");
+            sbAux.Append(" @composicao, @preco, @imgPath, @imgPathInfoNutricionais, @ds_nome, true);  ");
             sbAux.Append(" SELECT LAST_INSERT_ID(); ");
 
             _SintaxeSQl = sbAux.ToString();
