@@ -64,4 +64,6 @@ $(document).ready(function () {
         }
     });
     $('.selectonfocus').mask("00/00/0000", { selectOnFocus: true });
+    $('.credicard').mask("0000 0000 0000 0000", { selectOnFocus: true });
+    $('.credicarddate').mask("00/00", { selectOnFocus: true });
 });

@@ -14,14 +14,18 @@ namespace CatBuddy.Controllers
         private IClienteRepository _clienteRepository;
         private IUsuarioRepository _usuarioRepository;
         private IPedidoRepository _pedidoRepository;
+        private IEnderecoRepository _enderecoRepository;
+        private ICartaoRepository _cartaoRepository;
         private LoginCliente _loginCliente;
 
-        public ClienteController(IClienteRepository clienteRepository, LoginCliente loginCliente, IUsuarioRepository usuarioRepository, IPedidoRepository pedidoRepository)
+        public ClienteController(IClienteRepository clienteRepository, LoginCliente loginCliente, IUsuarioRepository usuarioRepository, IPedidoRepository pedidoRepository, IEnderecoRepository enderecoRepository, ICartaoRepository cartaoRepository )
         {
             _clienteRepository = clienteRepository;
             _loginCliente = loginCliente;
             _usuarioRepository = usuarioRepository;
             _pedidoRepository = pedidoRepository;
+            _enderecoRepository = enderecoRepository;
+            _cartaoRepository = cartaoRepository;
         }
         public IActionResult Index()
         {
@@ -65,7 +69,7 @@ namespace CatBuddy.Controllers
                 // Remove os caracteres do CPF e telefone
                 cliente.CPF = Apoio.TransformaCPF(cliente.CPF);
                 cliente.Telefone = Apoio.TransformaTelefone(cliente.Telefone);
-                
+
                 // Cadastra o cliente no banco
                 _clienteRepository.Cadastrar(cliente);
 
@@ -80,12 +84,14 @@ namespace CatBuddy.Controllers
             }
 
             // Se aconteceu algum erro retorna para a mesma página
-            return View(    CarregaViewCliente(cliente));
+            return View(CarregaViewCliente(cliente));
         }
 
         public IActionResult Sair()
         {
             _loginCliente.Logout();
+
+            MainLayout.codCliente = 0;
 
             return RedirectToAction("index", "Home");
         }
@@ -107,6 +113,9 @@ namespace CatBuddy.Controllers
             if (clienteDoBanco.Email != null && clienteDoBanco.Senha != null)
             {
                 _loginCliente.Login(clienteDoBanco);
+
+                MainLayout.codCliente = clienteDoBanco.cod_id_cliente.Value;
+
                 return new RedirectResult(Url.Action(nameof(PainelCliente)));
             }
             else
@@ -142,9 +151,188 @@ namespace CatBuddy.Controllers
             return View(_pedidoRepository.ObtemPedidos(_loginCliente.ObterCliente().cod_id_cliente.Value));
         }
 
+        [ClienteAutorizacao]
         public IActionResult DetalharPedido(int codPedido)
         {
             return View(_pedidoRepository.ObtemItensPedido(codPedido));
+        }
+
+        [ClienteAutorizacao]
+        public IActionResult CadastrarEndereco()
+        {
+            return View(CarregaViewEndereco());
+        }
+
+        [ClienteAutorizacao]
+        [HttpPost]
+        public IActionResult CadastrarEndereco(Endereco endereco)
+        {
+            if (ModelState.IsValid)
+            {
+                // Recupera o código do cliente
+                endereco.cod_cliente = MainLayout.codCliente;
+                endereco.cepUsuario = Apoio.TransformaCEP(endereco.cepUsuario);
+
+                // Cadastra o endereco no banco
+                _enderecoRepository.Cadastrar(endereco);
+
+                MainLayout.OpenSnackbar("Endereço cadastrado com sucesso!");
+
+                return RedirectToAction(nameof(PainelCliente));
+            }
+
+            return View(CarregaViewEndereco(endereco));
+        }
+
+        public IActionResult VisualizarEnderecos()
+        {
+            return View(_enderecoRepository.ObtemEnderecos(MainLayout.codCliente));
+        }
+
+        [HttpGet]
+        public IActionResult EditarEndereco(int id)
+        {
+            Endereco endereco = _enderecoRepository.ObtemEndereco(id);
+            return View(CarregaViewEndereco(endereco));
+        }
+
+        [ClienteAutorizacao]
+        [HttpPost]
+        public IActionResult EditarEndereco(Endereco endereco)
+        {
+            if (ModelState.IsValid)
+            {
+                endereco.cepUsuario = Apoio.TransformaCEP(endereco.cepUsuario);
+                endereco.cod_cliente = MainLayout.codCliente;
+
+                // Atualiza o endereco
+                _enderecoRepository.Atualizar(endereco);
+
+                MainLayout.OpenSnackbar("Endereço atualizado com sucesso!");
+
+                return RedirectToAction(nameof(PainelCliente));
+            }
+            return View();
+        }
+
+        public IActionResult DeletarEndereco(int id, string nome)
+        {
+            MainLayout.OpenDialog(nome, Strings.ConfirmaDeletarEndereco, id);
+            return RedirectToAction(nameof(VisualizarEnderecos));
+        }
+
+        public IActionResult ExecutarDialog()
+        {
+            try
+            {
+                if(MainLayout.ConteudoDialog == Strings.ConfirmaDeletarEndereco)
+                {
+                    // Exclui o endereco no banco
+                    _enderecoRepository.Excluir(Convert.ToInt32(MainLayout.ObterParametro()));
+
+                    MainLayout.OpenSnackbar("Endereço deletado com sucesso!");
+
+                    MainLayout.CloseDialog();
+
+                    return RedirectToAction(nameof(VisualizarEnderecos));
+
+                }
+                else if (MainLayout.ConteudoDialog == Strings.ConfirmaDeletarCartao)
+                {
+                    _cartaoRepository.Excluir(Convert.ToInt32(MainLayout.ObterParametro()));
+
+                    MainLayout.CloseDialog();
+
+                    MainLayout.OpenSnackbar("Cartão deletado com sucesso!");
+
+                    return RedirectToAction(nameof(VisualizarCartoes));
+                }
+            }
+            catch (Exception err)
+            {
+                MainLayout.OpenDialog("ERRO", err.Message);
+                return RedirectToAction(nameof(VisualizarEnderecos));
+            }
+
+            return RedirectToAction(nameof(PainelCliente));
+        }
+
+        public ViewEndereco CarregaViewEndereco(Endereco endereco = null)
+        {
+            ViewEndereco viewEndereco = new ViewEndereco()
+            {
+                ListLogradouro = _usuarioRepository.RetornaLogradouro(),
+            };
+
+            if (endereco != null)
+            {
+                viewEndereco.Endereco = endereco;
+            }
+            else
+            {
+                //viewEndereco.Endereco.cod_cliente = _loginCliente
+            }
+
+            return viewEndereco;
+        }
+
+        [ClienteAutorizacao]
+        public IActionResult VisualizarCartoes()
+        {
+            return View(_cartaoRepository.ObtemCartoes(MainLayout.codCliente));
+        }
+
+        [ClienteAutorizacao]
+        public IActionResult CadastrarCartao()
+        {
+            return View();
+        }
+
+        [ClienteAutorizacao]
+        [HttpPost]
+        public IActionResult CadastrarCartao(Cartao cartao)
+        {
+            if(ModelState.IsValid)
+            {
+                cartao.numeroCartaoCred = Apoio.TransformaNumeroCartaoCredito(cartao.numeroCartaoCred);
+                cartao.dataDeValidade = Apoio.TransformaDataValidade(cartao.dataDeValidade);
+
+                _cartaoRepository.Cadastrar(cartao);
+
+                MainLayout.OpenSnackbar("Cartão cadastrado!");
+
+                return RedirectToAction(nameof(VisualizarCartoes));
+            }
+
+            return View(cartao);
+        }
+
+        [ClienteAutorizacao]
+        public IActionResult EditarCartao(int id)
+        {
+            return View(_cartaoRepository.ObtemCartao(id));
+        }
+
+        [ClienteAutorizacao]
+        [HttpPost]
+        public IActionResult EditarCartao(Cartao cartao)
+        {
+            if (ModelState.IsValid)
+            {
+                cartao.numeroCartaoCred = Apoio.TransformaNumeroCartaoCredito(cartao.numeroCartaoCred);
+                cartao.dataDeValidade = Apoio.TransformaDataValidade(cartao.dataDeValidade);
+
+                _cartaoRepository.Atualizar(cartao);
+
+                return RedirectToAction(nameof(VisualizarCartoes));
+            }
+            return View(cartao);
+        }
+
+        public IActionResult DeletarCartao(int id, string titulo)
+        {
+            MainLayout.OpenDialog(titulo, Strings.ConfirmaDeletarCartao, id);
+            return RedirectToAction(nameof(VisualizarCartoes));
         }
     }
 }

@@ -112,6 +112,15 @@ foreign key (cod_produto) references tbl_produto (cod_id_produto),
 foreign key (cod_pedido) references tbl_pedido (cod_id_pedido),
 foreign key (cod_cliente) references tbl_cliente (cod_id_cliente));
 
+create table tbl_cartaoCliente(
+cod_id_pagamento int primary key auto_increment,
+cod_cliente int not null, 
+nomeTitular varchar(50),
+numeroCartaoCred varchar(16),
+dataDeValidade varchar(4),
+codSeguranca varchar(3),
+foreign key (cod_cliente) references tbl_cliente (cod_id_cliente));
+
 -- Criada uma view do produto para facilitar as consultas
 create view vwProduto as
 SELECT 
@@ -174,3 +183,9 @@ create view vwFornecedor as
 select * from 
 tbl_fornecedor fornecedor
 inner join tbl_logradouro logradouro on logradouro.cod_id_logradouro = fornecedor.cod_id_fornecedor;
+
+-- Criada uma view do endereco com o nome do logradouro
+create view vwEndereco as
+select * from 
+tbl_enderecocliente endereco
+inner join tbl_logradouro logradouro on logradouro.cod_id_logradouro = endereco.cod_id_endereco;

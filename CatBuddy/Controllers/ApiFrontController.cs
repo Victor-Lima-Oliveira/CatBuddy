@@ -13,5 +13,12 @@ namespace CatBuddy.Controllers
             MainLayout.CloseDialog();
             return Ok();
         }
+
+        [HttpGet("CloseSnackbar")]
+        public IActionResult CloseSnackbar()
+        {
+            MainLayout.CloseSnackbar();
+            return Ok();
+        }
     }
 }

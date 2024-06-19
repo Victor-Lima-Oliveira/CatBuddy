@@ -9,6 +9,7 @@
 
         public static bool showSnackbar = false;
         public static string MensagemSnackbar = String.Empty;
+        public static int codCliente = 0;
 
 
         public static void OpenDialog(string Titulo, string conteudo, object parametro = null)
@@ -49,13 +50,9 @@
         {
             showSnackbar = true;
             MensagemSnackbar = mensagem;
-
-            await Task.Delay(5000);
-
-            CloseSnackbar();
         }
 
-        private static void CloseSnackbar()
+        public static void CloseSnackbar()
         {
             showSnackbar = false;
         }

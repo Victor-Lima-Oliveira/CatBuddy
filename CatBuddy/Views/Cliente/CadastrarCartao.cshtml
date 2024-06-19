@@ -1,0 +1,51 @@
+﻿@using Newtonsoft.Json
+@model CatBuddy.Models.Cartao
+@inject IHttpContextAccessor httpContext
+
+@{
+    ViewData["Title"] = "CadastrarCartao";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Cliente cliente = JsonConvert.DeserializeObject<Cliente>(httpContext.HttpContext.Session.GetString("Login.Cliente"));
+
+}
+
+<h1>CadastrarCartao</h1>
+
+<h4>Cartao</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CadastrarCartao">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="cod_cliente" value="@cliente.cod_id_cliente" hidden />
+            <div class="form-group">
+                <label asp-for="nomeTitular" class="control-label"></label>
+                <input asp-for="nomeTitular" class="form-control" />
+                <span asp-validation-for="nomeTitular" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numeroCartaoCred" class="control-label"></label>
+                <input asp-for="numeroCartaoCred" class="form-control credicard" />
+                <span asp-validation-for="numeroCartaoCred" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dataDeValidade" class="control-label"></label>
+                <input asp-for="dataDeValidade" class="form-control credicarddate" />
+                <span asp-validation-for="dataDeValidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="codSeguranca" class="control-label"></label>
+                <input asp-for="codSeguranca" class="form-control" />
+                <span asp-validation-for="codSeguranca" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

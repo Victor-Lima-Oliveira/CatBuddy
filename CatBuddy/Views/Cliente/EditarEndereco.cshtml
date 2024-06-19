@@ -1,0 +1,57 @@
+﻿@model CatBuddy.Models.ViewEndereco
+
+@{
+    ViewData["Title"] = "EditarEndereco";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>EditarEndereco</h1>
+
+<h4>Endereco</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditarEndereco">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Endereco.cod_id_endereco" hidden />
+            <div class="form-group">
+                <label asp-for="Endereco.cod_logradouro" class="control-label"></label>
+                <select asp-for="Endereco.cod_logradouro">
+                    @foreach (Logradouro logradouro in Model.ListLogradouro)
+                    {
+                        <option value="@logradouro.codLogradouro">@logradouro.nomeLogradouro</option>
+                    }
+                </select>
+                <span asp-validation-for="Endereco.cod_logradouro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Endereco.enderecoUsuario" class="control-label"></label>
+                <input asp-for="Endereco.enderecoUsuario" class="form-control" />
+                <span asp-validation-for="Endereco.enderecoUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Endereco.bairroUsuario" class="control-label"></label>
+                <input asp-for="Endereco.bairroUsuario" class="form-control" />
+                <span asp-validation-for="Endereco.bairroUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Endereco.cepUsuario" class="control-label"></label>
+                <input asp-for="Endereco.cepUsuario" class="form-control cep" />
+                <span asp-validation-for="Endereco.cepUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Endereco.nomeEnderecoUsuario" class="control-label"></label>
+                <input asp-for="Endereco.nomeEnderecoUsuario" class="form-control" />
+                <span asp-validation-for="Endereco.nomeEnderecoUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

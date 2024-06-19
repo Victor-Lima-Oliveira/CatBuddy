@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CatBuddy.Models.Cartao>
+
+@{
+    ViewData["Title"] = "VisualizarCartoes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Visualizar Cartoes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeTitular)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.numeroCartaoCred)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataDeValidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.codSeguranca)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeTitular)
+                </td>
+                <td class="credicard">
+                    @Html.DisplayFor(modelItem => item.numeroCartaoCred)
+                </td>
+                <td class="credicarddate">
+                    @Html.DisplayFor(modelItem => item.dataDeValidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.codSeguranca)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarCartao", new { id=item.cod_id_pagamento  }) |
+                    @Html.ActionLink("Delete", "DeletarCartao", new { id = item.cod_id_pagamento, titulo = item.nomeTitular })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

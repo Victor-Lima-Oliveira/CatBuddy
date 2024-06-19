@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CatBuddy.Models.ViewEndereco>
+
+@{
+    ViewData["Title"] = "VisualizarEnderecos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Visualizar Enderecos</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco.enderecoUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco.bairroUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco.cepUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco.nomeEnderecoUsuario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.getEnderecoCompleto()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco.bairroUsuario)
+                </td>
+                <td class="cep">
+                    @Html.DisplayFor(modelItem => item.Endereco.cepUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco.nomeEnderecoUsuario)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarEndereco", new { id = item.Endereco.cod_id_endereco }) |
+                    @Html.ActionLink("Deletar", "DeletarEndereco", new { id = item.Endereco.cod_id_endereco, nome = item.Endereco.nomeEnderecoUsuario })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

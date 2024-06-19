@@ -70,5 +70,15 @@ namespace CatBuddy.Utils
 
             return (float)Convert.ToDouble(precoAux);
         }
+
+        public static string TransformaNumeroCartaoCredito(string numCartao)
+        {
+            return numCartao.Replace(" ", "");
+        }
+
+        public static string TransformaDataValidade(string dataValidade)
+        {
+            return dataValidade.Replace("/", "");
+        }
     }
 }

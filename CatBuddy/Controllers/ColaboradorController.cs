@@ -54,6 +54,7 @@ namespace CatBuddy.Controllers
             return RedirectToAction(nameof(VisualizarColaboradores));
         }
 
+        /*
         [ColaboradorAutorizacao]
         public IActionResult FecharDialog()
         {
@@ -63,7 +64,7 @@ namespace CatBuddy.Controllers
 
             return RedirectToAction(nameof(VisualizarColaboradores));
         }
-
+        */
         [ColaboradorAutorizacao]
         public IActionResult VisualizarColaboradores()
         {
