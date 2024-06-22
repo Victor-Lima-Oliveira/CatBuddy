@@ -6,7 +6,6 @@
 
 <style>
     /* Estilo personalizado para o carrossel ocupar toda a largura da tela */
-
     .conteinerCarrossel {
         width: 100vw; /* Define a largura igual à largura da tela */
         position: relative; /* Mantém o conteúdo no fluxo do documento */
@@ -17,7 +16,6 @@
 
     .carousel-item img {
         width: 100%; /* Define a largura da imagem do carrossel como 100% da largura do contêiner */
-        height: 60vh; /* Mantém a proporção da imagem */
     }
 
     .navbar-expand-xxl, .navbar-expand-xxl, .navbar-expand-lg, .navbar-expand-md, .navbar-expand-sm, .navbar {
@@ -27,7 +25,6 @@
     .bi-chevron-right, .bi-chevron-left {
         font-size: 3em; /* altera o tamanho dos simbolos que mudam o carrossel*/
     }
-
 </style>
 
 @*Carrossel com paineis *@
@@ -36,10 +33,10 @@
         <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner ">
                 <div class="carousel-item active">
-                    <img src="/img/banners/Inicial.png" class="d-block w-100" alt="...">
+                    <img src="/img/banners/Inicial.png" class="d-inline w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="/img/banners/petshop.png" class="d-block w-100" alt="...">
+                    <img src="/img/banners/petshop.png" class="d-inline w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -53,7 +50,81 @@
 </div>
 
 
+@*Lançamentos*@
+<div class="my-5">
+    <h1 class="text-purple font-paytone-one-regular mb-3">Lançamento</h1>
 
+    <div class="w-100 d-flex flex-wrap gap-5 justify-content-center">
+        <div class="text-center">
+            <div class="cardCirculo fundoDarkFuchsia">
+                <div class="cardCirculo-content" style="teste">
+                </div>
+            </div>
+            <p class="cardCirculo-content">CatNip</p>
+        </div>
+        <div class="text-center">
+            <div class="cardCirculo fundoDarkFuchsia">
+                <div class="cardCirculo-content"></div>
+            </div>
+            <p class="cardCirculo-content">CatNip</p>
+        </div>
+        <div class="text-center">
+            <div class="cardCirculo fundoDarkFuchsia">
+                <div class="cardCirculo-content"></div>
+            </div>
+            <p class="cardCirculo-content">CatNip</p>
+        </div>
+        <div class="text-center">
+            <div class="cardCirculo fundoDarkFuchsia">
+                <div class="cardCirculo-content"></div>
+            </div>
+            <p class="cardCirculo-content">CatNip</p>
+        </div>
+    </div>
+</div>
 
+@*Marcas*@
+<div class="my-5">
+    <h1 class="text-purple font-paytone-one-regular mb-3">Marcas que você pode confiar</h1>
+    <div class="w-100 d-flex flex-wrap gap-5 justify-content-center">
+        <div class="text-center">
+            <div class="cardRetangular fundoAmareloPastel"></div>
+        </div>
+        <div class="text-center">
+            <div class="cardRetangular fundoAmareloPastel"></div>
+        </div>
+        <div class="text-center">
+            <div class="cardRetangular fundoAmareloPastel"></div>
+        </div>
+        <div class="text-center">
+            <div class="cardRetangular fundoAmareloPastel"></div>
+        </div>
+    </div>
+</div>
 
+@*Banner*@
+<div class="conteinerCarrossel">
+    <div class="containerfluid">
+        <img src="~/img/banners/5.png" class="w-100 my-5" />
+    </div>
+</div>
+
+@*Outros produtos*@
+<div class="my-5">
+    <h1 class="text-purple font-paytone-one-regular mb-3">Outros produtos que você pode gostar</h1>
+    <div class="w-100 d-flex flex-wrap gap-5 justify-content-center">
+        <div class="text-center">
+            <div class="cardRetangular fundoLightPurple"></div>
+        </div>
+        <div class="text-center">
+            <div class="cardRetangular fundoLightPurple"></div>
+        </div>
+        <div class="text-center">
+            <div class="cardRetangular fundoLightPurple"></div>
+        </div>
+        <div class="text-center">
+            <div class="cardRetangular fundoLightPurple"></div>
+        </div>
+    </div>
+</div>
 

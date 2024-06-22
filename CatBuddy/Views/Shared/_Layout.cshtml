@@ -10,7 +10,7 @@
     if (httpContext.HttpContext.Session.GetString("Login.Cliente") != null)
     {
         // Recebe os dados do usuário
-         cliente = JsonConvert.DeserializeObject<Cliente>(httpContext.HttpContext.Session.GetString("Login.Cliente"));
+        cliente = JsonConvert.DeserializeObject<Cliente>(httpContext.HttpContext.Session.GetString("Login.Cliente"));
     }
 }
 
@@ -36,6 +36,21 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm align-content-between navbar-dark fundo-navBar border-bottom box-shadow mb-3">
+            <div class="">
+                <ul class="nav navbar-collapse collapse flex-grow-0 text-decoration-none">
+                    <li class="nav-item"><a class="bi bi-search text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
+                    <li class="nav-item"><a class="bi bi-basket text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Carrinho" asp-controller="Carrinho"></a></li>
+                    @if (cliente == null)
+                    {
+                        <li class="nav-item"><a class="bi bi-person text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Login" asp-controller="Cliente"></a></li>
+                    }
+                    else
+                    {
+                        <li class="nav-item "><a asp-action="Login" asp-controller="Cliente" class="text-white text-decoration-none">Olá, @cliente.nomeUsuario</a></li>
+                        <li class="nav-item"><a asp-controller="Cliente" asp-action="Sair" class="bi bi-box-arrow-right text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
+                    }
+                </ul>
+            </div>
             <div class="container-fluid">
 
                 @*Botão para modo celular*@
@@ -56,36 +71,11 @@
                                 <li><div class="dropdown-item">Comedouro</div></li>
                             </ul>
                         </div>
-                        <div class="dropdown ms-5">
-                            <div class="text-white font-paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
-                                Para Humanos
-                            </div>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><div class="dropdown-item">Roupas</div></li>
-                                <li><div class="dropdown-item">Decoração</div></li>
-                                <li><div class="dropdown-item">Presentes</div></li>
-                            </ul>
-                        </div>
                     </li>
                     <li>
                         <div class="nav justify-content-center ">
                             <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" style="height:12vh;" /></a>
                         </div>
-                    </li>
-                    <li>
-                        <ul class="nav navbar-collapse collapse flex-grow-0 text-decoration-none">
-                            <li class="nav-item"><a class="bi bi-search text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" ></a></li>
-                            <li class="nav-item"><a class="bi bi-basket text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Carrinho" asp-controller="Carrinho"></a></li>
-                            @if(cliente == null)
-                            {
-                                <li class="nav-item"><a class="bi bi-person text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Login" asp-controller="Cliente"></a></li>
-                            }
-                            else
-                            {
-                                <li class="nav-item "><a asp-action="Login" asp-controller="Cliente" class="text-white text-decoration-none">Olá, @cliente.nomeUsuario</a></li>
-                                <li class="nav-item"><a asp-controller="Cliente" asp-action="Sair" class="bi bi-box-arrow-right text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
-                            }
-                        </ul>
                     </li>
                 </ul>
             </div>

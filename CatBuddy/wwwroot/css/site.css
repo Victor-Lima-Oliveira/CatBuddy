@@ -1,6 +1,34 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
 html {
     font-size: 14px;
+    overflow: hidden auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--darkFuchsia) var(--amareloPastel); /* Cor da barra e do fundo */
 }
+
+body {
+    margin-bottom: 60px;
+    background-color: var(--amareloPastel);
+
+}
+
+    body::-webkit-scrollbar {
+        width: 8px; /* Largura da barra de rolagem */
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: var(--darkFuchsia); /* Cor da barra de rolagem */
+        border-radius: 10px; /* Borda arredondada */
+    }
+
+    body::-webkit-scrollbar-track {
+        background-color: var(--amareloPastel); /* Cor de fundo da barra de rolagem */
+    }
+    
 
 :root {
     /*Cores padrão*/
@@ -46,11 +74,6 @@ html {
     min-height: 100%;
 }
 
-body {
-    margin-bottom: 60px;
-    background-color: var(--amareloPastel);
-}
-
 #overlay {
     position: fixed; /* Sit on top of the page content */
     width: 100%; /* Full width (cover the whole page) */
@@ -76,4 +99,45 @@ body {
     top: inherit; /* Distância do topo */
     box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra */
     transition: visibility 0s, opacity 0.5s ease-out; /* Transição suave */
+}
+
+.fundoLightPurple{
+    background-color: var(--lightPurple);
+}
+
+.fundoDarkFuchsia {
+    background-color: var(--darkFuchsia);
+}
+
+.fundoAmareloPastel {
+    background-color: var(--yellow);
+}
+
+.cardRetangular {
+    border-radius: 25px;
+    width: 150px;
+    height: 150px;
+    margin: 1px 8px;
+    background-image: url('../img/fornecedores/pedigree_logo.jpg');
+    background-size: contain; /* Garante que a imagem cubra todo o espaço do card */
+    background-repeat: no-repeat; /* Evita que a imagem seja repetida */
+    background-position: center; /* Centraliza a imagem dentro do card */
+    box-shadow: 0px 0px 10px rgb(0, 0, 0, 0.1); /* Sombra com deslocamento x e y de 0px, desfoque de 10px e cor rgba */
+}
+
+.cardCirculo {
+    border-radius: 50%;
+    width: 150px;
+    height: 165px;
+    margin: 1px 8px;
+    padding: 2px;
+    background-image: url('../img/produtos/gatosnaturalfrango.png'); /* Substitua pelo caminho da sua imagem */
+    background-size: contain; /* Garante que a imagem cubra todo o espaço do card */
+    background-repeat: no-repeat; /* Evita que a imagem seja repetida */
+    background-position: center; /* Centraliza a imagem dentro do card */
+}
+
+
+.cardCirculo-content{
+    align-content: center;
 }

@@ -54,3 +54,17 @@ button.accept-policy {
 .fundo-navBar {
     background-color: var(--lightPurple);
 }
+
+.icon-bar {
+    background-color: #333; /* Cor de fundo para os ícones */
+    display: flex;
+    justify-content: flex-end; /* Alinha os ícones à direita */
+    align-items: center; /* Centraliza verticalmente os ícones */
+    padding: 10px; /* Espaçamento interno */
+}
+
+    .icon-bar i {
+        color: white; /* Cor dos ícones */
+        font-size: 20px; /* Tamanho dos ícones */
+        margin-left: 10px; /* Espaçamento entre os ícones */
+    }
