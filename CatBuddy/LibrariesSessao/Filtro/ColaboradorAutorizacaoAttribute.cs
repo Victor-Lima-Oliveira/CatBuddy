@@ -16,12 +16,12 @@ namespace CatBuddy.LibrariesSessao.Filtro
             // Recupera os dados do usuario 
             Colaborador colaborador = _loginColaborador.GetColaborador();
 
-            /* Se não receber o colaborador
+            // Se não receber o colaborador
             if(colaborador == null) 
             {
                 context.Result = new RedirectToActionResult("Login", "Colaborador", null);
             }
-            */
+            
         }
     }
 }

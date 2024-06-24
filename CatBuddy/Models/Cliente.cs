@@ -7,7 +7,7 @@ namespace CatBuddy.Models
         [Display(Name = "Código do Cliente")]
         public int? cod_id_cliente { get; set; }
 
-        [Display(Name = "Nome")]
+        [Display(Name = "Nome completo")]
         [Required(ErrorMessage = "O nome é obrigatório!")]
         [MaxLength(50, ErrorMessage = "Digite um  Nome com no máximo 50 caracteres")]
         public string nomeUsuario { get; set; }

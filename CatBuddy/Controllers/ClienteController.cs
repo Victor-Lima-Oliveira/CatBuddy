@@ -184,6 +184,7 @@ namespace CatBuddy.Controllers
             return View(CarregaViewEndereco(endereco));
         }
 
+        [ClienteAutorizacao]
         public IActionResult VisualizarEnderecos()
         {
             return View(_enderecoRepository.ObtemEnderecos(MainLayout.codCliente));

@@ -5,14 +5,11 @@
     Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
 }
 
-<h1>Novo Colaborador</h1>
-<hr />
-
-<div class="row">
-    <div class="col-md-4">
+<h4 class="text-purple d-flex justify-content-center">Cadastrar Colaborador</h4>
+<div class="d-flex justify-content-center">
+    <fieldset class="col-md-5 fundoDarkFuchsia">
         <form asp-action="CadastrarColaborador">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
             <div class="form-group">
                 <label asp-for="Colaborador.nomeColaborador" class="control-label"></label>
                 <input asp-for="Colaborador.nomeColaborador" class="form-control placeholder-name" />
@@ -27,21 +24,6 @@
                 <label asp-for="Colaborador.Email" class="control-label"></label>
                 <input asp-for="Colaborador.Email" class="form-control placeholder-email" />
                 <span asp-validation-for="Colaborador.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Colaborador.Telefone" class="control-label"></label><i>- Opcional</i>
-                <input asp-for="Colaborador.Telefone" class="form-control phone_with_ddd" />
-                <span asp-validation-for="Colaborador.Telefone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Colaborador.Senha" class="control-label"></label>
-                <input asp-for="Colaborador.Senha" class="form-control placeholder-password" />
-                <span asp-validation-for="Colaborador.Senha" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Colaborador.confirmaSenha" class="control-label"></label>
-                <input asp-for="Colaborador.confirmaSenha" class="form-control placeholder-password" />
-                <span asp-validation-for="Colaborador.confirmaSenha" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ListGenero" class="control-label"></label>
@@ -66,7 +48,22 @@
                 <span asp-validation-for="Colaborador.NivelDeAcesso" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Colaborador.Telefone" class="control-label"></label><i>- Opcional</i>
+                <input asp-for="Colaborador.Telefone" class="form-control phone_with_ddd" />
+                <span asp-validation-for="Colaborador.Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Colaborador.Senha" class="control-label"></label>
+                <input asp-for="Colaborador.Senha" class="form-control placeholder-password" />
+                <span asp-validation-for="Colaborador.Senha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Colaborador.confirmaSenha" class="control-label"></label>
+                <input asp-for="Colaborador.confirmaSenha" class="form-control placeholder-password" />
+                <span asp-validation-for="Colaborador.confirmaSenha" class="text-danger"></span>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-lightPurple mt-2"> Cadastrar </button>
             </div>
         </form>
     </div>

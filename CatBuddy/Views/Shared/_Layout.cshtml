@@ -119,7 +119,7 @@
                 }
                 <!-- Coluna para o conteúdo principal -->
                 <div class="col-md-9">
-                    <main role="main" class="pb-3">
+                    <main role="main" class="paddingFooter">
                         @RenderBody()
                     </main>
                 </div>
@@ -129,15 +129,52 @@
     else
     {
         <div class="container">
-            <main role="main" class="pb-3">
+            <main role="main" class="paddingFooter">
                 @RenderBody()
             </main>
         </div>
     }
 
     <footer class="border-top footer text-muted">
-        <div class="container text-white">
-            &copy; @DateTime.Now.Year - CatBuddy <a asp-controller="Colaborador" asp-action="Login">Colaboradores</a>
+        <div class="text-white fundoLightPurple ">
+            <div class="container d-flex">
+                <div class="row col-10">
+                    <h4>Formas de pagamento</h4>
+                    <div class="d-flex align-content-center gap-2">
+                        <img src="~/img/bandeiras/image_2.png" width="80px" height="30px" />
+                        <img src="~/img/bandeiras/image_3.png" width="50px" height="30px" />
+                        <img src="~/img/bandeiras/image_4.png" width="50px" height="30px" />
+                        <img src="~/img/bandeiras/image_5.png" width="70px" height="70px" />
+                        <img src="~/img/bandeiras/image_6.png" width="80px" height="30px" />
+                        <img src="~/img/bandeiras/image_7.png" width="50px" height="30px" />
+                        <img src="~/img/bandeiras/image_8.png" width="50px" height="30px" />
+                        <img src="~/img/bandeiras/image_1.png" width="30px" height="30px" />
+                    </div>
+                </div>
+                <div class="row col-2">
+                    <h4>Plataforma</h4>
+                    <a class="navbar-brand align-content-center" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" style="height:12vh;" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="d-flex">
+                <div class="row col-4">
+                    <b class="mb-5">Institucional</b>
+                    <p class="mb-4"><a href="#" style="color: black;">Sobre a CatBuddy</a></p>
+                    <p class="mb-4"><a asp-action="login" asp-controller="Colaborador">Portal Catbuddy</a></p>
+                </div>
+                <div class="row col-4">
+                    <b class="mb-5">Ajuda</b>
+                    <p class="mb-4"><a asp-action="VisualizarPedidos" asp-controller="Cliente">Meus Pedidos</a></p>
+                    <p class="mb-4"><a asp-action="VisualizarEnderecos" asp-controller="Cliente">Meus Endereços</a></p>
+                    <p class="mb-4"><a asp-action="VisualizarCartoes" asp-controller="Cliente">Meus Cartões</a></p>
+                    <p class="mb-4"><a asp-action="PainelCliente" asp-controller="Cliente">Meu Cadastro</a> </p>
+                </div>
+                <div class="row col-4">
+                </div>
+            </div>
+            <p class="text-center mt-5">Copyright&copy; @DateTime.Now.Year CatBuddy - Todos os direitos reservados</p>
         </div>
     </footer>
 

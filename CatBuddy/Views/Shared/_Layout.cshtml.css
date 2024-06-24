@@ -50,7 +50,7 @@ button.accept-policy {
     width: 100%;
     white-space: nowrap;
     line-height: 60px;
-    background-color: var(--darkFuchsia)
+    height: 400px;
 }
 
 .fundo-navBar {
@@ -74,4 +74,26 @@ button.accept-policy {
 .iconeSearch {
     background-color: inherit;
     border: none;
+}
+
+ul{
+    list-style-type: none
+}
+
+p {
+    height: 0px;
+    color: black;
+}
+b{
+    color: black;
+    height: 0px;
+}
+
+.bandeiras img{
+    width: 25px;
+    height: 25px;
+}
+
+.paddingFooter{
+    padding-bottom: 350px;
 }

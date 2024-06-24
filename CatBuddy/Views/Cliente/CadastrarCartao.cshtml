@@ -6,15 +6,12 @@
     ViewData["Title"] = "CadastrarCartao";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Cliente cliente = JsonConvert.DeserializeObject<Cliente>(httpContext.HttpContext.Session.GetString("Login.Cliente"));
-
 }
+<a asp-action="PainelCliente" asp-controller="Cliente" class="btn btn-darkFuchsia">Voltar</a>
 
-<h1>CadastrarCartao</h1>
-
-<h4>Cartao</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<h4 class="text-purple d-flex justify-content-center">Cadastrar Cartão</h4>
+<div class="d-flex justify-content-center">
+    <fieldset class="col-md-5 fundoYellow">
         <form asp-action="CadastrarCartao">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="cod_cliente" value="@cliente.cod_id_cliente" hidden />
@@ -38,14 +35,10 @@
                 <input asp-for="codSeguranca" class="form-control" />
                 <span asp-validation-for="codSeguranca" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-lightPurple mt-2"> Cadastrar </button>
             </div>
         </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    </fieldset>
 </div>
 

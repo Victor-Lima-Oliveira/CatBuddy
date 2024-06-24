@@ -54,19 +54,19 @@
                         <img src="~/@item.ImgPath" style="width: 90px; height: 100px" />
                     </div>
                 </td>
-                <td>
+                <td style="width: 20%">
                     <span>
                         <b>Código produto: </b>@Html.DisplayFor(modelitem => item.CodIdProduto) <br />
                     </span>
-                    <span>
-                        @Html.DisplayFor(modelItem => item.NomeProduto) <br />
+                    <span class="hideText" style="height:auto;">
+                        @Html.DisplayFor(modelItem => item.NomeProduto) 
                     </span>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.QtdEstoque)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Preco)
+                    @item.getPreco()
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeFornecedor)

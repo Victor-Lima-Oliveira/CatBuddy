@@ -5,12 +5,9 @@
     Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
 }
 
-<h1>CadastrarForncedor</h1>
-
-<h4>Fornecedor</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<h4 class="text-purple d-flex justify-content-center">Cadastrar Fornecedor</h4>
+<div class="d-flex justify-content-center">
+    <fieldset class="col-md-5 fundoDarkFuchsia">
         <form asp-action="CadastrarForncedor">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -58,8 +55,8 @@
                 <input asp-for="Fornecedor.municipio" class="form-control" />
                 <span asp-validation-for="Fornecedor.municipio" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-lightPurple mt-2"> Cadastrar </button>
             </div>
         </form>
     </div>

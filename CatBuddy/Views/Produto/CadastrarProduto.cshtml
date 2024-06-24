@@ -102,23 +102,11 @@
             <span asp-validation-for="produto.Descricao" class="text-danger"></span>
         </div>
 
-        @*Adicionar o input informações nutricionais*@
-            <div id="informacoesNutricionais" class="mt-3 mb-3">
-               
-            </div>
-        
-        <div class="d-flex gap-2">
-            <input type="submit" value="Adicionar" class="btn btn-yellow" />
-            <a asp-action="PaginaPrincipal" asp-controller="Colaborador" class="btn btn-darkFuchsia">Voltar</a>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-lightPurple mt-2"> Cadastrar </button>
         </div>
     </form>
 </div>
-
-
-
-
-
-
 
 <script>
     $(document).ready(function () {

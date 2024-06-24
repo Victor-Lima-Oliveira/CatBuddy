@@ -5,42 +5,26 @@
 }
 
 
-<main role="main">
-    <br />
-    <br />
-    <section class="container">
-        <aside class="col-sm-4">
-            <h3 class="subtitle-doc">
-                Login
-            </h3>
-            <div id="code_login_1">
-                <div class="card">
-                    <article class="card-body">
-                        @if (ViewData["MSG_E"] != null)
-                        {
-                            <p class="alert alert-danger">@Html.Raw(ViewData["MSG_E"])</p>
-                        }
-                        <h4 class="card-title mb-4 mt-1">Entrar</h4>
-                        <form method="post">
-                            <div class="form-group">
-                                <label>E-mail</label>
-                                <input asp-for="Email" class="form-control" placeholder="Email" type="email">
-                            </div>
-                            <div class="form-group">
-                                <a class="float-right" href="#">Esqueceu a senha</a>
-                                <label>Senha</label>
-                                <input asp-for="Senha" class="form-control" placeholder="******" type="password">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block"> Acessar </button>
-                            </div>
-                        </form>
-                    </article>
-                </div>
+@if (ViewData["MSG_E"] != null)
+{
+    <p class="alert alert-danger">@Html.Raw(ViewData["MSG_E"])</p>
+}
+
+<h4 class="text-purple d-flex justify-content-center">Login</h4>
+<div class="d-flex justify-content-center">
+    <fieldset class="col-md-5 fundoDarkFuchsia">
+        <form method="post">
+            <div class="form-group">
+                <label>E-mail</label>
+                <input asp-for="Email" class="form-control" placeholder="Email" type="email">
             </div>
-        </aside>
-    </section>
-</main>
-
-
-
+            <div class="form-group">
+                <label>Senha</label>
+                <input asp-for="Senha" class="form-control" placeholder="******" type="password">
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-lightPurple mt-2"> Entrar </button>
+            </div>
+        </form>
+    </fieldset>
+</div>
