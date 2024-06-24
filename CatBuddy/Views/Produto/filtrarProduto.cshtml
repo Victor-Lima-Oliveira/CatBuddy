@@ -1,39 +1,100 @@
 ﻿@model IEnumerable<CatBuddy.Models.Produto>
 
 @{
-    ViewData["Title"] = "filtrarProduto";
+    ViewData["Title"] = "Produto";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>filtrarProduto</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Código</th>
-        </tr>
-        <tr>
-            <th>NOME</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-                <td>
-                    @item.CodIdProduto
-                </td>
-            <td>
-                @item.NomeProduto
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 col-sm-4 d-flex justify-content-center">
+                <div class="cardProduto">
+                    <a asp-action="InformacoesProduto" asp-controller="Produto" asp-route-id="@item.CodIdProduto">
+                        <div class="cardProduto-content">
+                            <img src="~/@item.ImgPath" />
+                            <p class="text-center hideText mt-1" style="height: 45px;"><b>@item.NomeProduto</b></p>
+                            <p class="text-center card-label fundoBranco" style="margin-bottom: 3px !important;">@item.getPreco()</p>
+                            <p class="text-center card-label fundoYellow ma-0 text-white link">À vista: @item.getPreco(true)</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
 }
-    </tbody>
-</table>
+else
+{
+    <h4 class="font-paytone-one-regular text-lightPurple">Nenhum produto encontrado</h4>
+}
+
+@section Lateral {
+    <div>
+
+        <h4>Filtrar produto</h4>
+        <hr />
+        <form>
+            <h5 class="mb-3">Limpar filtros <i class="bi bi-trash" style="font-size: 15px;"></i> </h5>
+            <div class="form-group">
+                <h4 class="mb-0">Faixa de preço</h4>
+                <hr />
+                <label class="form-control">
+                    <input type="radio" name="faixapreco" value="1">
+                    R$ 0,00 a R$ 25,00
+                </label>
+                <label class="form-control">
+                    <input type="radio" name="faixapreco" value="2">
+                    R$ 25,00 a R$ 50,00
+                </label>
+                <label class="form-control">
+                    <input type="radio" name="faixapreco" value="3">
+                    R$ 50,00 a R$ 100,00
+                </label>
+                <label class="form-control">
+                    <input type="radio" name="faixapreco" value="4">
+                    R$ 100,00 a R$ 200,00
+                </label>
+                <label class="form-control">
+                    <input type="radio" name="faixapreco" value="5">
+                    + R$ 200,00
+                </label>
+            </div>
+            <div class="form-group">
+                <h4 class="mb-0">Marcas</h4>
+                <hr />
+                <label class="form-control">
+                    <input type="radio" name="faixapreco" value="1">
+                    Golden
+                </label>
+                <label class="form-control">
+                    <input type="radio" name="faixapreco" value="2">
+                    Matisse
+                </label>
+                <label class="form-control">
+                    <input type="radio" name="faixapreco" value="3">
+                    Premier
+                </label>
+                <label class="form-control">
+                    <input type="radio" name="faixapreco" value="4">
+                    Whiskas
+                </label>
+            </div>
+
+        </form>
+    </div>
+
+}
+
+<style>
+    .form-control {
+        background-color: transparent;
+        border: none;
+    }
+
+    hr {
+        margin-top: 2px;
+    }
+</style>
+

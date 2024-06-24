@@ -35,49 +35,49 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm align-content-between navbar-dark fundo-navBar border-bottom box-shadow mb-3">
-            <div class="">
-                <ul class="nav navbar-collapse collapse flex-grow-0 text-decoration-none">
-                    <li class="nav-item"><a class="bi bi-search text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
-                    <li class="nav-item"><a class="bi bi-basket text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Carrinho" asp-controller="Carrinho"></a></li>
-                    @if (cliente == null)
-                    {
-                        <li class="nav-item"><a class="bi bi-person text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar" asp-action="Login" asp-controller="Cliente"></a></li>
-                    }
-                    else
-                    {
-                        <li class="nav-item "><a asp-action="Login" asp-controller="Cliente" class="text-white text-decoration-none">Olá, @cliente.nomeUsuario</a></li>
-                        <li class="nav-item"><a asp-controller="Cliente" asp-action="Sair" class="bi bi-box-arrow-right text-white m-4 d-grid text-decoration-none tamanho-fonte-nav-bar"></a></li>
-                    }
-                </ul>
-            </div>
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow mb-3">
+            @*Botão para modo celular*@
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="container">
+                <div class="row">
+                    <ul class="nav navbar-collapse collapse " aria-expanded="false">
+                        <a class="navbar-brand align-content-center" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" style="height:12vh;" /></a>
+                    </ul>
+                </div>
+                <div class="row">
+                    <ul class="nav navbar-collapse collapse flex-grow-0 justify-content-end">
+                        <li class="nav-link">
+                            <form asp-action="filtrarProduto" asp-controller="Produto" class="row g-3 align-items-center">
+                                <div class="col-auto">
+                                    <input type="text" class="form-control card-label" style="border: 0.2px solid var(--yellow); background-color: white;" name="nome" />
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="bi bi-search text-purple m-4 d-grid tamanho-fonte-nav-bar iconeSearch"></button>
+                                </div>
+                            </form>
+                        </li>
+                        <li class="nav-item"><a class="bi bi-cart3 text-purple m-4 d-grid tamanho-fonte-nav-bar" asp-action="Carrinho" asp-controller="Carrinho"></a></li>
+                        @if (cliente == null)
+                        {
+                            <li class="nav-item"><a class="bi bi-person text-purple m-4 d-grid tamanho-fonte-nav-bar" asp-action="Login" asp-controller="Cliente"></a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-item "><a asp-action="Login" asp-controller="Cliente" class="text-purple">Olá, @cliente.nomeUsuario</a></li>
+                            <li class="nav-item"><a asp-controller="Cliente" asp-action="Sair" class="bi bi-box-arrow-right text-purple m-4 d-grid tamanho-fonte-nav-bar"></a></li>
+                        }
+                    </ul>
+                    <ul class="nav navbar-collapse collapse flex-grow-0 justify-content-end">
+                        <li class="nav-link"><a class="text-purple font-paytone-one-regular" asp-action="filtrarProduto" asp-controller="Produto" asp-route-codCategoria="1">Rações secas</a></li>
+                        <li class="nav-link"><a class="text-purple font-paytone-one-regular" asp-action="filtrarProduto" asp-controller="Produto" asp-route-codCategoria="6">Esconderijos</a></li>
+                        <li class="nav-link"><a class="text-purple font-paytone-one-regular" asp-action="filtrarProduto" asp-controller="Produto" asp-route-codCategoria="4">Comedouros</a></li>
+                        <li class="nav-link"><a class="text-purple font-paytone-one-regular" asp-action="filtrarProduto" asp-controller="Produto" asp-route-codCategoria="9">Roupas</a></li>
+                    </ul>
+                </div>
 
-                @*Botão para modo celular*@
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <ul class="nav navbar-collapse collapse justify-content-around" aria-expanded="false">
-                    <li class="d-flex ">
-                        <div class="dropdown me-5">
-                            <div class="text-white font-paytone-one-regular tamanho-fonte-nav-bar" type="button" id="dropdownMenuButton" aria-expanded="false">
-                                Para Gato
-                            </div>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><div class="dropdown-item">Brinquedos</div></li>
-                                <li><a class="dropdown-item" asp-action="InformacoesProduto" asp-controller="Produto" asp-route-id="1">Ração</a></li>
-                                <li><div class="dropdown-item">Comedouro</div></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="nav justify-content-center ">
-                            <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" style="height:12vh;" /></a>
-                        </div>
-                    </li>
-                </ul>
             </div>
         </nav>
     </header>
@@ -85,10 +85,10 @@
     @if (MainLayout.IsDialogOpen())
     {
         <div id="overlay" onclick="fecharDialog(event)">
-            <dialog id="Dialog" open style="position: fixed; top: 50%; background-color: var(--white); border: none; border-radius: 15px; color: var(--darkFuchsia); width: 35%;">
-                <b>@MainLayout.TituloDialog</b>
+            <dialog id="Dialog" open style="position: fixed; top: 50%; left: 32%; background-color: var(--white); border: none; border-radius: 15px; color: var(--darkFuchsia); width: 35%;">
+                <b style="margin-left: 10px">@MainLayout.TituloDialog</b>
                 <hr />
-                <p>@MainLayout.ConteudoDialog</p>
+                <p style="margin-left: 10px">@MainLayout.ConteudoDialog</p>
                 <div class="d-flex justify-content-end gap-2">
                     <a id="Sair" onclick="fecharDialog()" class="btn btn-success text-white">Voltar</a>
                     <a asp-action="ExecutarDialog" class="btn btn-danger">Deletar</a>
@@ -101,6 +101,45 @@
     {
         <div id="snackbar">@MainLayout.MensagemSnackbar</div>
     }
+
+
+
+    @if (IsSectionDefined("Lateral"))
+    {
+        <div class="container">
+            <div class="row">
+                <h1 class="font-paytone-one-regular text-lightPurple mb-5">Aproveite nossos produtos</h1>
+
+                <!-- Coluna para o conteúdo lateral -->
+                @if (IsSectionDefined("Lateral"))
+                {
+                    <div class="col-md-3">
+                        @RenderSection("Lateral", required: false)
+                    </div>
+                }
+                <!-- Coluna para o conteúdo principal -->
+                <div class="col-md-9">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    }
+
+    <footer class="border-top footer text-muted">
+        <div class="container text-white">
+            &copy; @DateTime.Now.Year - CatBuddy <a asp-controller="Colaborador" asp-action="Login">Colaboradores</a>
+        </div>
+    </footer>
 
     <script>
         function fecharDialog(event = null) {
@@ -134,17 +173,6 @@
         };
     </script>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container text-white">
-            &copy; @DateTime.Now.Year - CatBuddy <a asp-controller="Colaborador" asp-action="Login">Colaboradores</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

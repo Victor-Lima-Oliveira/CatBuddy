@@ -210,7 +210,6 @@ namespace CatBuddy.Repository
             // Montar a sintaxe SQL 
             sbAux.Append(" SELECT * FROM vwproduto ");
             sbAux.Append(" WHERE IsProdutoAtivo = true");
-
             
             if (produto != null)
             {
