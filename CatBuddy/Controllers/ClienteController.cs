@@ -335,5 +335,14 @@ namespace CatBuddy.Controllers
             MainLayout.OpenDialog(titulo, Strings.ConfirmaDeletarCartao, id);
             return RedirectToAction(nameof(VisualizarCartoes));
         }
+
+        public IActionResult SelecionarEndereco(Endereco endereco)
+        {
+            MainLayout.EnderecoSelecionado = endereco;
+
+            MainLayout.OpenSnackbar($"Endereço selecionado: {endereco.nomeEnderecoUsuario}");
+
+            return RedirectToAction(nameof(VisualizarEnderecos));
+        }
     }
 }

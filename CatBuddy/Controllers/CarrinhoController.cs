@@ -5,6 +5,7 @@ using CatBuddy.Utils;
 using Microsoft.AspNetCore.Mvc;
 using MySqlX.XDevAPI;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Transactions;
 
 namespace CatBuddy.Controllers
@@ -15,7 +16,7 @@ namespace CatBuddy.Controllers
         private IPedidoRepository _pedidoRepository;
         private IHttpContextAccessor _httpContextAccessor;
         private CarrinhoDeCompraCookie _carrinhoDeCompraCookie;
-        
+
         public CarrinhoController(IProdutoRepository produtoRepository,
             CarrinhoDeCompraCookie carrinhoDeCompraCookie,
             IPedidoRepository pedidoRepository, IHttpContextAccessor httpContextAccessor)
@@ -83,7 +84,13 @@ namespace CatBuddy.Controllers
 
         public IActionResult Pagamento()
         {
-            return View();
+            ViewCheckout view = new ViewCheckout()
+            {
+                ListProduto = _carrinhoDeCompraCookie.ConsultarProdutosNoCarrinho(),
+                Endereco = MainLayout.EnderecoSelecionado,
+            };
+
+            return View(view);
         }
 
         public IActionResult FinalizarPedido(int codPagamento)

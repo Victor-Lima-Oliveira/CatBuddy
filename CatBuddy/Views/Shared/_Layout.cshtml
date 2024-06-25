@@ -59,7 +59,14 @@
                                 </div>
                             </form>
                         </li>
-                        <li class="nav-item"><a class="bi bi-cart3 text-purple m-4 d-grid tamanho-fonte-nav-bar" asp-action="Carrinho" asp-controller="Carrinho"></a></li>
+                        <li class="nav-item pr-0">
+                            @if (MainLayout.qtdCarrinho != 0)
+                            {
+                                <p style="font-size: 12px; text-align: end; margin: 0px; padding: 0px;">@MainLayout.qtdCarrinho</p>
+                            }
+                            <a class="bi bi-cart3 text-purple m-4 d-grid tamanho-fonte-nav-bar" asp-action="Carrinho" asp-controller="Carrinho">
+   
+                            </a></li>
                         @if (cliente == null)
                         {
                             <li class="nav-item"><a class="bi bi-person text-purple m-4 d-grid tamanho-fonte-nav-bar" asp-action="Login" asp-controller="Cliente"></a></li>
@@ -113,7 +120,7 @@
                 <!-- Coluna para o conteúdo lateral -->
                 @if (IsSectionDefined("Lateral"))
                 {
-                    <div class="col-md-3">
+                    <div class="col-md-3 paddingFooter">
                         @RenderSection("Lateral", required: false)
                     </div>
                 }

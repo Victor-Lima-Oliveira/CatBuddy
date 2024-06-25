@@ -42,7 +42,8 @@
                 </td>
                 <td>
                     @Html.ActionLink("Editar", "EditarEndereco", new { id = item.Endereco.cod_id_endereco }) |
-                    @Html.ActionLink("Deletar", "DeletarEndereco", new { id = item.Endereco.cod_id_endereco, nome = item.Endereco.nomeEnderecoUsuario })
+                    @Html.ActionLink("Deletar", "DeletarEndereco", new { id = item.Endereco.cod_id_endereco, nome = item.Endereco.nomeEnderecoUsuario }) |
+                    @Html.ActionLink("Selecionar", "SelecionarEndereco", new { endereco = item.Endereco })
                 </td>
             </tr>
         }

@@ -1,29 +1,128 @@
-﻿@model IEnumerable<CatBuddy.Models.Produto>
+﻿@using Newtonsoft.Json
+@model CatBuddy.Models.ViewCheckout
+@inject IHttpContextAccessor httpContext
 
 @{
-    ViewData["Title"] = "Pagamento";
+    ViewData["Title"] = "Finalização";
+    Cliente cliente = null;
+    if (httpContext.HttpContext.Session.GetString("Login.Cliente") != null)
+    {
+        // Recebe os dados do usuário
+        cliente = JsonConvert.DeserializeObject<Cliente>(httpContext.HttpContext.Session.GetString("Login.Cliente"));
+    }
 }
 
-<h1>Escolha sua forma de pagamento</h1>
 
-<table class="table d-flex d-flex-inline">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Preco)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeProduto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QtdDeProduto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeFornecedor)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
- </table>
+@if (cliente != null)
+{
+    @if (Model.ListProduto != null)
+    {
+        <p>
+            <div class="row ">
+                <div class="col-4">
+                    <h2 class="font-paytone-one-regular text-yellow">Carrinho</h2>
+                </div>
+            </div>
+        </p>
+        <div class="row d-flex flex-wrap">
+            <div class="col-8">
+                @foreach (var item in Model.ListProduto)
+                {
+                    <div class="container border-bottom mt-3">
+                        <div class="row">
+                            @*foto*@
+                            <div class="col-2 ">
+                                <img src="~/@item.ImgPath" width="80%" height="80%" />
+                            </div>
 
-<a class="btn btn-yellow" asp-action="FinalizarPedido" asp-controller="Carrinho" asp-route-codPagamento="1">Finalizar compra</a>
+                            @* Descricao *@
+                            <div class="col-8">
+                                <h4 class="font-paytone-one-regular text-yellow">@item.NomeProduto</h4>
+                                <div class="mt-2">
+                                    <b>
+                                        Quantidade:
+                                    </b>
+                                    <div class="btn p-0">
+                                        @item.QtdDeProduto
+                                        @*<select asp-for="@item.QtdDeProduto" class="form-select form-select-md quantidade" data-id="@item.CodIdProduto">
+                            @for (int i = 1; i <= 10; i++)
+                            {
+                            <option value="@i">@i</option>
+                            }
+                            </select>
+                            *@
+                                    </div>
+                                    <div>
+                                        <label class=""><span class=""><b>Preço</b> R$:</span> @item.Preco</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-4">
+                <h4 class="text-purple text-center">Resumo</h4>
+                <div class="fundoDarkFuchsia w-100 mx-3 rounded-3 p-2">
+                    <p>
+                        <label>Subtotal</label>
+                        <label>@Model.getTotal()</label>
+                    </p>
+                    <label>Frete</label>
+                    <label>Total</label>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-yellow" asp-action="Pagamento" asp-controller="Carrinho">Comprar</a>
+    }
+    else
+    {
+        <h4 class="font-paytone-one-regular text-darkFuchsia">Não possui produtos no carrinho</h4>
+    }
+    <div class="row col-12">
+        @if (Model.Endereco != null)
+        {
+            <h4 class="text-purple text-center">Endereço de entrega</h4>
+            <div class="fundoDarkFuchsia">
+                <div>
+                    <label class="text-center w-100">@Model.Endereco.nomeEnderecoUsuario</label>
+
+                    <label class="">CEP: </label>
+                    <label class="">@Model.Endereco.cepUsuario</label>
+                </div>
+            </div>
+
+        }
+        else
+        {
+            <h4 class="font-paytone-one-regular text-darkFuchsia">Selecione um endereço</h4>
+        }
+    </div>
+}
+else
+{
+    <h4 class="font-paytone-one-regular text-darkFuchsia">Para acessar o carrinho, faça seu login </h4>
+    <a asp-action="Login" asp-controller="Cliente" class="btn btn-yellow">Login</a>
+}
+
+
+<script>
+    $(document).ready(function () {
+        $('.quantidade').change(function () {
+            var idProduto = $(this).data('id');
+            var quantidade = $(this).val();
+
+            $.ajax({
+                url: '/Carrinho/AlterarQuantidadeNosCookies',
+                type: 'POST',
+                data: { Produto.codIdProduto: idProduto, Produto.qtdDeProduto: quantidade },
+                success: function () {
+                    location.reload();
+                },
+                error: function () {
+                    alert('Erro ao atualizar a página, tente novamente mais tarde');
+                }
+            });
+        });
+    });
+</script>

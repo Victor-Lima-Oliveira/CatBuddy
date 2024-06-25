@@ -1,4 +1,6 @@
-﻿namespace CatBuddy.Utils
+﻿using CatBuddy.Models;
+
+namespace CatBuddy.Utils
 {
     public static class MainLayout
     {
@@ -10,6 +12,10 @@
         public static bool showSnackbar = false;
         public static string MensagemSnackbar = String.Empty;
         public static int codCliente = 0;
+
+        public static int qtdCarrinho = 0;
+
+        public static Endereco EnderecoSelecionado = null;
 
 
         public static void OpenDialog(string Titulo, string conteudo, object parametro = null)

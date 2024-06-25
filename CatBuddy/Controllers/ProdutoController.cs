@@ -1,5 +1,6 @@
 ﻿using CatBuddy.httpContext;
 using CatBuddy.LibrariesSessao.Filtro;
+using CatBuddy.LibrariesSessao.Login;
 using CatBuddy.Models;
 using CatBuddy.Repository.Contract;
 using CatBuddy.Utils;
@@ -11,13 +12,15 @@ namespace CatBuddy.Controllers
     {
         private IProdutoRepository _produtoRepository;
         private CarrinhoDeCompraCookie _carrinhoDeCompraCookie;
+        private LoginCliente _loginCliente;
 
         protected List<Categoria> listCategoria = new List<Categoria>();
         protected List<Fornecedor> listFornecedor = new List<Fornecedor>();
-        public ProdutoController(IProdutoRepository produtoRepository, CarrinhoDeCompraCookie carrinhoDeCompraCookie)
+        public ProdutoController(IProdutoRepository produtoRepository, CarrinhoDeCompraCookie carrinhoDeCompraCookie, LoginCliente loginCliente)
         {
             _produtoRepository = produtoRepository;
             _carrinhoDeCompraCookie = carrinhoDeCompraCookie;
+            _loginCliente = loginCliente;
         }
         public IActionResult filtrarProduto(string nome = "", int codCategoria = 0)
         {
@@ -76,7 +79,7 @@ namespace CatBuddy.Controllers
 
         }
 
-        public IActionResult AdicionarItemAoCarrinho(ViewProdutoeInformacoesNutricionais produtoSelecionado)
+        public IActionResult AdicionarItemAoCarrinho(ViewProdutoeInformacoesNutricionais produtoSelecionado, string action)
         {
             try
             {
@@ -105,8 +108,26 @@ namespace CatBuddy.Controllers
                     // Salva os dados nos cookies
                     _carrinhoDeCompraCookie.AdicionarAoCarrinho(produtoNoCarrinho);
 
-                    // Depois redireciona para o carrinho 
-                    return RedirectToAction("Carrinho", "Carrinho");
+                    // verifica se possui login na sessão
+                    if (_loginCliente.ObterCliente() != null)
+                    {
+                        if (action == "ComprarAgora")
+                        {
+                            return RedirectToAction("Pagamento", "Carrinho");
+                        }
+                        else if (action == "AdicionarAoCarrinho")
+                        {
+                            return RedirectToAction("InformacoesProduto", new { id = produtoSelecionado.produto.CodIdProduto });
+                        }
+                        else
+                        {
+                            return BadRequest(); // Ação desconhecida
+                        }
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login", "Cliente");
+                    }
                 }
             }
             catch (Exception err)

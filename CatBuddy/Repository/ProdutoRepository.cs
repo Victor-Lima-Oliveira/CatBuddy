@@ -197,6 +197,8 @@ namespace CatBuddy.Repository
                     produto.imgPathinfoNutricionais = mySqlDataReader["imgPathinfoNutricionais"].ToString();
                 }
             }
+            if (produto == null)
+                return null;
             return produto;
         }
 

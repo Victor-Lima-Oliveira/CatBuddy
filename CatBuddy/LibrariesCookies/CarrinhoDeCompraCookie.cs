@@ -1,4 +1,5 @@
 ﻿using CatBuddy.Models;
+using CatBuddy.Utils;
 using Newtonsoft.Json;
 
 namespace CatBuddy.httpContext
@@ -65,6 +66,7 @@ namespace CatBuddy.httpContext
                 if (produtoJaCadastrado == null)
                 {
                     listProduto.Add(produtoQueSeraPersistido);
+                    MainLayout.qtdCarrinho++;
                 }
                 // Se o produto ja foi cadastrado, atualiza a quantidade com o novo valor 
                 else
@@ -89,13 +91,16 @@ namespace CatBuddy.httpContext
 
                     // Adiciona o novo produto na lista 
                     listProduto.Add(produtoAtualizado);
+                    MainLayout.qtdCarrinho++;
                 }
             }
             else
             {
                 listProduto = new List<Produto>();
                 listProduto.Add(produtoQueSeraPersistido);
+                MainLayout.qtdCarrinho++;
             }
+
 
             // Registra os produtos nos cookies
             SalvarProdutoNosCookies(listProduto);
@@ -117,6 +122,7 @@ namespace CatBuddy.httpContext
             {
                 // Remove o produto da lista
                 listProduto.Remove(produtoJaCadastrado);
+                MainLayout.qtdCarrinho--;
 
                 // Salva a lista sem ele o produto nos cookies 
                 SalvarProdutoNosCookies(listProduto);
@@ -129,6 +135,7 @@ namespace CatBuddy.httpContext
         public void RemoverTodos()
         {
             _cookie.Remover(sKey);
+            MainLayout.qtdCarrinho = 0;
         }
 
     }

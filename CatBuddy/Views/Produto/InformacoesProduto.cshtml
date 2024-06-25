@@ -23,7 +23,7 @@ else if (Model.produto.QtdEstoque <= 20)
 {
     <h6 class="alert alert-yellow"><b>Corra:</b> Ultimos produtos em estoque</h6>
 }
-
+<h2 class="text-purple">Detalhes do item</h2>
 @*Painel com foto e painel de informações*@
 <div class="container">
     <div class="row">
@@ -61,7 +61,8 @@ else if (Model.produto.QtdEstoque <= 20)
                     @Html.HiddenFor(model => model.produto.CodIdProduto)
                     <input asp-for="produto.CodIdProduto" Class="visually-hidden" type="number" value="@Model.produto.CodIdProduto" />
 
-                    <input class="btn btn-yellow" type="submit" value="Adicionar ao carrinho" @(Model.produto.QtdEstoque == 0 ? "disabled" : "") />
+                    <input type="submit" name="action" value="AdicionarAoCarrinho" class="btn btn-darkFuchsia @(Model.produto.QtdEstoque == 0 ? "disabled" : "")" />
+                    <input type="submit" name="action" value="ComprarAgora" class="btn btn-darkFuchsia" />
                 </form>
             </div>
         </div>
@@ -75,7 +76,7 @@ else if (Model.produto.QtdEstoque <= 20)
 
 @*Descrição completa*@
 <div class="container" id="descricaoCompleta">
-    <h4 class="font-paytone-one-regular text-yellow">Descrição</h4>
+    <h4 class="font-paytone-one-regular text-purple">Descrição</h4>
     <p class="text-justify">@Model.produto.Descricao</p>
 </div>
 
@@ -86,7 +87,7 @@ else if (Model.produto.QtdEstoque <= 20)
 
 @*Informações complementares - As informações só serão apresentadas se tiver algo salvo no banco*@
 <div class="container">
-    <h4 class="font-paytone-one-regular text-yellow">Informações complementares</h4>
+    <h4 class="font-paytone-one-regular text-purple">Informações complementares</h4>
     <dl class="row">
         @if (!String.IsNullOrEmpty(Model.produto.Idade))
         {
@@ -115,12 +116,6 @@ else if (Model.produto.QtdEstoque <= 20)
                 @Html.DisplayFor(model => model.produto.Sabor)
             </dd>
         }
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.produto.CodFornecedor)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.produto.CodFornecedor)
-        </dd>
         @if (!String.IsNullOrEmpty(Model.produto.MedidasAproximadas))
         {
             <dt class="col-sm-2">
