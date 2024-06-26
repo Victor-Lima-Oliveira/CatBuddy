@@ -93,10 +93,10 @@
     @if (MainLayout.IsDialogOpen())
     {
         <div id="overlay" onclick="fecharDialog(event)">
-            <dialog id="Dialog" open style="position: fixed; top: 50%; background-color: var(--white); border: none; border-radius: 15px; color: var(--darkFuchsia); width: 35%;">
-                <b>@MainLayout.TituloDialog</b>
+            <dialog id="Dialog" open style="position: fixed; top: 50%; left: 32%; background-color: var(--white); border: none; border-radius: 15px; color: var(--darkFuchsia); width: 35%;">
+                <b style="margin-left: 10px">@MainLayout.TituloDialog</b>
                 <hr />
-                <p>@MainLayout.ConteudoDialog</p>
+                <p style="margin-left: 10px">@MainLayout.ConteudoDialog</p>
                 <div class="d-flex justify-content-end gap-2">
                     <a id="Sair" onclick="fecharDialog()" class="btn btn-success text-white">Voltar</a>
                     <a asp-action="ExecutarDialog" class="btn btn-danger">Deletar</a>
@@ -107,7 +107,10 @@
 
     @if (MainLayout.IsSnackBarOpen())
     {
-        <div id="snackbar">@MainLayout.MensagemSnackbar</div>
+        <div id="snackbar" class="text-white" style="background-color: #860F58;">@MainLayout.MensagemSnackbar</div>
+        <script>
+            fecharSnackBar(); // Chama a função para fechar o snackbar após 3 segundos
+        </script>
     }
 
     <script>
@@ -142,6 +145,33 @@
         }
     </script>
 
+    <script>
+        // Função para fechar o snackbar após um tempo determinado
+        function fecharSnackBar() {
+            // Espera 3 segundos (3000 milissegundos) e depois fecha o snackbar
+            setTimeout(function () {
+                // Fecha o snackbar chamando a função do ASP.NET Core via AJAX
+                fetch('/api/front/CloseSnackBar', {
+                    method: 'GET',
+                    headers: {
+                    },
+                }).then(response => {
+                    if (response.ok) {
+                        console.log('Snackbar fechado com sucesso.');
+                    } else {
+                        console.error('Erro ao fechar o snackbar:', response.statusText);
+                    }
+                }).catch(error => {
+                    console.error('Erro ao fechar o snackbar:', error);
+                });
+            }, 5000); // Tempo em milissegundos (3 segundos)
+        }
+
+        // Chamada para iniciar o temporizador quando o snackbar é exibido
+        if (@MainLayout.IsSnackBarOpen().ToString().ToLower()) {
+            fecharSnackBar();
+        }
+    </script>
 
     <div class="container">
         <main role="main" class="pb-3">

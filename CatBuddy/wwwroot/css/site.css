@@ -113,6 +113,8 @@ a {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: Paytone One;
+    text-transform: uppercase;
+    color: var(--purple)
 }
 
 .fundoLightPurple {
@@ -149,10 +151,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .cardCirculo {
     border-radius: 50%;
-    width: 150px;
-    height: 165px;
+    width: 170px;
+    height: 185px;
     margin: 1px 8px;
-    padding: 2px;
     background-size: contain; /* Garante que a imagem cubra todo o espaço do card */
     background-repeat: no-repeat; /* Evita que a imagem seja repetida */
     background-position: center; /* Centraliza a imagem dentro do card */
@@ -198,3 +199,18 @@ fieldset {
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra */
 }
+
+table th{
+    text-transform: uppercase;
+    color: var(--darkFuchsia);
+    
+}
+
+table td{
+    color: gray;
+}
+
+table {
+    border: 1px solid var(--darkFuchsia--rgb);
+}
+

@@ -12,6 +12,25 @@
     }
 }
 
+@section LateralEsquerda {
+    <div>
+        <h4 class="text-purple text-center">Resumo do pedido</h4>
+        <div class="fundoDarkFuchsia w-100 mx-3 rounded-3 p-2">
+            <p>
+                <label>Subtotal: </label>
+                <label>@Model.getTotal()</label>
+            </p>
+            <p>
+                <label>Frete: </label>
+                <label>R$: 10,00</label>
+            </p>
+            <p>
+                <label>Total: </label>
+                <label>@Model.getTotal(true)</label>
+            </p>
+        </div>
+    </div>
+}
 
 @if (cliente != null)
 {
@@ -25,79 +44,86 @@
             </div>
         </p>
         <div class="row d-flex flex-wrap">
-            <div class="col-8">
-                @foreach (var item in Model.ListProduto)
-                {
-                    <div class="container border-bottom mt-3">
-                        <div class="row">
-                            @*foto*@
-                            <div class="col-2 ">
-                                <img src="~/@item.ImgPath" width="80%" height="80%" />
-                            </div>
+            @foreach (var item in Model.ListProduto)
+            {
+                <div class="container border-bottom mt-3">
+                    <div class="row">
+                        @*foto*@
+                        <div class="col-2 ">
+                            <img src="~/@item.ImgPath" width="80%" height="80%" />
+                        </div>
 
-                            @* Descricao *@
-                            <div class="col-8">
-                                <h4 class="font-paytone-one-regular text-yellow">@item.NomeProduto</h4>
-                                <div class="mt-2">
-                                    <b>
-                                        Quantidade:
-                                    </b>
-                                    <div class="btn p-0">
-                                        @item.QtdDeProduto
-                                        @*<select asp-for="@item.QtdDeProduto" class="form-select form-select-md quantidade" data-id="@item.CodIdProduto">
-                            @for (int i = 1; i <= 10; i++)
-                            {
-                            <option value="@i">@i</option>
-                            }
-                            </select>
-                            *@
-                                    </div>
-                                    <div>
-                                        <label class=""><span class=""><b>Preço</b> R$:</span> @item.Preco</label>
-                                    </div>
+                        @* Descricao *@
+                        <div class="col-8">
+                            <h4 class="font-paytone-one-regular text-yellow">@item.NomeProduto</h4>
+                            <div class="mt-2">
+                                <b>
+                                    Quantidade:
+                                </b>
+                                <div class="btn p-0">
+                                    @item.QtdDeProduto
+                                </div>
+                                <div>
+                                    <label class=""><span class=""><b>Preço</b> R$:</span> @item.Preco</label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                }
-            </div>
-            <div class="col-4">
-                <h4 class="text-purple text-center">Resumo</h4>
-                <div class="fundoDarkFuchsia w-100 mx-3 rounded-3 p-2">
-                    <p>
-                        <label>Subtotal</label>
-                        <label>@Model.getTotal()</label>
-                    </p>
-                    <label>Frete</label>
-                    <label>Total</label>
                 </div>
-            </div>
+            }
         </div>
-        <a class="btn btn-yellow" asp-action="Pagamento" asp-controller="Carrinho">Comprar</a>
+
+        <div class="row">
+            @if (Model.Endereco != null)
+            {
+                <div class="my-5">
+                    <h4 class="text-purple text-start">Endereço de entrega</h4>
+                    <div class="fundoDarkFuchsia rounded-3 w-25 p-2">
+                        <div>
+                            <label class="text-center w-100">@Model.Endereco.nomeEnderecoUsuario</label>
+                            <label class="">CEP: </label>
+                            <label class="cep">@Model.Endereco.cepUsuario</label><br />
+                            <label class="">R. @Model.Endereco.enderecoUsuario</label><br />
+                            <label class="">@Model.Endereco.bairroUsuario</label>
+                        </div>
+                    </div>
+                    <a asp-action="VisualizarEnderecos" asp-controller="cliente" asp-route-bSelecionar="true" class="btn btn-darkFuchsia my-3">Alterar</a>
+                </div>
+            }
+            else
+            {
+                <div class="my-5">
+                    <h4 class="font-paytone-one-regular text-darkFuchsia">Selecione um endereço</h4>
+                    <a asp-action="VisualizarEnderecos" asp-controller="cliente" asp-route-bSelecionar="true" class="btn btn-darkFuchsia">Selecionar</a>
+                </div>
+            }
+        </div>
+
+        <div class="row">
+            <form asp-action="FinalizarPedido">
+            <div class="my-5">
+                <h4 class="text-purple text-start">Selecione a forma de pagamento</h4>
+                <label>
+                        <input type="radio" asp-for="codPagamento"  value="1"  />
+                    PIX
+                </label><br />
+                <label>
+                        <input type="radio" asp-for="codPagamento"  value="2" />
+                    Cartão de crédito
+                </label><br />
+                <label>
+                        <input type="radio" asp-for="codPagamento"  value="3" />
+                    Boleto
+                </label>
+            </div>
+                <button type="submit" class="btn btn-yellow my-5 text-end">Finalizar Pedido</button>
+            </form>
+        </div>
     }
     else
     {
         <h4 class="font-paytone-one-regular text-darkFuchsia">Não possui produtos no carrinho</h4>
     }
-    <div class="row col-12">
-        @if (Model.Endereco != null)
-        {
-            <h4 class="text-purple text-center">Endereço de entrega</h4>
-            <div class="fundoDarkFuchsia">
-                <div>
-                    <label class="text-center w-100">@Model.Endereco.nomeEnderecoUsuario</label>
-
-                    <label class="">CEP: </label>
-                    <label class="">@Model.Endereco.cepUsuario</label>
-                </div>
-            </div>
-
-        }
-        else
-        {
-            <h4 class="font-paytone-one-regular text-darkFuchsia">Selecione um endereço</h4>
-        }
-    </div>
 }
 else
 {

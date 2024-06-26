@@ -11,6 +11,9 @@ namespace CatBuddy.Utils
 
         public static bool showSnackbar = false;
         public static string MensagemSnackbar = String.Empty;
+
+        public static InfoSessao infoSessao = new InfoSessao();
+
         public static int codCliente = 0;
 
         public static int qtdCarrinho = 0;

@@ -36,7 +36,7 @@ else if (Model.produto.QtdEstoque <= 20)
         <div class="col">
             <h4 class="font-paytone-one-regular text-yellow">@Html.DisplayFor(model => model.produto.NomeProduto)</h4>
             <h5>@Model.produto.NomeFornecedor</h5>
-            <h6><a href="#descricaoCompleta">Ver Descrição completa</a></h6>
+            <h6><a href="#descricaoCompleta" style="text-decoration: underline">Ver Descrição completa</a></h6>
             <div><b>Preço: </b>@Model.produto.getPreco()</div>
             <div class="mt-2">
                 <form asp-action="AdicionarItemAoCarrinho" asp-controller="Produto">
@@ -61,8 +61,8 @@ else if (Model.produto.QtdEstoque <= 20)
                     @Html.HiddenFor(model => model.produto.CodIdProduto)
                     <input asp-for="produto.CodIdProduto" Class="visually-hidden" type="number" value="@Model.produto.CodIdProduto" />
 
-                    <input type="submit" name="action" value="AdicionarAoCarrinho" class="btn btn-darkFuchsia @(Model.produto.QtdEstoque == 0 ? "disabled" : "")" />
-                    <input type="submit" name="action" value="ComprarAgora" class="btn btn-darkFuchsia" />
+                    <input type="submit" name="action" value="Adicionar ao Carrinho" class="btn btn-darkFuchsia @(Model.produto.QtdEstoque == 0 ? "disabled" : "")" />
+                    <input type="submit" name="action" value="Comprar agora" class="btn btn-darkFuchsia" />
                 </form>
             </div>
         </div>

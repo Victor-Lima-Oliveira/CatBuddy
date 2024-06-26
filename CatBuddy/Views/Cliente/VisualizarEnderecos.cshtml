@@ -3,7 +3,12 @@
 @{
     ViewData["Title"] = "VisualizarEnderecos";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    bool bHabilitaSelecionar = false;
+
+    bool.TryParse(ViewBag.selecionar.ToString(), out bHabilitaSelecionar);
 }
+<a asp-action="CadastrarEndereco" asp-controller="cliente" class="btn btn-yellow">Cadastrar Endereco</a>
 
 <h1>Visualizar Enderecos</h1>
 <table class="table">
@@ -42,8 +47,13 @@
                 </td>
                 <td>
                     @Html.ActionLink("Editar", "EditarEndereco", new { id = item.Endereco.cod_id_endereco }) |
-                    @Html.ActionLink("Deletar", "DeletarEndereco", new { id = item.Endereco.cod_id_endereco, nome = item.Endereco.nomeEnderecoUsuario }) |
-                    @Html.ActionLink("Selecionar", "SelecionarEndereco", new { endereco = item.Endereco })
+                    @Html.ActionLink("Deletar", "DeletarEndereco", new { id = item.Endereco.cod_id_endereco, nome = item.Endereco.nomeEnderecoUsuario })
+
+                    @if (bHabilitaSelecionar)
+                    {
+                        <span>|</span>
+                        <a asp-action="SelecionarEndereco" name="endereco" asp-route-id="@item.Endereco.cod_id_endereco">Selecionar</a>
+                    }
                 </td>
             </tr>
         }

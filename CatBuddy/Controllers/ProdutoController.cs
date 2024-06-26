@@ -125,11 +125,11 @@ namespace CatBuddy.Controllers
                     // verifica se possui login na sessão
                     if (_loginCliente.ObterCliente() != null)
                     {
-                        if (action == "ComprarAgora")
+                        if (action == "Comprar agora")
                         {
                             return RedirectToAction("Pagamento", "Carrinho");
                         }
-                        else if (action == "AdicionarAoCarrinho")
+                        else if (action == "Adicionar ao Carrinho")
                         {
                             return RedirectToAction("InformacoesProduto", new { id = produtoSelecionado.produto.CodIdProduto });
                         }
@@ -354,27 +354,11 @@ namespace CatBuddy.Controllers
             listFornecedorAux = _produtoRepository.RetornaFornecedores();
             listCategoriaAux = _produtoRepository.RetornaCategorias();
 
-            // Declara o primeiro valor como selecione
-            fornecedor = new Fornecedor
-            {
-                codFornecedor = Const.SEM_FORNECEDOR_SELECIONADO,
-                nomeFornecedor = "Selecione um fornecedor"
-            };
-            listFornecedor.Add(fornecedor);
-
             // Coloca os outros valores do banco para os fornecedores
             foreach (Fornecedor fornecedorItem in listFornecedorAux)
             {
                 listFornecedor.Add(fornecedorItem);
             }
-
-            // Declara a primeira categoria como nula
-            categoria = new Categoria
-            {
-                codCategoria = Const.SEM_CATEGORIA_SELECIONADA,
-                nomeCategoria = "Selecione uma categoria"
-            };
-            listCategoria.Add(categoria);
 
             // Insere as categorias do banco na lista
             foreach (Categoria categoriaItem in listCategoriaAux)

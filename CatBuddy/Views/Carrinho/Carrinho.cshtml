@@ -71,11 +71,13 @@
                 </div>
             </div>
         }
-        <a class="btn btn-yellow" asp-action="Pagamento" asp-controller="Carrinho">Comprar</a>
+        <div class="d-flex justify-content-end">
+        <a class="btn btn-yellow my-5" asp-action="Pagamento" asp-controller="Carrinho">Avançar</a>
+        </div>
     }
     else
     {
-        <h4 class="font-paytone-one-regular text-darkFuchsia">Nenhum produto no carrinho, veja nossas sugestões: </h4>
+        <h4 class="font-paytone-one-regular text-darkFuchsia">Nenhum produto no carrinho </h4>
     }
 }
 else

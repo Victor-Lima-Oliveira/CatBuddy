@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Detalhar Pedido</h1>
+<h1 class="text-purple">Detalhar Pedido</h1>
 
 <table class="table">
     <thead>
@@ -22,7 +22,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.ItemPedido.subtotal)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -40,11 +39,6 @@
                 </td>
                 <td>
                     @item.ItemPedido.getSubtotal()
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                 </td>
             </tr>
         }

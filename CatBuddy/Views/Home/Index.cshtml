@@ -60,32 +60,38 @@
     <div class="w-100 d-flex flex-wrap gap-5 justify-content-center">
         <a asp-action="informacoesproduto" asp-controller="produto" asp-route-id="41">
             <div class="text-center">
-                <div class="cardCirculo fundoDarkFuchsia" style="background-image: url(../img/produtos/sachegoldengourmetadultosatum.png) !important">
+                <div class="cardCirculo fundoDarkFuchsia" style="background-image: url(../img/produtos/sachegoldengourmetadultosatum.png)">
                     <div class="cardCirculo-content">
                     </div>
                 </div>
                 <p class="cardCirculo-content">Sache gourmet</p>
             </div>
         </a>
+        <a asp-action="informacoesproduto" asp-controller="produto" asp-route-id="1">
+            <div class="text-center">
+                <div class="cardCirculo fundoDarkFuchsia" style="background-image: url(../img/produtos/premierobesidade.png)">
+                    <div class="cardCirculo-content"></div>
+                </div>
+                <p class="cardCirculo-content">Nutrição Clínica Obesidade</p>
+            </div>
+        </a>
+        <a asp-action="informacoesproduto" asp-controller="produto" asp-route-id="33">
+            <div class="text-center">
+                <div class="cardCirculo fundoDarkFuchsia" style="background-image: url(../img/produtos/whiskasadultocarne.png)">
+                    <div class="cardCirculo-content"></div>
+                </div>
+                <p class="cardCirculo-content">Whiskas Peixe</p>
+            </div>
+        </a>
+        <a asp-action="informacoesproduto" asp-controller="produto" asp-route-id="46">
+            <div class="text-center">
+                <div class="cardCirculo fundoDarkFuchsia" style="background-image: url(../img/produtos/churugalinha.png)">
+                    <div class="cardCirculo-content"></div>
+                </div>
+                <p class="cardCirculo-content">Petisco Churu</p>
+            </div>
+        </a>
 
-        <div class="text-center">
-            <div class="cardCirculo fundoDarkFuchsia">
-                <div class="cardCirculo-content"></div>
-            </div>
-            <p class="cardCirculo-content">CatNip</p>
-        </div>
-        <div class="text-center">
-            <div class="cardCirculo fundoDarkFuchsia">
-                <div class="cardCirculo-content"></div>
-            </div>
-            <p class="cardCirculo-content">CatNip</p>
-        </div>
-        <div class="text-center">
-            <div class="cardCirculo fundoDarkFuchsia">
-                <div class="cardCirculo-content"></div>
-            </div>
-            <p class="cardCirculo-content">CatNip</p>
-        </div>
     </div>
 </div>
 
@@ -93,18 +99,26 @@
 <div class="my-5">
     <h1 class="text-purple font-paytone-one-regular mb-3">Marcas que você pode confiar</h1>
     <div class="w-100 d-flex flex-wrap gap-5 justify-content-center">
-        <div class="text-center">
-            <div class="cardRetangular fundoYellow"></div>
-        </div>
-        <div class="text-center">
-            <div class="cardRetangular fundoYellow"></div>
-        </div>
-        <div class="text-center">
-            <div class="cardRetangular fundoYellow"></div>
-        </div>
-        <div class="text-center">
-            <div class="cardRetangular fundoYellow"></div>
-        </div>
+        <a asp-action="filtrarfixo" asp-controller="Produto" asp-route-codFornecedor="1">
+            <div class="text-center">
+                <div class="cardRetangular fundoYellow" style="background-image: url(../img/fornecedores/golden.png);"></div>
+            </div>
+        </a>
+        <a asp-action="filtrarfixo" asp-controller="Produto" asp-route-codFornecedor="2">
+            <div class="text-center">
+                <div class="cardRetangular fundoYellow" style="background-image: url(../img/fornecedores/farmina.jpg)"></div>
+            </div>
+        </a>
+        <a asp-action="filtrarfixo" asp-controller="Produto" asp-route-codFornecedor="3">
+            <div class="text-center">
+                <div class="cardRetangular fundoYellow" style="background-image: url(../img/fornecedores/whiskas.png)"></div>
+            </div>
+        </a>
+        <a asp-action="filtrarfixo" asp-controller="Produto" asp-route-codFornecedor="4">
+            <div class="text-center">
+                <div class="cardRetangular fundoYellow" style="background-image: url(../img/fornecedores/cat.jpg)"></div>
+            </div>
+        </a>
     </div>
 </div>
 
@@ -117,20 +131,28 @@
 
 @*Outros produtos*@
 <div class="my-5">
-    <h1 class="text-purple font-paytone-one-regular mb-3">Outros produtos que você pode gostar</h1>
+    <h1 class="text-purple font-paytone-one-regular mb-3">Compre roupinhas para o seu amigo</h1>
     <div class="w-100 d-flex flex-wrap gap-5 justify-content-center">
-        <div class="text-center">
-            <div class="cardRetangular fundoLightPurple"></div>
-        </div>
-        <div class="text-center">
-            <div class="cardRetangular fundoLightPurple"></div>
-        </div>
-        <div class="text-center">
-            <div class="cardRetangular fundoLightPurple"></div>
-        </div>
-        <div class="text-center">
-            <div class="cardRetangular fundoLightPurple"></div>
-        </div>
+        <a asp-action="informacoesproduto" asp-controller="produto" asp-route-id="62">
+            <div class="text-center">
+                <div class="cardRetangular fundoLightPurple" style="background-image: url(../img/produtos/sasuke.jpg)"></div>
+            </div>
+        </a>
+        <a asp-action="informacoesproduto" asp-controller="produto" asp-route-id="60">
+            <div class="text-center">
+                <div class="cardRetangular fundoLightPurple" style="background-image: url(../img/produtos/hokage.jpg); background-size: cover;"></div>
+            </div>
+        </a>
+        <a asp-action="informacoesproduto" asp-controller="produto" asp-route-id="61">
+            <div class="text-center">
+                <div class="cardRetangular fundoLightPurple" style="background-image: url(../img/produtos/akatsuki.png)"></div>
+            </div>
+        </a>
+        <a asp-action="informacoesproduto" asp-controller="produto" asp-route-id="59">
+            <div class="text-center">
+                <div class="cardRetangular fundoLightPurple" style="background-image: url(../img/produtos/lufalufa.png)"></div>
+            </div>
+        </a>
     </div>
 </div>
 

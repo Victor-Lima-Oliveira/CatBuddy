@@ -41,8 +41,14 @@
 <div class="text-end">
     @for (int i = 1; i <= totalPaginas; i++)
     {
-        <a asp-action="VizualizarProdutos" asp-controller="Produto" asp-route-pag="@i" style="text-decoration: underline; color: blue">@i</a>
-
+        if (i == pag)
+        {
+            <a asp-action="VizualizarProdutos" asp-controller="Produto" asp-route-pag="@i" style="text-decoration: underline;"><b>@i</b></a>
+        }
+        else
+        {
+            <a asp-action="VizualizarProdutos" asp-controller="Produto" asp-route-pag="@i" style="text-decoration: underline; color: blue">@i</a>
+        }
         if (i == totalPaginas)
         {
             break;
@@ -62,7 +68,7 @@
             <th>
                 Estoque
             </th>
-            <th>
+            <th class="text-center">
                 Preço
             </th>
             <th>
@@ -95,7 +101,7 @@
                         @Html.DisplayFor(modelItem => Model[i].NomeProduto)
                     </span>
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => Model[i].QtdEstoque)
                 </td>
                 <td>
@@ -133,7 +139,14 @@
 <div class="text-end">
     @for (int i = 1; i <= totalPaginas; i++)
     {
-        <a asp-action="VizualizarProdutos" asp-controller="Produto" asp-route-pag="@i" style="text-decoration: underline; color: blue">@i</a>
+        if(i == pag)
+        {
+            <a asp-action="VizualizarProdutos" asp-controller="Produto" asp-route-pag="@i" style="text-decoration: underline;"><b>@i</b></a>
+        }
+        else
+        {
+            <a asp-action="VizualizarProdutos" asp-controller="Produto" asp-route-pag="@i" style="text-decoration: underline; color: blue">@i</a>
+        }
 
         if (i == totalPaginas)
         {

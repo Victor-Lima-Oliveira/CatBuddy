@@ -5,12 +5,9 @@
     Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
 }
 
-<h1>EditarColaborador</h1>
-
-<h4>Colaborador</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<h4 class="text-purple d-flex justify-content-center">Editar Colaborador</h4>
+<div class="d-flex justify-content-center">
+    <fieldset class="col-md-5 fundoDarkFuchsia">
         <form asp-action="EditarColaborador">
             <input asp-for="Colaborador.Senha" value="0" hidden />
             <input asp-for="Colaborador.confirmaSenha" value="0" hidden />
@@ -63,13 +60,9 @@
                 <span asp-validation-for="Colaborador.NivelDeAcesso" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Editar" class="btn btn-yellow mt-2 text-center" />
             </div>
         </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    </fieldset>
 </div>
 

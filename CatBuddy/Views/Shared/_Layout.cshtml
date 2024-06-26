@@ -106,10 +106,11 @@
 
     @if (MainLayout.IsSnackBarOpen())
     {
-        <div id="snackbar">@MainLayout.MensagemSnackbar</div>
+        <div id="snackbar" class="text-white" style="background-color: #860F58;">@MainLayout.MensagemSnackbar</div>
+        <script>
+            fecharSnackBar(); // Chama a função para fechar o snackbar após 3 segundos
+        </script>
     }
-
-
 
     @if (IsSectionDefined("Lateral"))
     {
@@ -133,6 +134,28 @@
             </div>
         </div>
     }
+    else if (IsSectionDefined("LateralEsquerda"))
+    {
+        <div class="container">
+            <div class="row">
+                <h1 class="font-paytone-one-regular text-lightPurple mb-5">Resumo do pedido</h1>
+
+                <!-- Coluna para o conteúdo principal -->
+                <div class="col-md-9">
+                    <main role="main" class="paddingFooter">
+                        @RenderBody()
+                    </main>
+                </div>
+                <!-- Coluna para o conteúdo lateral -->
+                @if (IsSectionDefined("LateralEsquerda"))
+                {
+                    <div class="col-md-3 paddingFooter">
+                        @RenderSection("LateralEsquerda", required: false)
+                    </div>
+                }
+            </div>
+        </div>
+    }
     else
     {
         <div class="container">
@@ -144,22 +167,22 @@
 
     <footer class="border-top footer text-muted">
         <div class="text-white fundoLightPurple ">
-            <div class="container d-flex">
-                <div class="row col-10">
-                    <h4>Formas de pagamento</h4>
+            <div class="container d-flex flex-wrap">
+                <div class="col-sm-10">
+                    <h4 class="text-white">Formas de pagamento</h4>
                     <div class="d-flex align-content-center gap-2">
                         <img src="~/img/bandeiras/image_2.png" width="80px" height="30px" />
                         <img src="~/img/bandeiras/image_3.png" width="50px" height="30px" />
                         <img src="~/img/bandeiras/image_4.png" width="50px" height="30px" />
-                        <img src="~/img/bandeiras/image_5.png" width="70px" height="70px" />
                         <img src="~/img/bandeiras/image_6.png" width="80px" height="30px" />
                         <img src="~/img/bandeiras/image_7.png" width="50px" height="30px" />
                         <img src="~/img/bandeiras/image_8.png" width="50px" height="30px" />
                         <img src="~/img/bandeiras/image_1.png" width="30px" height="30px" />
+                        <br>
                     </div>
                 </div>
-                <div class="row col-2">
-                    <h4>Plataforma</h4>
+                <div class="">
+                    <h4 class="text-white">Plataforma</h4>
                     <a class="navbar-brand align-content-center" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" style="height:12vh;" /></a>
                 </div>
             </div>
@@ -215,6 +238,34 @@
                     Alert('Estamos com problemas, chame um técnico');
                 });
         };
+    </script>
+
+    <script>
+        // Função para fechar o snackbar após um tempo determinado
+        function fecharSnackBar() {
+            // Espera 3 segundos (3000 milissegundos) e depois fecha o snackbar
+            setTimeout(function () {
+                // Fecha o snackbar chamando a função do ASP.NET Core via AJAX
+                fetch('/api/front/CloseSnackBar', {
+                    method: 'GET',
+                    headers: {
+                    },
+                }).then(response => {
+                    if (response.ok) {
+                        console.log('Snackbar fechado com sucesso.');
+                    } else {
+                        console.error('Erro ao fechar o snackbar:', response.statusText);
+                    }
+                }).catch(error => {
+                    console.error('Erro ao fechar o snackbar:', error);
+                });
+            }, 5000); // Tempo em milissegundos (3 segundos)
+        }
+
+        // Chamada para iniciar o temporizador quando o snackbar é exibido
+        if (@MainLayout.IsSnackBarOpen().ToString().ToLower()) {
+            fecharSnackBar();
+        }
     </script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -163,6 +163,10 @@ namespace CatBuddy.Controllers
             // Remove o colaborador da sessão
             _loginColaborador.Logout();
 
+            MainLayout.codCliente = 0;
+            MainLayout.EnderecoSelecionado = null;
+            MainLayout.qtdCarrinho = 0;
+
             // Vai para tela de login
             return RedirectToAction(nameof(Login));
         }

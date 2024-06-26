@@ -88,12 +88,13 @@ namespace CatBuddy.Controllers
             {
                 ListProduto = _carrinhoDeCompraCookie.ConsultarProdutosNoCarrinho(),
                 Endereco = MainLayout.EnderecoSelecionado,
+                codPagamento = 1
             };
 
             return View(view);
         }
 
-        public IActionResult FinalizarPedido(int codPagamento)
+        public IActionResult FinalizarPedido(ViewCheckout view)
         {
             List<Produto> listProdutosDoCarrinho;
             Produto produtoAux;
@@ -101,7 +102,6 @@ namespace CatBuddy.Controllers
             float valorTotal = 0;
             int codPedido;
             int qtdEstoqueAux;
-
 
             try
             {
@@ -121,7 +121,7 @@ namespace CatBuddy.Controllers
                     }
 
                     // Cadastra o pedido
-                    codPedido = _pedidoRepository.CadastrarPedido(cliente.cod_id_cliente.Value, valorTotal, codPagamento);
+                    codPedido = _pedidoRepository.CadastrarPedido(cliente.cod_id_cliente.Value, valorTotal, view.codPagamento);
 
                     // Cadastra os itens do pedido 
                     foreach (Produto produtoItem in listProdutosDoCarrinho)
@@ -151,7 +151,10 @@ namespace CatBuddy.Controllers
                 }
 
                 // Limpa os cookies 
-                _carrinhoDeCompraCookie.RemoverTodos();
+                foreach(Produto produtoitem in listProdutosDoCarrinho)
+                {
+                    _carrinhoDeCompraCookie.RemoverProduto(produtoitem);
+                }
 
                 return View();
             }
@@ -160,7 +163,15 @@ namespace CatBuddy.Controllers
                 TempData[Const.ErroTempData] = err.Message;
                 return RedirectToAction(Const.ErroAction, Const.ErroController);
             }
+        }
 
+        public IActionResult AtualizaQtd()
+        {
+            List<Produto> listProdutos = _carrinhoDeCompraCookie.ConsultarProdutosNoCarrinho();
+
+            MainLayout.qtdCarrinho = listProdutos.Count;
+
+            return RedirectToAction("PainelCliente", "Cliente");
         }
     }
 }

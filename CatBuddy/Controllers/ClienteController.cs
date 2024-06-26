@@ -1,4 +1,5 @@
-﻿using CatBuddy.LibrariesSessao.Filtro;
+﻿using CatBuddy.httpContext;
+using CatBuddy.LibrariesSessao.Filtro;
 using CatBuddy.LibrariesSessao.Login;
 using CatBuddy.Models;
 using CatBuddy.Repository;
@@ -16,9 +17,10 @@ namespace CatBuddy.Controllers
         private IPedidoRepository _pedidoRepository;
         private IEnderecoRepository _enderecoRepository;
         private ICartaoRepository _cartaoRepository;
+        private CarrinhoDeCompraCookie _carrinhoDeCompraCookie;
         private LoginCliente _loginCliente;
 
-        public ClienteController(IClienteRepository clienteRepository, LoginCliente loginCliente, IUsuarioRepository usuarioRepository, IPedidoRepository pedidoRepository, IEnderecoRepository enderecoRepository, ICartaoRepository cartaoRepository )
+        public ClienteController(IClienteRepository clienteRepository, LoginCliente loginCliente, IUsuarioRepository usuarioRepository, IPedidoRepository pedidoRepository, IEnderecoRepository enderecoRepository, ICartaoRepository cartaoRepository)
         {
             _clienteRepository = clienteRepository;
             _loginCliente = loginCliente;
@@ -79,6 +81,8 @@ namespace CatBuddy.Controllers
                 // Salva ele na sessão
                 _loginCliente.Login(cliente);
 
+                MainLayout.codCliente = cliente.cod_id_cliente.Value;
+
                 // Volta para a página principal para fazer as comprar 
                 return RedirectToAction("Index", "Home");
             }
@@ -92,6 +96,8 @@ namespace CatBuddy.Controllers
             _loginCliente.Logout();
 
             MainLayout.codCliente = 0;
+            MainLayout.EnderecoSelecionado = null;
+            MainLayout.qtdCarrinho = 0;
 
             return RedirectToAction("index", "Home");
         }
@@ -116,7 +122,7 @@ namespace CatBuddy.Controllers
 
                 MainLayout.codCliente = clienteDoBanco.cod_id_cliente.Value;
 
-                return new RedirectResult(Url.Action(nameof(PainelCliente)));
+                return RedirectToAction("AtualizaQtd", "Carrinho");
             }
             else
             {
@@ -185,8 +191,17 @@ namespace CatBuddy.Controllers
         }
 
         [ClienteAutorizacao]
-        public IActionResult VisualizarEnderecos()
+        public IActionResult VisualizarEnderecos(bool bSelecionar = false)
         {
+            if (bSelecionar)
+            {
+                ViewBag.selecionar = true;
+            }
+            else
+            {
+                ViewBag.selecionar = false;
+            }
+
             return View(_enderecoRepository.ObtemEnderecos(MainLayout.codCliente));
         }
 
@@ -226,7 +241,7 @@ namespace CatBuddy.Controllers
         {
             try
             {
-                if(MainLayout.ConteudoDialog == Strings.ConfirmaDeletarEndereco)
+                if (MainLayout.ConteudoDialog == Strings.ConfirmaDeletarEndereco)
                 {
                     // Exclui o endereco no banco
                     _enderecoRepository.Excluir(Convert.ToInt32(MainLayout.ObterParametro()));
@@ -293,7 +308,7 @@ namespace CatBuddy.Controllers
         [HttpPost]
         public IActionResult CadastrarCartao(Cartao cartao)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 cartao.numeroCartaoCred = Apoio.TransformaNumeroCartaoCredito(cartao.numeroCartaoCred);
                 cartao.dataDeValidade = Apoio.TransformaDataValidade(cartao.dataDeValidade);
@@ -336,13 +351,15 @@ namespace CatBuddy.Controllers
             return RedirectToAction(nameof(VisualizarCartoes));
         }
 
-        public IActionResult SelecionarEndereco(Endereco endereco)
+        public IActionResult SelecionarEndereco(int id)
         {
-            MainLayout.EnderecoSelecionado = endereco;
+            Endereco endereco = _enderecoRepository.ObtemEndereco(id);
 
-            MainLayout.OpenSnackbar($"Endereço selecionado: {endereco.nomeEnderecoUsuario}");
+            MainLayout.EnderecoSelecionado = endereco; 
 
-            return RedirectToAction(nameof(VisualizarEnderecos));
+            MainLayout.OpenSnackbar($"Endereço selecionado: {MainLayout.EnderecoSelecionado.nomeEnderecoUsuario}");
+
+            return RedirectToAction("Pagamento", "Carrinho");
         }
     }
 }
