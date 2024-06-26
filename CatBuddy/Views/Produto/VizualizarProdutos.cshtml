@@ -1,9 +1,25 @@
-﻿@model IEnumerable<CatBuddy.Models.Produto>
+﻿@model List<CatBuddy.Models.Produto>
 
 @{
     ViewData["Title"] = "VizualizarProdutos";
     Layout = "~/Views/Shared/_Layout_Colaborador.cshtml";
-    int qtdDeProdutos = 0;
+
+    int pagAtual = 0;
+    int pag = 1;
+    if (int.TryParse(ViewBag.pag.ToString(), out pag))
+    {
+        if (pag == 1)
+        {
+            pagAtual = 0;
+        }
+        else
+        {
+            pagAtual = (pag * 15) - 15;
+        }
+    }
+
+    int totalPaginas = (int)Math.Ceiling((double)Model.Count / 15); ;
+    int TotalProduto = 15 * pag;
 }
 
 @if (TempData["ViewBagPaginaVizualizarSucesso"] != null)
@@ -21,6 +37,20 @@
 }
 
 <h1 class="text-yellow font-paytone-one-regular">Lista de produtos</h1>
+
+<div class="text-end">
+    @for (int i = 1; i <= totalPaginas; i++)
+    {
+        <a asp-action="VizualizarProdutos" asp-controller="Produto" asp-route-pag="@i" style="text-decoration: underline; color: blue">@i</a>
+
+        if (i == totalPaginas)
+        {
+            break;
+        }
+        <span>/</span>
+    }
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -45,58 +75,70 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @for (int i = pagAtual; i <= TotalProduto; i++)
         {
-
+            if (Model.Count == i)
+            {
+                break;
+            }
             <tr>
                 <td>
                     <div>
-                        <img src="~/@item.ImgPath" style="width: 90px; height: 100px" />
+                        <img src="~/@Model[i].ImgPath" style="width: 90px; height: 100px" />
                     </div>
                 </td>
                 <td style="width: 20%">
                     <span>
-                        <b>Código produto: </b>@Html.DisplayFor(modelitem => item.CodIdProduto) <br />
+                        <b>Código produto: </b>@Html.DisplayFor(modelitem => Model[i].CodIdProduto) <br />
                     </span>
                     <span class="hideText" style="height:auto;">
-                        @Html.DisplayFor(modelItem => item.NomeProduto) 
+                        @Html.DisplayFor(modelItem => Model[i].NomeProduto)
                     </span>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.QtdEstoque)
+                    @Html.DisplayFor(modelItem => Model[i].QtdEstoque)
                 </td>
                 <td>
-                    @item.getPreco()
+                    @Model[i].getPreco()
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NomeFornecedor)
+                    @Html.DisplayFor(modelItem => Model[i].NomeFornecedor)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NomeCategoria)
+                    @Html.DisplayFor(modelItem => Model[i].NomeCategoria)
                 </td>
-                <td >
+                <td>
                     <a class="btn btn-warning text-white"
                        asp-action="EditarProduto"
                        asp-controller="Produto"
-                       asp-route-codProduto="@item.CodIdProduto">Editar</a> |
+                       asp-route-codProduto="@Model[i].CodIdProduto">Editar</a> |
                     <a class="btn btn-info text-white"
                        asp-action="DetalhamentoProduto"
                        asp-controller="Produto"
-                       asp-route-codProduto="@item.CodIdProduto">Detalhar</a> |
+                       asp-route-codProduto="@Model[i].CodIdProduto">Detalhar</a> |
                     <a class="btn btn-danger text-white"
                        asp-action="AbrirDialogDeletar"
                        asp-controller="Produto"
-                       asp-route-nomeProduto="@item.NomeProduto"
-                       asp-route-codProduto="@item.CodIdProduto">
+                       asp-route-nomeProduto="@Model[i].NomeProduto"
+                       asp-route-codProduto="@Model[i].CodIdProduto">
                         Deletar
                     </a>
                     &nbsp;
                 </td>
             </tr>
-
-            qtdDeProdutos++;
-            if (qtdDeProdutos == 25)
-                break;
         }
     </tbody>
 </table>
+
+<div class="text-end">
+    @for (int i = 1; i <= totalPaginas; i++)
+    {
+        <a asp-action="VizualizarProdutos" asp-controller="Produto" asp-route-pag="@i" style="text-decoration: underline; color: blue">@i</a>
+
+        if (i == totalPaginas)
+        {
+            break;
+        }
+        <span>/</span>
+    }
+</div>

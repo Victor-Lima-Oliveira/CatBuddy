@@ -141,7 +141,6 @@ h1, h2, h3, h4, h5, h6 {
     width: 150px;
     height: 150px;
     margin: 1px 8px;
-    background-image: url('../img/fornecedores/pedigree_logo.jpg');
     background-size: contain; /* Garante que a imagem cubra todo o espaço do card */
     background-repeat: no-repeat; /* Evita que a imagem seja repetida */
     background-position: center; /* Centraliza a imagem dentro do card */
@@ -154,7 +153,6 @@ h1, h2, h3, h4, h5, h6 {
     height: 165px;
     margin: 1px 8px;
     padding: 2px;
-    background-image: url('../img/produtos/gatosnaturalfrango.png'); /* Substitua pelo caminho da sua imagem */
     background-size: contain; /* Garante que a imagem cubra todo o espaço do card */
     background-repeat: no-repeat; /* Evita que a imagem seja repetida */
     background-position: center; /* Centraliza a imagem dentro do card */

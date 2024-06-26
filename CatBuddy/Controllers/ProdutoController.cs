@@ -224,7 +224,7 @@ namespace CatBuddy.Controllers
             return bvalido;
         }
 
-        public IActionResult VizualizarProdutos()
+        public IActionResult VizualizarProdutos(int pag = 1)
         {
             if (TempData[Const.AvisoPaginaVizualizarProdutos] != null)
             {
@@ -241,6 +241,9 @@ namespace CatBuddy.Controllers
                 ViewBag.nomeProduto = TempData["nomeProduto"];
                 ViewBag.OpenDialog = "true";
             }
+
+            // Recebe em qual pagina está o usuario
+            ViewBag.pag = pag;
 
             return View(_produtoRepository.retornaProdutos());
         }
