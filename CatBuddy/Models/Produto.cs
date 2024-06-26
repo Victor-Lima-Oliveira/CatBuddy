@@ -84,6 +84,8 @@ namespace CatBuddy.Models
         [Display(Name = "Descrição"), Required(ErrorMessage = "A Descrição do produto é obrigatória")]
         public string Descricao { get; set; }
 
+        public int? Query { get; set; }
+
         public string getPreco(bool descontoAVista = false)
         {
             if (descontoAVista)

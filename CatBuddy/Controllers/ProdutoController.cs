@@ -22,11 +22,20 @@ namespace CatBuddy.Controllers
             _carrinhoDeCompraCookie = carrinhoDeCompraCookie;
             _loginCliente = loginCliente;
         }
-        public IActionResult filtrarProduto(string nome = "", int codCategoria = 0)
+
+        public IActionResult filtrarProduto(string nome = "", int codCategoria = 0, int faixapreco = 0, int codFornecedor = 0)
         {
             Produto produto = new Produto();
-            produto.NomeProduto = nome;
-            produto.CodCategoria = codCategoria;
+            if(faixapreco != 0 || codFornecedor != 0)
+            {
+                produto.CodFornecedor = codFornecedor;
+                produto.Query = faixapreco;
+            }
+            else
+            {
+                produto.NomeProduto = nome;
+                produto.CodCategoria = codCategoria;
+            }
 
             return View(_produtoRepository.retornaProdutos(produto));
         }
@@ -38,6 +47,11 @@ namespace CatBuddy.Controllers
             produto.NomeProduto = nome;
 
             return View(_produtoRepository.retornaProdutos(produto));
+        }
+
+        public IActionResult filtrarfixo(int faixapreco, int codFornecedor)
+        {
+            return RedirectToAction("filtrarProduto", new {nome = "", codCategoria = 0, faixapreco = faixapreco, codFornecedor = codFornecedor });
         }
 
         public IActionResult InformacoesProduto(int id)

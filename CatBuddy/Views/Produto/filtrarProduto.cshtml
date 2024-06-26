@@ -35,8 +35,8 @@ else
 
         <h4>Filtrar produto</h4>
         <hr />
-        <form>
-            <h5 class="mb-3">Limpar filtros <i class="bi bi-trash" style="font-size: 15px;"></i> </h5>
+        <form asp-action="filtrarfixo" asp-controller="Produto" method="post">
+            <h5 class="mb-3"><a asp-action="filtrarProduto" asp-controller="Produto">Limpar filtros <i class="bi bi-trash" style="font-size: 15px;"></i> </a></h5>
             <div class="form-group">
                 <h4 class="mb-0">Faixa de preço</h4>
                 <hr />
@@ -65,23 +65,23 @@ else
                 <h4 class="mb-0">Marcas</h4>
                 <hr />
                 <label class="form-control">
-                    <input type="radio" name="faixapreco" value="1">
-                    Golden
+                    <input type="radio" name="codFornecedor" value="1">
+                    PremieR Pet
                 </label>
                 <label class="form-control">
-                    <input type="radio" name="faixapreco" value="2">
-                    Matisse
+                    <input type="radio" name="codFornecedor" value="2">
+                    Farmina Pet
                 </label>
                 <label class="form-control">
-                    <input type="radio" name="faixapreco" value="3">
-                    Premier
+                    <input type="radio" name="codFornecedor" value="3">
+                    Mars Brasil
                 </label>
                 <label class="form-control">
-                    <input type="radio" name="faixapreco" value="4">
-                    Whiskas
+                    <input type="radio" name="codFornecedor" value="4">
+                    Cat Acessories
                 </label>
             </div>
-
+            <button type="submit" value="Filtrar" class="btn btn-darkFuchsia w-100">Filtrar </button>
         </form>
     </div>
 

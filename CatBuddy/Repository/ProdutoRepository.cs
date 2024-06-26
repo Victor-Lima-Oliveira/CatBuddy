@@ -224,6 +224,33 @@ namespace CatBuddy.Repository
                 {
                     sbAux.Append(" AND codCategoria = @codCategoria");
                 }
+
+                if(produto.CodFornecedor != 0)
+                {
+                    sbAux.Append(" AND codFornecedor = @codFornecedor ");
+                }
+
+                if(produto.Query != 0)
+                {
+                    switch (produto.Query)
+                    {
+                        case 1:
+                            sbAux.Append(" AND preco BETWEEN 0 AND 25 ");
+                            break;
+                        case 2:
+                            sbAux.Append(" AND preco BETWEEN 25.01 AND 50 ");
+                            break;
+                        case 3:
+                            sbAux.Append(" AND preco BETWEEN 50.01 AND 100 ");
+                            break;
+                        case 4:
+                            sbAux.Append(" AND preco BETWEEN 100.01 AND 200 ");
+                            break;
+                        case 5:
+                            sbAux.Append(" AND preco > 200 ");
+                            break;
+                    }
+                }
             }
 
             // Ordena pela código do produto
@@ -247,6 +274,7 @@ namespace CatBuddy.Repository
                 {
                     cmd.Parameters.AddWithValue("@nome", "%" + produto.NomeProduto + "%");
                     cmd.Parameters.AddWithValue("@codCategoria", produto.CodCategoria);
+                    cmd.Parameters.AddWithValue("@codFornecedor", produto.CodFornecedor);
                 }
 
                 // Recuperação dos dados em um adapter
